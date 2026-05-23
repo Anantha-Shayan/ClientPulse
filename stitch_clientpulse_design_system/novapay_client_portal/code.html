@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NovaPay Client Portal | ClientPulse</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f2f3ff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#d5e3fd",
+                        "primary-fixed": "#dde1ff",
+                        "tertiary-fixed-dim": "#61dca6",
+                        "outline-variant": "#c4c5d8",
+                        "on-secondary-fixed": "#0d1c2f",
+                        "on-surface-variant": "#434655",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#7ff9c1",
+                        "primary-container": "#1b4fe8",
+                        "surface-tint": "#184de6",
+                        "secondary-fixed-dim": "#b9c7e0",
+                        "on-tertiary-fixed": "#002114",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#131b2e",
+                        "surface-container-high": "#e2e7ff",
+                        "surface": "#faf8ff",
+                        "surface-bright": "#faf8ff",
+                        "tertiary": "#005338",
+                        "surface-dim": "#d2d9f4",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#dae2fd",
+                        "on-tertiary-fixed-variant": "#005237",
+                        "inverse-surface": "#283044",
+                        "inverse-primary": "#b8c4ff",
+                        "on-surface": "#131b2e",
+                        "primary": "#0038bd",
+                        "secondary": "#515f74",
+                        "secondary-container": "#d5e3fd",
+                        "on-primary-fixed": "#001453",
+                        "background": "#faf8ff",
+                        "tertiary-container": "#006e4b",
+                        "surface-container": "#eaedff",
+                        "primary-fixed-dim": "#b8c4ff",
+                        "on-secondary-container": "#57657b",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#0037b9",
+                        "on-secondary-fixed-variant": "#3a485c",
+                        "on-primary-container": "#d3d9ff",
+                        "outline": "#747687",
+                        "on-tertiary-container": "#77f2ba",
+                        "surface-variant": "#dae2fd",
+                        "inverse-on-surface": "#eef0ff",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "base": "8px",
+                        "2xl": "48px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "3xl": "64px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-3": ["Inter"],
+                        "caption": ["Inter"],
+                        "label": ["Inter"],
+                        "headline-2": ["Inter"],
+                        "display": ["Inter"],
+                        "body": ["Inter"],
+                        "headline-1": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-3": ["16px", {"lineHeight": "1.5", "fontWeight": "600"}],
+                        "caption": ["12px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label": ["12px", {"lineHeight": "1", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "headline-2": ["20px", {"lineHeight": "1.4", "letterSpacing": "-0.2px", "fontWeight": "600"}],
+                        "display": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.5px", "fontWeight": "700"}],
+                        "body": ["14px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-1": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.3px", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .gauge-container {
+            position: relative;
+            width: 140px;
+            height: 70px;
+            overflow: hidden;
+        }
+        .gauge-bg {
+            fill: none;
+            stroke: #eaedff;
+            stroke-width: 12;
+            stroke-linecap: round;
+        }
+        .gauge-fill {
+            fill: none;
+            stroke: #006e4b;
+            stroke-width: 12;
+            stroke-linecap: round;
+            stroke-dasharray: 220;
+            stroke-dashoffset: 40; /* 82% */
+            transition: stroke-dashoffset 1s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-background font-body text-on-background antialiased">
+<!-- TopNavBar -->
+<nav class="bg-surface sticky top-0 z-50 border-b border-outline-variant shadow-sm w-full">
+<div class="flex justify-between items-center h-[64px] px-lg max-w-7xl mx-auto w-full">
+<div class="flex items-center gap-md">
+<img alt="ClientPulse Logo" class="h-8 w-8 object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0ug15-6c5QWjyawetnXkD9hnwdaZ1PrYcMP2DH3BoGLSCsVrs9y_WS0EYRyX392QWjLJh-0Xv0MXibiiZvNuzk3-YeyYNL4iNNY2THthNKqYw877PP5aAr8_Yj677-zD2d0zs1LTQKOyhFIruX8bZmqhToYhTJF6ptEWYI1ZzzvStC_C0HMbEBfbpeTSRMFjV_Vxqt3ItmJ4q5LENrji5avGjjO64gexDi5kNrhot27APNtJiq4OtKzVVJFP"/>
+<span class="font-headline-1 text-headline-1 font-bold text-primary tracking-tight">ClientPulse</span>
+</div>
+<div class="flex-1 flex justify-center">
+<h2 class="font-headline-2 text-headline-2 text-on-surface">NovaPay</h2>
+</div>
+<div class="flex items-center gap-md">
+<button class="hidden md:flex text-on-surface-variant hover:text-primary transition-colors font-medium text-body px-md py-xs rounded-lg">
+                    Contact Support
+                </button>
+<div class="h-10 w-10 rounded-full border border-outline-variant overflow-hidden bg-surface-container">
+<img alt="Client User Profile" class="h-full w-full object-cover" data-alt="A professional headshot of a middle-aged male executive with a warm smile, wearing a tailored charcoal suit and a crisp white shirt. The background is a soft-focus corporate office with warm ambient lighting. The visual style is high-end photography, clean and polished, aligning with a premium SaaS brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCU6tbAAM7usmqN4mriCJLOx2wtUIU0XmphbsIvAcfufD_pDkI-pclVWCTBJaw22e133i4xZLLk_9jTdZ6USr6Z9uzUd4cpxSlQHptXVP1ZaQ9WEDZG72BOVZ0mNdxp67pjsgFHNQb-q41niTb80A--HuGPVoNzZLIxvBAxjfDg8yu5cD_e75XjmTmKiTHpcRh-hAQwAXheRArd0EYypZQIzsf5VRnfNCAGvyWi3DaBboLE8sGKV4qJatPrDIN9LOA5g22PqyIEOE66"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="max-w-7xl mx-auto px-lg py-xl space-y-xl">
+<!-- Hero Section -->
+<section class="relative overflow-hidden rounded-xl bg-surface-container-low p-xl md:p-2xl flex flex-col md:flex-row justify-between items-center gap-xl border border-outline-variant">
+<div class="space-y-md text-center md:text-left z-10">
+<h1 class="font-display text-display text-on-surface tracking-tight" style="font-size: 28px; line-height: 1.2; font-weight: 700;">NovaPay Digital Transformation</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                    Started March 2026 · Expected completion August 2026
+                </p>
+<div class="flex flex-wrap gap-sm justify-center md:justify-start">
+<span class="inline-flex items-center gap-xs px-md py-xs rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label text-label">
+<span class="material-symbols-outlined !text-[14px]">check_circle</span>
+                        Live Dashboard
+                    </span>
+<span class="inline-flex items-center gap-xs px-md py-xs rounded-full bg-secondary-container text-on-secondary-container font-label text-label">
+<span class="material-symbols-outlined !text-[14px]">calendar_today</span>
+                        Phase 2: Execution
+                    </span>
+</div>
+</div>
+<div class="flex flex-col items-center justify-center p-lg bg-surface rounded-xl border border-outline-variant shadow-sm z-10 w-[200px]">
+<div class="gauge-container">
+<svg class="w-full" viewbox="0 0 100 50">
+<path class="gauge-bg" d="M10,45 A40,40 0 0,1 90,45"></path>
+<path class="gauge-fill" d="M10,45 A40,40 0 0,1 90,45"></path>
+</svg>
+<div class="absolute inset-0 flex items-end justify-center pb-2">
+<span class="font-display text-[32px] text-on-surface font-bold">82</span>
+</div>
+</div>
+<div class="mt-xs text-center">
+<span class="text-tertiary-container font-headline-3 text-headline-3 block">On Track</span>
+<span class="text-caption font-caption text-on-surface-variant">Overall Health</span>
+</div>
+</div>
+<!-- Subtle background pattern -->
+<div class="absolute top-0 right-0 w-1/3 h-full opacity-10 pointer-events-none">
+<svg height="100%" viewbox="0 0 400 400" width="100%">
+<defs>
+<pattern height="40" id="grid" patternunits="userSpaceOnUse" width="40">
+<path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="1"></path>
+</pattern>
+</defs>
+<rect class="text-primary" fill="url(#grid)" height="100%" width="100%"></rect>
+</svg>
+</div>
+</section>
+<!-- Summary Stats Row -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<!-- Milestones Card -->
+<div class="bg-surface border border-outline-variant rounded-lg p-lg shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-sm">
+<span class="font-label text-label text-on-surface-variant uppercase tracking-wider">Milestones</span>
+<span class="material-symbols-outlined text-primary">flag</span>
+</div>
+<div class="flex items-baseline gap-xs">
+<span class="font-display text-display text-on-surface">8</span>
+<span class="font-headline-2 text-headline-2 text-on-surface-variant">/ 12</span>
+</div>
+<div class="mt-md w-full bg-surface-container-low h-1.5 rounded-full">
+<div class="bg-primary h-full rounded-full w-[66%]"></div>
+</div>
+</div>
+<!-- Tasks Card -->
+<div class="bg-surface border border-outline-variant rounded-lg p-lg shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-sm">
+<span class="font-label text-label text-on-surface-variant uppercase tracking-wider">Tasks</span>
+<span class="material-symbols-outlined text-primary">checklist</span>
+</div>
+<div class="flex items-baseline gap-xs">
+<span class="font-display text-display text-on-surface">45</span>
+<span class="font-headline-2 text-headline-2 text-on-surface-variant">/ 62</span>
+</div>
+<div class="mt-md w-full bg-surface-container-low h-1.5 rounded-full">
+<div class="bg-primary h-full rounded-full w-[72%]"></div>
+</div>
+</div>
+<!-- Days Remaining Card -->
+<div class="bg-surface border border-outline-variant rounded-lg p-lg shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-sm">
+<span class="font-label text-label text-on-surface-variant uppercase tracking-wider">Days Remaining</span>
+<span class="material-symbols-outlined text-primary">timer</span>
+</div>
+<div class="flex items-baseline gap-xs">
+<span class="font-display text-display text-on-surface">24</span>
+<span class="font-headline-3 text-headline-3 text-on-surface-variant ml-xs">Business Days</span>
+</div>
+<p class="mt-md text-caption font-caption text-tertiary-container">Project concluding in 3 weeks</p>
+</div>
+</section>
+<!-- Milestones Section -->
+<section class="bg-surface border border-outline-variant rounded-xl p-xl shadow-sm">
+<div class="flex items-center justify-between mb-2xl">
+<h3 class="font-headline-1 text-headline-1 text-on-surface">Project Timeline</h3>
+<button class="text-primary font-medium hover:underline flex items-center gap-xs text-body">
+                    View Full Roadmap <span class="material-symbols-outlined !text-[16px]">arrow_forward</span>
+</button>
+</div>
+<div class="relative pt-12 pb-6 overflow-x-auto">
+<!-- Timeline Base Line -->
+<div class="absolute top-[60px] left-0 w-full h-[3px] bg-surface-container-high"></div>
+<div class="flex justify-between min-w-[800px] relative z-10 px-md">
+<!-- Done Milestone -->
+<div class="flex flex-col items-center gap-md w-40 text-center">
+<div class="relative">
+<div class="w-6 h-6 bg-tertiary-container rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined !text-[16px] font-bold">check</span>
+</div>
+</div>
+<div>
+<p class="font-headline-3 text-headline-3 text-on-surface">Initiation</p>
+<p class="font-caption text-caption text-on-surface-variant">Completed March 12</p>
+</div>
+</div>
+<!-- Done Milestone -->
+<div class="flex flex-col items-center gap-md w-40 text-center">
+<div class="relative">
+<div class="w-6 h-6 bg-tertiary-container rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined !text-[16px] font-bold">check</span>
+</div>
+</div>
+<div>
+<p class="font-headline-3 text-headline-3 text-on-surface">Discovery</p>
+<p class="font-caption text-caption text-on-surface-variant">Completed April 05</p>
+</div>
+</div>
+<!-- Active Milestone -->
+<div class="flex flex-col items-center gap-md w-40 text-center">
+<div class="relative">
+<div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center text-white ring-4 ring-primary-fixed ring-opacity-50 animate-pulse">
+<div class="w-2 h-2 bg-white rounded-full"></div>
+</div>
+</div>
+<div>
+<p class="font-headline-3 text-headline-3 text-primary">UX Strategy</p>
+<p class="font-caption text-caption text-primary font-medium">In Progress</p>
+</div>
+</div>
+<!-- Upcoming Milestone -->
+<div class="flex flex-col items-center gap-md w-40 text-center">
+<div class="relative">
+<div class="w-6 h-6 bg-surface border-2 border-outline-variant rounded-full"></div>
+</div>
+<div>
+<p class="font-headline-3 text-headline-3 text-on-surface-variant">Prototyping</p>
+<p class="font-caption text-caption text-on-surface-variant">Scheduled May 22</p>
+</div>
+</div>
+<!-- Upcoming Milestone -->
+<div class="flex flex-col items-center gap-md w-40 text-center">
+<div class="relative">
+<div class="w-6 h-6 bg-surface border-2 border-outline-variant rounded-full"></div>
+</div>
+<div>
+<p class="font-headline-3 text-headline-3 text-on-surface-variant">Final Handoff</p>
+<p class="font-caption text-caption text-on-surface-variant">Scheduled Aug 10</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Updates -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-xl">
+<div class="lg:col-span-2 space-y-md">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-2 text-headline-2 text-on-surface">Recent Activity</h3>
+<span class="text-caption font-caption text-on-surface-variant">Last updated: 2 hours ago</span>
+</div>
+<div class="bg-surface border border-outline-variant rounded-xl divide-y divide-outline-variant overflow-hidden">
+<!-- Update Item -->
+<div class="p-md flex items-start gap-md hover:bg-surface-container-low transition-colors">
+<div class="p-xs bg-tertiary-container/10 rounded-lg text-tertiary-container">
+<span class="material-symbols-outlined">task_alt</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<p class="font-headline-3 text-headline-3 text-on-surface">Phase 1 completed</p>
+<span class="text-caption font-caption text-on-surface-variant">May 12, 2026</span>
+</div>
+<p class="text-body text-on-surface-variant mt-xs">The initial infrastructure migration for NovaPay was successful. All legacy systems are now bridged.</p>
+</div>
+</div>
+<!-- Update Item -->
+<div class="p-md flex items-start gap-md hover:bg-surface-container-low transition-colors">
+<div class="p-xs bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">upload_file</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<p class="font-headline-3 text-headline-3 text-on-surface">New design assets uploaded</p>
+<span class="text-caption font-caption text-on-surface-variant">May 10, 2026</span>
+</div>
+<p class="text-body text-on-surface-variant mt-xs">Updated wireframes for the payment gateway UI are now available in the Documents folder.</p>
+</div>
+</div>
+<!-- Update Item -->
+<div class="p-md flex items-start gap-md hover:bg-surface-container-low transition-colors">
+<div class="p-xs bg-secondary/10 rounded-lg text-secondary">
+<span class="material-symbols-outlined">group</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<p class="font-headline-3 text-headline-3 text-on-surface">Stakeholder meeting notes</p>
+<span class="text-caption font-caption text-on-surface-variant">May 08, 2026</span>
+</div>
+<p class="text-body text-on-surface-variant mt-xs">Bi-weekly sync notes published. Action items assigned to the Dev team regarding API security.</p>
+</div>
+</div>
+<!-- Update Item -->
+<div class="p-md flex items-start gap-md hover:bg-surface-container-low transition-colors">
+<div class="p-xs bg-tertiary-container/10 rounded-lg text-tertiary-container">
+<span class="material-symbols-outlined">verified</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<p class="font-headline-3 text-headline-3 text-on-surface">Security Audit passed</p>
+<span class="text-caption font-caption text-on-surface-variant">May 05, 2026</span>
+</div>
+<p class="text-body text-on-surface-variant mt-xs">The initial penetration testing for the cloud environment returned zero critical vulnerabilities.</p>
+</div>
+</div>
+<!-- Update Item -->
+<div class="p-md flex items-start gap-md hover:bg-surface-container-low transition-colors">
+<div class="p-xs bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">notifications_active</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<p class="font-headline-3 text-headline-3 text-on-surface">Phase 2 kickoff</p>
+<span class="text-caption font-caption text-on-surface-variant">May 01, 2026</span>
+</div>
+<p class="text-body text-on-surface-variant mt-xs">Commencement of User Experience strategy and interface development for the primary app.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-md">
+<h3 class="font-headline-2 text-headline-2 text-on-surface">Quick Access</h3>
+<div class="bg-surface-container-high border border-outline-variant rounded-xl p-lg space-y-md">
+<button class="w-full flex items-center justify-between p-md bg-surface rounded-lg border border-outline-variant hover:border-primary transition-all group">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">description</span>
+<div class="text-left">
+<p class="font-headline-3 text-headline-3 text-on-surface">Project Scope</p>
+<p class="font-caption text-caption text-on-surface-variant">PDF · 4.2 MB</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">download</span>
+</button>
+<button class="w-full flex items-center justify-between p-md bg-surface rounded-lg border border-outline-variant hover:border-primary transition-all group">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">article</span>
+<div class="text-left">
+<p class="font-headline-3 text-headline-3 text-on-surface">Budget Overview</p>
+<p class="font-caption text-caption text-on-surface-variant">XLS · 1.5 MB</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">download</span>
+</button>
+<button class="w-full flex items-center justify-between p-md bg-surface rounded-lg border border-outline-variant hover:border-primary transition-all group">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">folder</span>
+<div class="text-left">
+<p class="font-headline-3 text-headline-3 text-on-surface">Asset Library</p>
+<p class="font-caption text-caption text-on-surface-variant">Cloud Folder</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">open_in_new</span>
+</button>
+<div class="pt-md border-t border-outline-variant">
+<div class="flex items-center gap-md mb-md">
+<img alt="Account Manager" class="h-10 w-10 rounded-full object-cover border border-outline" data-alt="Close-up portrait of a confident female account manager with a friendly expression. She is wearing modern business casual attire and has stylish glasses. The background is a minimalist, brightly lit studio with subtle blue accents, creating an approachable and expert professional vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuARDcdUEP1md1QMp6TYL3STTWz46gSzusOuGs4aPXfX0vpYa-5XRmYpMUpHeYsRgZkzAi357gkKY-SG8UYVsRqARrF5ZaZdLe9eMlWs8uTBmZLIWV5c2Xoi376vzpkLtB-2N1aHhAg96i6h5hfuEDjsJe2HZhEwyxpGWpYkBuTUfksvxAK50vFJbwIDu1i330S4297mF9ye77PaUJytxDmebehtYZlojeQVnVeQJGGJZP2RiXv4Zw2hFz6BQjuLlcoZKyyYSVxorOHR"/>
+<div>
+<p class="font-headline-3 text-headline-3 text-on-surface">Sarah Mitchell</p>
+<p class="font-caption text-caption text-on-surface-variant">Your Account Executive</p>
+</div>
+</div>
+<button class="w-full py-md bg-primary text-white font-headline-3 text-headline-3 rounded-lg hover:bg-primary-container transition-colors shadow-sm">
+                            Schedule Sync
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low w-full py-xl px-lg border-t border-outline-variant mt-3xl">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-md">
+<div class="flex items-center gap-md">
+<span class="font-headline-3 text-headline-3 text-on-surface-variant">Powered by ClientPulse · Avidus Interactive</span>
+</div>
+<div class="flex gap-xl">
+<a class="font-body text-body text-on-secondary-fixed-variant hover:text-primary transition-opacity duration-300" href="#">Support</a>
+<a class="font-body text-body text-on-secondary-fixed-variant hover:text-primary transition-opacity duration-300" href="#">Privacy Policy</a>
+<a class="font-body text-body text-on-secondary-fixed-variant hover:text-primary transition-opacity duration-300" href="#">Terms of Service</a>
+</div>
+<p class="font-caption text-caption text-on-surface-variant opacity-70">
+                © 2024 ClientPulse SaaS. All rights reserved.
+            </p>
+</div>
+</footer>
+<script>
+        // Simple micro-interaction for the gauge
+        window.addEventListener('DOMContentLoaded', () => {
+            const gaugeFill = document.querySelector('.gauge-fill');
+            if (gaugeFill) {
+                // Trigger animation after a short delay
+                setTimeout(() => {
+                    gaugeFill.style.strokeDashoffset = '40'; // 82% of 220
+                }, 300);
+            }
+        });
+    </script>
+</body></html>

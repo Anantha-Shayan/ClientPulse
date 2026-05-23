@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Feedback &amp; Overlays Library | ClientPulse</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        @keyframes progress-drain {
+            from { width: 100%; }
+            to { width: 0%; }
+        }
+        .animate-drain {
+            animation: progress-drain 5s linear forwards;
+        }
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+        .skeleton-shimmer {
+            background: linear-gradient(90deg, #f0f1f5 25%, #e2e8f0 50%, #f0f1f5 75%);
+            background-size: 1000px 100%;
+            animation: shimmer 2s infinite linear;
+        }
+        .glass-blur {
+            backdrop-filter: blur(8px);
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* New Motion Behaviors */
+        @keyframes toast-in {
+            from { transform: translateX(20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .animate-toast {
+            animation: toast-in 200ms ease-out forwards;
+        }
+
+        .tooltip-transition {
+            transition: opacity 200ms ease-out, transform 200ms ease-out;
+        }
+
+        /* Modal specific transitions */
+        #confirm-dialog .modal-container {
+            transition: transform 200ms ease-out, opacity 200ms ease-out;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#131b2e",
+                        "surface-tint": "#184de6",
+                        "surface-container-highest": "#dae2fd",
+                        "inverse-primary": "#b8c4ff",
+                        "secondary-fixed-dim": "#b9c7e0",
+                        "primary": "#0038bd",
+                        "on-secondary-fixed-variant": "#3a485c",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#005338",
+                        "outline": "#747687",
+                        "on-primary-fixed-variant": "#0037b9",
+                        "on-primary-fixed": "#001453",
+                        "on-tertiary-fixed-variant": "#005237",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f2f3ff",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#d5e3fd",
+                        "on-tertiary-fixed": "#002114",
+                        "on-secondary-container": "#57657b",
+                        "secondary": "#515f74",
+                        "surface-dim": "#d2d9f4",
+                        "background": "#faf8ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#131b2e",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#b8c4ff",
+                        "primary-container": "#1b4fe8",
+                        "tertiary-container": "#006e4b",
+                        "outline-variant": "#c4c5d8",
+                        "surface-container": "#eaedff",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#faf8ff",
+                        "on-secondary-fixed": "#0d1c2f",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#61dca6",
+                        "surface-variant": "#dae2fd",
+                        "surface-container-high": "#e2e7ff",
+                        "surface": "#faf8ff",
+                        "on-surface-variant": "#434655",
+                        "inverse-surface": "#283044",
+                        "inverse-on-surface": "#eef0ff",
+                        "on-tertiary-container": "#77f2ba",
+                        "on-primary-container": "#d3d9ff",
+                        "secondary-fixed": "#d5e3fd",
+                        "primary-fixed": "#dde1ff",
+                        "tertiary-fixed": "#7ff9c1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "base": "8px",
+                        "2xl": "48px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "3xl": "64px"
+                    },
+                    "fontFamily": {
+                        "headline-3": ["Inter"],
+                        "headline-2": ["Inter"],
+                        "display": ["Inter"],
+                        "label": ["Inter"],
+                        "body": ["Inter"],
+                        "headline-1": ["Inter"],
+                        "caption": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-3": ["16px", {"lineHeight": "1.5", "fontWeight": "600"}],
+                        "headline-2": ["20px", {"lineHeight": "1.4", "letterSpacing": "-0.2px", "fontWeight": "600"}],
+                        "display": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.5px", "fontWeight": "700"}],
+                        "label": ["12px", {"lineHeight": "1", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "body": ["14px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-1": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.3px", "fontWeight": "600"}],
+                        "caption": ["12px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-lg h-16 bg-surface-container-lowest border-b border-outline-variant shadow-sm">
+<div class="flex items-center gap-xl">
+<span class="text-headline-2 font-headline-2 text-primary tracking-tight">ClientPulse</span>
+<div class="hidden md:flex items-center gap-lg">
+<a class="font-body text-body font-medium text-on-secondary-container hover:bg-surface-container-low transition-colors" href="#">Dashboard</a>
+<a class="font-body text-body font-medium text-on-secondary-container hover:bg-surface-container-low transition-colors" href="#">Feedback</a>
+<a class="font-body text-body font-medium text-on-secondary-container hover:bg-surface-container-low transition-colors" href="#">Analytics</a>
+<a class="font-body text-body font-medium text-primary border-b-2 border-primary pb-1" href="#">Settings</a>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container rounded-lg border-none focus:ring-2 focus:ring-primary text-body" placeholder="Search..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant p-2 hover:bg-surface-container-low rounded-full transition-colors">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant p-2 hover:bg-surface-container-low rounded-full transition-colors">help_outline</button>
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="User profile" data-alt="Close up professional headshot of a smiling business executive with soft studio lighting, showcasing a modern corporate aesthetic with a neutral, clean background in high definition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgsQoTQicFZ254p7g7fNCsfswpLKk8e_Y3tncaizUQbys4-KpcYyr2H-NfDf6tI1DOUkn5c0rlucdIpc3Q1Nnnmv2FTIegdjzaG5xKbr27JjBZ-MfQ2ONIm9gdyOpISAw-8XkRwPWL5OzDbN9xAJXTv7vWoYvSnkewprq7YqZrYfH2oYhntYa1TxEgjSjk3X2af-D-Th4V7hIa6ibGiChogLWEjjgMQEOJI0yGSNKdslvqafAWgydF4DtrJD5OlDt6L8EOCjEWF7yT"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-16 h-[calc(100vh-64px)] w-[280px] flex flex-col p-md z-40 bg-surface-container border-r border-outline-variant">
+<div class="flex items-center gap-md px-md mb-xl">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">pulse_alert</span>
+</div>
+<div>
+<h2 class="text-headline-3 font-headline-3 text-on-surface">ClientPulse</h2>
+<p class="text-label font-label text-on-surface-variant">Enterprise Plan</p>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 py-3 bg-primary-container text-on-primary-container font-bold rounded-lg mb-lg hover:shadow-md transition-all active:scale-95">
+<span class="material-symbols-outlined">add</span>
+<span>New Feedback</span>
+</button>
+<div class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-md py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-label font-label">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-md py-3 bg-primary-container text-on-primary-container font-bold rounded-lg border-l-4 border-primary transition-all" href="#">
+<span class="material-symbols-outlined">forum</span>
+<span class="text-label font-label">Responses</span>
+</a>
+<a class="flex items-center gap-3 px-md py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">bolt</span>
+<span class="text-label font-label">Automation</span>
+</a>
+<a class="flex items-center gap-3 px-md py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-label font-label">Team</span>
+</a>
+<a class="flex items-center gap-3 px-md py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-label font-label">Templates</span>
+</a>
+</div>
+<div class="pt-lg border-t border-outline-variant space-y-1">
+<a class="flex items-center gap-3 px-md py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="text-label font-label">Support</span>
+</a>
+<a class="flex items-center gap-3 px-md py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-label font-label">Account</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-[280px] mt-16 p-xl min-h-screen">
+<header class="mb-xl">
+<h1 class="text-display font-display text-on-surface">Feedback &amp; Overlays</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant mt-2">Comprehensive library of status indicators, feedback components, and overlay elements.</p>
+</header>
+<div class="grid grid-cols-12 gap-xl">
+<!-- Toast Notifications Section -->
+<section class="col-span-12 lg:col-span-6 space-y-lg">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm">
+<h3 class="text-headline-1 font-headline-1 mb-md">Toast Notifications</h3>
+<div class="grid grid-cols-1 gap-md">
+<!-- Success -->
+<div class="relative overflow-hidden bg-white border border-outline-variant rounded-lg p-md flex items-center gap-md shadow-md animate-toast">
+<div class="w-10 h-10 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<div class="flex-1">
+<p class="text-headline-3 font-headline-3 text-on-surface">Project saved</p>
+<p class="text-caption font-caption text-on-surface-variant">Changes synchronized successfully.</p>
+</div>
+<div class="absolute bottom-0 left-0 h-1 bg-tertiary animate-drain"></div>
+</div>
+<!-- Error -->
+<div class="relative overflow-hidden bg-white border border-outline-variant rounded-lg p-md flex items-center gap-md shadow-md animate-toast" style="animation-delay: 100ms;">
+<div class="w-10 h-10 rounded-full bg-error/10 flex items-center justify-center text-error">
+<span class="material-symbols-outlined">error</span>
+</div>
+<div class="flex-1">
+<p class="text-headline-3 font-headline-3 text-on-surface">Upload failed</p>
+<p class="text-caption font-caption text-on-surface-variant">Network connection lost. Please try again.</p>
+</div>
+<div class="absolute bottom-0 left-0 h-1 bg-error animate-drain"></div>
+</div>
+<!-- Warning -->
+<div class="relative overflow-hidden bg-white border border-outline-variant rounded-lg p-md flex items-center gap-md shadow-md animate-toast" style="animation-delay: 200ms;">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div class="flex-1">
+<p class="text-headline-3 font-headline-3 text-on-surface">Storage limit</p>
+<p class="text-caption font-caption text-on-surface-variant">You've reached 85% of your allocated space.</p>
+</div>
+<div class="absolute bottom-0 left-0 h-1 bg-secondary-fixed-dim animate-drain"></div>
+</div>
+<!-- Info -->
+<div class="relative overflow-hidden bg-white border border-outline-variant rounded-lg p-md flex items-center gap-md shadow-md animate-toast" style="animation-delay: 300ms;">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">info</span>
+</div>
+<div class="flex-1">
+<p class="text-headline-3 font-headline-3 text-on-surface">Update available</p>
+<p class="text-caption font-caption text-on-surface-variant">A new version of ClientPulse is ready.</p>
+</div>
+<div class="absolute bottom-0 left-0 h-1 bg-primary animate-drain"></div>
+</div>
+</div>
+</div>
+<!-- Tooltips & Spinners -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<!-- Tooltips -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm">
+<h3 class="text-headline-2 font-headline-2 mb-md">Tooltips</h3>
+<div class="flex flex-col gap-xl py-4 items-center">
+<div class="relative group">
+<button class="px-md py-2 border border-outline-variant rounded-lg text-body hover:bg-surface-container-low transition-colors">Hover me (Top)</button>
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 bg-inverse-surface text-inverse-on-surface text-label rounded opacity-0 group-hover:opacity-100 group-hover:-translate-y-1 tooltip-transition whitespace-nowrap pointer-events-none">
+                                Refresh analytics data
+                                <div class="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-inverse-surface"></div>
+</div>
+</div>
+<div class="relative group">
+<button class="px-md py-2 border border-outline-variant rounded-lg text-body hover:bg-surface-container-low transition-colors">Hover me (Right)</button>
+<div class="absolute left-full ml-3 top-1/2 -translate-y-1/2 px-3 py-1 bg-inverse-surface text-inverse-on-surface text-label rounded opacity-0 group-hover:opacity-100 group-hover:translate-x-1 tooltip-transition whitespace-nowrap pointer-events-none">
+                                Edit settings
+                                <div class="absolute right-full top-1/2 -translate-y-1/2 border-8 border-transparent border-r-inverse-surface"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Spinners -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm">
+<h3 class="text-headline-2 font-headline-2 mb-md">Loading States</h3>
+<div class="flex flex-wrap items-end justify-center gap-lg py-4">
+<div class="flex flex-col items-center gap-2">
+<div class="w-6 h-6 border-2 border-primary/20 border-t-primary rounded-full animate-spin transition-all duration-300"></div>
+<span class="text-caption">Small</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 border-4 border-primary/20 border-t-primary rounded-full animate-spin transition-all duration-300"></div>
+<span class="text-caption">Medium</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<button class="px-md py-2 bg-primary text-on-primary rounded-lg text-label hover:opacity-90 transition-all" onclick="toggleFullscreenLoader()">Preview Full</button>
+<span class="text-caption">Action</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Confirm Dialog & Progress Bars -->
+<section class="col-span-12 lg:col-span-6 space-y-lg">
+<!-- Progress Bars -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm">
+<h3 class="text-headline-1 font-headline-1 mb-md">Progress Tracking</h3>
+<div class="space-y-lg">
+<div>
+<div class="flex justify-between items-center mb-2">
+<span class="text-body font-medium">Standard Progress</span>
+<span class="text-label text-primary font-bold">65%</span>
+</div>
+<div class="w-full h-3 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-1000 ease-out" style="width: 65%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-center mb-1">
+<span class="text-label text-on-surface-variant">Mini Variant</span>
+<span class="text-label">24/100</span>
+</div>
+<div class="w-full h-1 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-tertiary rounded-full transition-all duration-700 ease-out" style="width: 24%"></div>
+</div>
+</div>
+<div class="p-md bg-surface-container rounded-lg flex items-center gap-md">
+<div class="relative w-12 h-12">
+<svg class="w-full h-full" viewbox="0 0 36 36">
+<path class="text-outline-variant" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="100, 100" stroke-width="3"></path>
+<path class="text-primary transition-all duration-1000 ease-in-out" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="75, 100" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<span class="absolute inset-0 flex items-center justify-center text-[10px] font-bold">75%</span>
+</div>
+<div>
+<p class="text-label font-bold">Monthly Target</p>
+<p class="text-caption text-on-surface-variant">Ahead of schedule by 12%</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Skeleton Loaders -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm">
+<h3 class="text-headline-1 font-headline-1 mb-md">Skeleton Loaders</h3>
+<div class="space-y-xl">
+<!-- Card Skeleton -->
+<div class="border border-outline-variant rounded-xl p-md space-y-md">
+<div class="w-12 h-12 rounded-full skeleton-shimmer"></div>
+<div class="space-y-2">
+<div class="h-4 w-3/4 skeleton-shimmer rounded"></div>
+<div class="h-3 w-1/2 skeleton-shimmer rounded"></div>
+</div>
+</div>
+<!-- List Skeleton -->
+<div class="space-y-4">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 skeleton-shimmer rounded-lg"></div>
+<div class="flex-1 space-y-2">
+<div class="h-3 w-full skeleton-shimmer rounded"></div>
+<div class="h-3 w-4/5 skeleton-shimmer rounded"></div>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 skeleton-shimmer rounded-lg"></div>
+<div class="flex-1 space-y-2">
+<div class="h-3 w-full skeleton-shimmer rounded"></div>
+<div class="h-3 w-4/5 skeleton-shimmer rounded"></div>
+</div>
+</div>
+</div>
+<!-- Chart Skeleton -->
+<div class="flex items-end gap-2 h-24">
+<div class="flex-1 skeleton-shimmer rounded-t" style="height: 40%"></div>
+<div class="flex-1 skeleton-shimmer rounded-t" style="height: 80%"></div>
+<div class="flex-1 skeleton-shimmer rounded-t" style="height: 60%"></div>
+<div class="flex-1 skeleton-shimmer rounded-t" style="height: 90%"></div>
+<div class="flex-1 skeleton-shimmer rounded-t" style="height: 50%"></div>
+<div class="flex-1 skeleton-shimmer rounded-t" style="height: 70%"></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Confirm Dialog Example In-Situ -->
+<section class="mt-xl">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm flex flex-col items-center justify-center py-2xl space-y-md text-center">
+<div class="w-16 h-16 rounded-full bg-error-container flex items-center justify-center text-error mb-2">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'opsz' 48;">delete_forever</span>
+</div>
+<h2 class="text-headline-1 font-headline-1">In-Situ Overlay Example</h2>
+<p class="text-body text-on-surface-variant max-w-md">Try launching the modal overlay to see the backdrop blur and destructive action pattern.</p>
+<button class="px-xl py-3 bg-error text-on-error rounded-lg font-bold hover:opacity-90 transition-all shadow-md active:scale-95" onclick="toggleConfirmDialog()">Open Confirm Dialog</button>
+</div>
+</section>
+</main>
+<!-- Overlays -->
+<!-- Fullscreen Loader -->
+<div class="fixed inset-0 z-[100] glass-blur flex flex-col items-center justify-center hidden opacity-0 transition-opacity duration-300" id="fullscreen-loader">
+<div class="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin mb-md"></div>
+<p class="text-headline-3 text-primary font-bold">Synchronizing Data...</p>
+<p class="text-caption text-on-surface-variant">This will only take a moment.</p>
+<button class="mt-xl px-md py-2 border border-outline text-on-surface rounded-lg hover:bg-surface-container-high transition-all" onclick="toggleFullscreenLoader()">Cancel</button>
+</div>
+<!-- Confirm Dialog (Modal) -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center hidden opacity-0 transition-opacity duration-200" id="confirm-dialog">
+<div class="absolute inset-0 bg-on-background/40 backdrop-blur-sm" onclick="toggleConfirmDialog()"></div>
+<div class="relative modal-container bg-white w-full max-w-md rounded-xl shadow-2xl p-xl scale-90 opacity-0 border border-outline-variant">
+<div class="flex items-start gap-lg">
+<div class="w-12 h-12 rounded-full bg-error-container flex items-center justify-center text-error shrink-0">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div>
+<h3 class="text-headline-1 font-headline-1 text-on-surface">Delete Project?</h3>
+<p class="text-body text-on-surface-variant mt-2">Are you sure you want to delete <span class="font-bold">"Q4 Market Analysis"</span>? This action cannot be undone and all associated feedback will be permanently removed.</p>
+</div>
+</div>
+<div class="flex items-center justify-end gap-md mt-xl">
+<button class="px-lg py-2 text-on-surface-variant font-medium hover:bg-surface-container rounded-lg transition-colors" onclick="toggleConfirmDialog()">Cancel</button>
+<button class="px-lg py-2 bg-error text-on-error font-bold rounded-lg hover:opacity-90 transition-all shadow-sm">Delete Project</button>
+</div>
+</div>
+</div>
+<script>
+        function toggleFullscreenLoader() {
+            const loader = document.getElementById('fullscreen-loader');
+            if (loader.classList.contains('hidden')) {
+                loader.classList.remove('hidden');
+                setTimeout(() => loader.classList.add('opacity-100'), 10);
+            } else {
+                loader.classList.remove('opacity-100');
+                setTimeout(() => loader.classList.add('hidden'), 300);
+            }
+        }
+
+        function toggleConfirmDialog() {
+            const dialog = document.getElementById('confirm-dialog');
+            const modalContent = dialog.querySelector('.modal-container');
+            if (dialog.classList.contains('hidden')) {
+                dialog.classList.remove('hidden');
+                setTimeout(() => {
+                    dialog.classList.add('opacity-100');
+                    modalContent.classList.remove('scale-90', 'opacity-0');
+                    modalContent.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            } else {
+                modalContent.classList.remove('scale-100', 'opacity-100');
+                modalContent.classList.add('scale-90', 'opacity-0');
+                dialog.classList.remove('opacity-100');
+                setTimeout(() => dialog.classList.add('hidden'), 200);
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const dialog = document.getElementById('confirm-dialog');
+                const loader = document.getElementById('fullscreen-loader');
+                if (!dialog.classList.contains('hidden')) toggleConfirmDialog();
+                if (!loader.classList.contains('hidden')) toggleFullscreenLoader();
+            }
+        });
+    </script>
+</body></html>

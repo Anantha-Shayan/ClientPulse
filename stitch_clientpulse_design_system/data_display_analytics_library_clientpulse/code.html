@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ClientPulse | Data Display Component Library</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-on-surface": "#eef0ff",
+                      "tertiary-container": "#006e4b",
+                      "secondary-fixed": "#d5e3fd",
+                      "surface-tint": "#184de6",
+                      "on-tertiary-fixed": "#002114",
+                      "background": "#faf8ff",
+                      "surface-container-high": "#e2e7ff",
+                      "error-container": "#ffdad6",
+                      "on-primary-fixed": "#001453",
+                      "on-primary-container": "#d3d9ff",
+                      "on-primary-fixed-variant": "#0037b9",
+                      "on-secondary-container": "#57657b",
+                      "surface-variant": "#dae2fd",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed-variant": "#3a485c",
+                      "surface": "#faf8ff",
+                      "primary-container": "#1b4fe8",
+                      "on-surface": "#131b2e",
+                      "on-secondary-fixed": "#0d1c2f",
+                      "on-tertiary-container": "#77f2ba",
+                      "on-background": "#131b2e",
+                      "error": "#ba1a1a",
+                      "on-error-container": "#93000a",
+                      "surface-dim": "#d2d9f4",
+                      "secondary": "#515f74",
+                      "surface-container-highest": "#dae2fd",
+                      "primary-fixed": "#dde1ff",
+                      "outline": "#747687",
+                      "secondary-fixed-dim": "#b9c7e0",
+                      "on-surface-variant": "#434655",
+                      "inverse-primary": "#b8c4ff",
+                      "tertiary": "#005338",
+                      "on-error": "#ffffff",
+                      "primary-fixed-dim": "#b8c4ff",
+                      "outline-variant": "#c4c5d8",
+                      "inverse-surface": "#283044",
+                      "tertiary-fixed": "#7ff9c1",
+                      "primary": "#0038bd",
+                      "tertiary-fixed-dim": "#61dca6",
+                      "surface-bright": "#faf8ff",
+                      "surface-container-low": "#f2f3ff",
+                      "on-tertiary-fixed-variant": "#005237",
+                      "on-primary": "#ffffff",
+                      "surface-container": "#eaedff",
+                      "secondary-container": "#d5e3fd"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "3xl": "64px",
+                      "sm": "8px",
+                      "base": "8px",
+                      "md": "16px",
+                      "2xl": "48px",
+                      "xl": "32px",
+                      "lg": "24px"
+              },
+              "fontFamily": {
+                      "headline-1": ["Inter"],
+                      "caption": ["Inter"],
+                      "display": ["Inter"],
+                      "label": ["Inter"],
+                      "body": ["Inter"],
+                      "headline-2": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-3": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-1": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.3px", "fontWeight": "600"}],
+                      "caption": ["12px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "display": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.5px", "fontWeight": "700"}],
+                      "label": ["12px", {"lineHeight": "1", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                      "body": ["14px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-2": ["20px", {"lineHeight": "1.4", "letterSpacing": "-0.2px", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-3": ["16px", {"lineHeight": "1.5", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .gauge-arc { stroke-dasharray: 251.2; stroke-dashoffset: 251.2; transition: stroke-dashoffset 1s ease-out; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen">
+<!-- TopNavBar (Shared Component) -->
+<nav class="sticky top-0 z-50 flex items-center justify-between px-md h-16 w-full bg-surface/80 backdrop-blur-md border-b border-outline-variant shadow-sm">
+<div class="flex items-center gap-lg flex-1">
+<span class="font-headline-2 text-headline-2 text-primary font-bold tracking-tight">ClientPulse</span>
+<div class="hidden md:flex items-center gap-md ml-xl">
+<a class="font-body text-body text-secondary hover:text-primary transition-colors cursor-pointer active:opacity-80">Dashboard</a>
+<a class="font-body text-body text-secondary hover:text-primary transition-colors cursor-pointer active:opacity-80">Projects</a>
+<a class="font-body text-body text-secondary hover:text-primary transition-colors cursor-pointer active:opacity-80">Teams</a>
+<a class="font-body text-body text-secondary hover:text-primary transition-colors cursor-pointer active:opacity-80">Reports</a>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-lg text-body focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all w-64" placeholder="Search resources..." type="text"/>
+</div>
+<div class="flex items-center gap-sm">
+<button class="p-2 hover:bg-surface-container-low rounded-full text-secondary transition-colors cursor-pointer"><span class="material-symbols-outlined">notifications</span></button>
+<button class="p-2 hover:bg-surface-container-low rounded-full text-secondary transition-colors cursor-pointer"><span class="material-symbols-outlined">help</span></button>
+<button class="p-2 hover:bg-surface-container-low rounded-full text-secondary transition-colors cursor-pointer"><span class="material-symbols-outlined">settings</span></button>
+</div>
+<div class="h-8 w-8 rounded-full overflow-hidden ml-sm border border-outline-variant cursor-pointer">
+<img alt="User profile" class="h-full w-full object-cover" data-alt="A professional headshot of a corporate executive in a modern office setting. The lighting is soft and natural, emphasizing a bright and trustworthy professional atmosphere. The individual is wearing a sharp, tailored navy blue blazer over a crisp white shirt, aligning with a premium corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2xSUT6pqCqC3GTc8OhI-fiyZFne7KajToRAbIgqAla7midiuxp-ywxv2ZYIu5KDGH6vGNgWhoLzNT6AJ0UX10zuTMyJ41-_kyV8ahEFTnucNkfW5Pmf7XVQEdFk_3nOvJnUbZ73nr0uRWDhu3ifyBlr5ioeoam6zU2UnDd4v5napRG0gpuirMEDdHNiJJz3Qfo0hUYb845pWvRRy8cp6O6Z0SExPFgIaOgzXNSBBfvRVPUWPoE7cy7COIqhg-YJe8ii6ERu5_qsK3"/>
+</div>
+</div>
+</nav>
+<div class="flex">
+<!-- SideNavBar (Shared Component) -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-surface-container-low border-r border-outline-variant flex flex-col py-md gap-sm hidden md:flex">
+<div class="px-md mb-md">
+<button class="w-full bg-primary-container text-white font-headline-3 text-headline-3 py-3 px-4 rounded-lg shadow-sm hover:opacity-90 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                    New Project
+                </button>
+</div>
+<nav class="flex-1 px-sm space-y-1">
+<div class="px-md py-2 flex items-center gap-3 bg-primary-container text-on-primary-container border-l-4 border-primary font-label text-label cursor-pointer transition-all duration-200">
+<span class="material-symbols-outlined">dashboard</span>
+                    Overview
+                </div>
+<div class="px-md py-2 flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high font-label text-label cursor-pointer transition-all duration-200">
+<span class="material-symbols-outlined">assignment</span>
+                    All Projects
+                </div>
+<div class="px-md py-2 flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high font-label text-label cursor-pointer transition-all duration-200">
+<span class="material-symbols-outlined">account_tree</span>
+                    Resource Flow
+                </div>
+<div class="px-md py-2 flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high font-label text-label cursor-pointer transition-all duration-200">
+<span class="material-symbols-outlined">bar_chart</span>
+                    Analytics
+                </div>
+<div class="px-md py-2 flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high font-label text-label cursor-pointer transition-all duration-200">
+<span class="material-symbols-outlined">groups</span>
+                    Clients
+                </div>
+<div class="px-md py-2 flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high font-label text-label cursor-pointer transition-all duration-200">
+<span class="material-symbols-outlined">inventory_2</span>
+                    Archive
+                </div>
+</nav>
+<div class="px-sm mt-auto border-t border-outline-variant pt-md">
+<div class="px-md py-2 flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high font-label text-label cursor-pointer transition-all duration-200">
+<span class="material-symbols-outlined">settings</span>
+                    Settings
+                </div>
+<div class="px-md py-2 flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high font-label text-label cursor-pointer transition-all duration-200">
+<span class="material-symbols-outlined">contact_support</span>
+                    Support
+                </div>
+<div class="mt-md px-md py-4 bg-surface-container rounded-xl mx-sm">
+<div class="flex items-center gap-3 mb-2">
+<div class="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold">CP</div>
+<div>
+<p class="text-label font-bold text-on-surface">Enterprise Plan</p>
+<p class="text-caption text-secondary">Active</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 p-lg space-y-2xl">
+<!-- Library Header -->
+<header class="max-w-6xl mx-auto">
+<h1 class="font-display text-display text-on-surface">Data Display Library</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2 max-w-3xl">Comprehensive UI patterns for high-density analytics dashboards. Built for institutional clarity and data-driven decision making.</p>
+</header>
+<!-- 1. Stats & Trends -->
+<section class="max-w-6xl mx-auto">
+<div class="flex items-end justify-between mb-lg border-b border-outline-variant pb-md">
+<div>
+<h2 class="font-headline-1 text-headline-1 text-on-surface">Stats &amp; Trends</h2>
+<p class="font-caption text-caption text-secondary">Modular metric cards with performance visualization</p>
+</div>
+<button class="text-primary font-label text-label flex items-center gap-1 hover:underline">View Documentation <span class="material-symbols-outlined text-[16px]">arrow_forward</span></button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg">
+<!-- Stat Card 1 -->
+<div class="bg-surface-container-lowest p-md rounded-lg shadow-sm border border-outline-variant flex flex-col gap-md">
+<div class="flex justify-between items-start">
+<div class="h-10 w-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">attach_money</span>
+</div>
+<span class="px-2 py-1 bg-tertiary-fixed text-on-tertiary-fixed font-label text-[10px] rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">trending_up</span> 12.5%
+                            </span>
+</div>
+<div>
+<p class="font-caption text-caption text-secondary uppercase tracking-wider">Annual Revenue</p>
+<h3 class="font-display text-display text-on-surface">$2,450,000</h3>
+</div>
+</div>
+<!-- Stat Card 2 -->
+<div class="bg-surface-container-lowest p-md rounded-lg shadow-sm border border-outline-variant flex flex-col gap-md">
+<div class="flex justify-between items-start">
+<div class="h-10 w-10 rounded-full bg-secondary-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">group</span>
+</div>
+<span class="px-2 py-1 bg-error-container text-on-error-container font-label text-[10px] rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">trending_down</span> 3.2%
+                            </span>
+</div>
+<div>
+<p class="font-caption text-caption text-secondary uppercase tracking-wider">Active Clients</p>
+<h3 class="font-display text-display text-on-surface">1,842</h3>
+</div>
+</div>
+<!-- Stat Card 3 -->
+<div class="bg-surface-container-lowest p-md rounded-lg shadow-sm border border-outline-variant flex flex-col gap-md">
+<div class="flex justify-between items-start">
+<div class="h-10 w-10 rounded-full bg-tertiary-container/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">task_alt</span>
+</div>
+<span class="px-2 py-1 bg-tertiary-fixed text-on-tertiary-fixed font-label text-[10px] rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">trending_up</span> 8.1%
+                            </span>
+</div>
+<div>
+<p class="font-caption text-caption text-secondary uppercase tracking-wider">Completion Rate</p>
+<h3 class="font-display text-display text-on-surface">94.8%</h3>
+</div>
+</div>
+<!-- Stat Card 4 -->
+<div class="bg-surface-container-lowest p-md rounded-lg shadow-sm border border-outline-variant flex flex-col gap-md">
+<div class="flex justify-between items-start">
+<div class="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">speed</span>
+</div>
+<span class="px-2 py-1 bg-surface-container-high text-secondary font-label text-[10px] rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">horizontal_rule</span> 0%
+                            </span>
+</div>
+<div>
+<p class="font-caption text-caption text-secondary uppercase tracking-wider">System Health</p>
+<h3 class="font-display text-display text-on-surface">99.9%</h3>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. Data Tables -->
+<section class="max-w-6xl mx-auto">
+<div class="flex items-end justify-between mb-lg border-b border-outline-variant pb-md">
+<div>
+<h2 class="font-headline-1 text-headline-1 text-on-surface">Data Tables</h2>
+<p class="font-caption text-caption text-secondary">High-density records with sortable columns and pagination</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low border-b border-outline-variant">
+<tr>
+<th class="px-lg py-3 font-label text-label text-secondary uppercase tracking-wider cursor-pointer hover:text-on-surface transition-colors">
+<div class="flex items-center gap-1">Project Name <span class="material-symbols-outlined text-[14px]">unfold_more</span></div>
+</th>
+<th class="px-lg py-3 font-label text-label text-secondary uppercase tracking-wider cursor-pointer hover:text-on-surface transition-colors">
+<div class="flex items-center gap-1">Status <span class="material-symbols-outlined text-[14px]">unfold_more</span></div>
+</th>
+<th class="px-lg py-3 font-label text-label text-secondary uppercase tracking-wider cursor-pointer hover:text-on-surface transition-colors">
+<div class="flex items-center gap-1">Manager <span class="material-symbols-outlined text-[14px]">unfold_more</span></div>
+</th>
+<th class="px-lg py-3 font-label text-label text-secondary uppercase tracking-wider cursor-pointer hover:text-on-surface transition-colors text-right">
+<div class="flex items-center gap-1 justify-end">Health <span class="material-symbols-outlined text-[14px]">unfold_more</span></div>
+</th>
+<th class="px-lg py-3 font-label text-label text-secondary uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-lg py-4 font-headline-3 text-headline-3 text-on-surface">Project Aurora Redesign</td>
+<td class="px-lg py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-tertiary-fixed text-on-tertiary-fixed">
+                                            In Progress
+                                        </span>
+</td>
+<td class="px-lg py-4">
+<div class="flex items-center gap-sm">
+<div class="h-6 w-6 rounded-full bg-primary/20 text-[10px] flex items-center justify-center font-bold text-primary">SC</div>
+<span class="font-body text-body text-on-surface">Sarah Chen</span>
+</div>
+</td>
+<td class="px-lg py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<div class="w-24 h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="bg-tertiary h-full w-[85%]"></div>
+</div>
+<span class="text-caption font-medium">85%</span>
+</div>
+</td>
+<td class="px-lg py-4 text-right">
+<button class="p-1 text-secondary hover:text-primary transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-lg py-4 font-headline-3 text-headline-3 text-on-surface">Global Expansion Alpha</td>
+<td class="px-lg py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary-fixed text-on-secondary-fixed">
+                                            Paused
+                                        </span>
+</td>
+<td class="px-lg py-4">
+<div class="flex items-center gap-sm">
+<div class="h-6 w-6 rounded-full bg-secondary/20 text-[10px] flex items-center justify-center font-bold text-secondary">MK</div>
+<span class="font-body text-body text-on-surface">Marcus Kane</span>
+</div>
+</td>
+<td class="px-lg py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<div class="w-24 h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[40%]"></div>
+</div>
+<span class="text-caption font-medium">40%</span>
+</div>
+</td>
+<td class="px-lg py-4 text-right">
+<button class="p-1 text-secondary hover:text-primary transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-lg py-4 font-headline-3 text-headline-3 text-on-surface">Cloud Integration Sync</td>
+<td class="px-lg py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-error-container text-on-error-container">
+                                            Critical
+                                        </span>
+</td>
+<td class="px-lg py-4">
+<div class="flex items-center gap-sm">
+<div class="h-6 w-6 rounded-full bg-error/10 text-[10px] flex items-center justify-center font-bold text-error">AL</div>
+<span class="font-body text-body text-on-surface">Alice Low</span>
+</div>
+</td>
+<td class="px-lg py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<div class="w-24 h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="bg-error h-full w-[12%]"></div>
+</div>
+<span class="text-caption font-medium">12%</span>
+</div>
+</td>
+<td class="px-lg py-4 text-right">
+<button class="p-1 text-secondary hover:text-primary transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="px-lg py-3 bg-surface-container-low border-t border-outline-variant flex items-center justify-between">
+<p class="font-caption text-caption text-secondary">Showing 1-10 of 50</p>
+<div class="flex items-center gap-sm">
+<button class="p-1 border border-outline-variant rounded hover:bg-surface transition-colors"><span class="material-symbols-outlined text-[18px]">chevron_left</span></button>
+<button class="px-3 py-1 bg-primary text-white text-caption font-medium rounded">1</button>
+<button class="px-3 py-1 border border-outline-variant hover:bg-surface text-caption font-medium rounded transition-colors">2</button>
+<button class="px-3 py-1 border border-outline-variant hover:bg-surface text-caption font-medium rounded transition-colors">3</button>
+<button class="p-1 border border-outline-variant rounded hover:bg-surface transition-colors"><span class="material-symbols-outlined text-[18px]">chevron_right</span></button>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. Status & Classification Badges -->
+<section class="max-w-6xl mx-auto">
+<div class="flex items-end justify-between mb-lg border-b border-outline-variant pb-md">
+<div>
+<h2 class="font-headline-1 text-headline-1 text-on-surface">Status &amp; Classification Badges</h2>
+<p class="font-caption text-caption text-secondary">Semantic tagging system for quick visual scanning</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-xl">
+<!-- Health Badges -->
+<div class="space-y-md">
+<p class="font-label text-label uppercase tracking-widest text-secondary mb-sm">Health</p>
+<div class="flex flex-col gap-sm">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-full font-bold text-caption w-fit border border-tertiary/20">
+<span class="h-2 w-2 rounded-full bg-tertiary"></span> On Track
+                            </div>
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-secondary-fixed text-on-secondary-fixed-variant rounded-full font-bold text-caption w-fit border border-secondary/20">
+<span class="h-2 w-2 rounded-full bg-secondary"></span> At Risk
+                            </div>
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-error-container text-on-error-container rounded-full font-bold text-caption w-fit border border-error/20">
+<span class="h-2 w-2 rounded-full bg-error animate-pulse"></span> Critical
+                            </div>
+</div>
+</div>
+<!-- Status Badges -->
+<div class="space-y-md">
+<p class="font-label text-label uppercase tracking-widest text-secondary mb-sm">Status</p>
+<div class="flex flex-col gap-sm">
+<span class="px-3 py-1 bg-primary/10 text-primary font-bold text-caption rounded w-fit border border-primary/20">IN PROGRESS</span>
+<span class="px-3 py-1 bg-tertiary/10 text-tertiary font-bold text-caption rounded w-fit border border-tertiary/20">COMPLETED</span>
+<span class="px-3 py-1 bg-secondary/10 text-secondary font-bold text-caption rounded w-fit border border-secondary/20">PAUSED</span>
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant font-bold text-caption rounded w-fit border border-outline-variant">BACKLOG</span>
+</div>
+</div>
+<!-- Role Badges -->
+<div class="space-y-md">
+<p class="font-label text-label uppercase tracking-widest text-secondary mb-sm">Role</p>
+<div class="flex flex-col gap-sm">
+<span class="px-4 py-1.5 bg-inverse-surface text-inverse-on-surface font-label text-caption rounded w-fit">ADMIN</span>
+<span class="px-4 py-1.5 bg-primary text-white font-label text-caption rounded w-fit shadow-sm">MEMBER</span>
+<span class="px-4 py-1.5 bg-surface-container-high text-on-surface font-label text-caption rounded w-fit border border-outline-variant">CLIENT</span>
+</div>
+</div>
+<!-- Priority Badges -->
+<div class="space-y-md">
+<p class="font-label text-label uppercase tracking-widest text-secondary mb-sm">Priority</p>
+<div class="flex flex-col gap-sm">
+<span class="flex items-center gap-2 font-headline-3 text-headline-3 text-error">
+<span class="h-1.5 w-1.5 rounded-full bg-error"></span> Critical
+                            </span>
+<span class="flex items-center gap-2 font-headline-3 text-headline-3 text-on-surface">
+<span class="h-1.5 w-1.5 rounded-full bg-orange-500"></span> High
+                            </span>
+<span class="flex items-center gap-2 font-headline-3 text-headline-3 text-on-surface">
+<span class="h-1.5 w-1.5 rounded-full bg-tertiary"></span> Medium
+                            </span>
+<span class="flex items-center gap-2 font-headline-3 text-headline-3 text-secondary">
+<span class="h-1.5 w-1.5 rounded-full bg-secondary"></span> Low
+                            </span>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. Visual Progress & 5. Entity & Metadata -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-2xl max-w-6xl mx-auto">
+<!-- Visual Progress -->
+<section>
+<div class="flex items-end justify-between mb-lg border-b border-outline-variant pb-md">
+<div>
+<h2 class="font-headline-1 text-headline-1 text-on-surface">Visual Progress</h2>
+<p class="font-caption text-caption text-secondary">Gauge and bar based health visualization</p>
+</div>
+</div>
+<div class="space-y-xl">
+<!-- Bars -->
+<div class="space-y-md">
+<div class="flex items-center justify-between gap-md">
+<p class="text-caption font-bold text-secondary uppercase">Project Completion</p>
+<span class="text-headline-3 text-primary">82%</span>
+</div>
+<div class="w-full h-3 bg-surface-container rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[82%] rounded-full shadow-sm"></div>
+</div>
+</div>
+<!-- Gauges -->
+<div class="flex items-end gap-2xl">
+<!-- Large Gauge -->
+<div class="flex flex-col items-center">
+<div class="relative w-[140px] h-[70px] overflow-hidden">
+<svg class="w-full h-full transform translate-y-0" viewbox="0 0 100 50">
+<path d="M10,50 A40,40 0 0,1 90,50" fill="none" stroke="#eaedff" stroke-linecap="round" stroke-width="12"></path>
+<path d="M10,50 A40,40 0 0,1 90,50" fill="none" stroke="#1b4fe8" stroke-dasharray="126" stroke-dashoffset="31.5" stroke-linecap="round" stroke-width="12"></path>
+</svg>
+<div class="absolute bottom-0 left-0 right-0 flex flex-col items-center">
+<span class="font-display text-headline-1 text-on-surface">75%</span>
+</div>
+</div>
+<p class="mt-2 text-caption font-bold text-secondary uppercase">Health Score</p>
+</div>
+<!-- Small Gauge -->
+<div class="flex flex-col items-center">
+<div class="relative w-[80px] h-[40px] overflow-hidden">
+<svg class="w-full h-full" viewbox="0 0 100 50">
+<path d="M10,50 A40,40 0 0,1 90,50" fill="none" stroke="#eaedff" stroke-linecap="round" stroke-width="15"></path>
+<path d="M10,50 A40,40 0 0,1 90,50" fill="none" stroke="#005338" stroke-dasharray="126" stroke-dashoffset="12" stroke-linecap="round" stroke-width="15"></path>
+</svg>
+<div class="absolute bottom-0 left-0 right-0 flex flex-col items-center">
+<span class="text-caption font-bold text-on-surface">92%</span>
+</div>
+</div>
+<p class="mt-2 text-[10px] font-bold text-secondary uppercase tracking-tighter">Vitals</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Entity & Metadata -->
+<section>
+<div class="flex items-end justify-between mb-lg border-b border-outline-variant pb-md">
+<div>
+<h2 class="font-headline-1 text-headline-1 text-on-surface">Entity &amp; Metadata</h2>
+<p class="font-caption text-caption text-secondary">Avatar stacks and removal tag chips</p>
+</div>
+</div>
+<div class="space-y-xl">
+<!-- Avatar Stack -->
+<div class="space-y-md">
+<p class="text-caption font-bold text-secondary uppercase">Assigned Team</p>
+<div class="flex -space-x-3 overflow-hidden p-1">
+<img alt="Member 1" class="inline-block h-10 w-10 rounded-full ring-4 ring-background object-cover" data-alt="A portrait of a creative professional woman in a bright, modern studio. The lighting is warm and golden, reflecting a positive and energetic workplace atmosphere. She is wearing a mustard yellow knit sweater that contrasts elegantly against a soft, neutral-toned background, embodying a modern, approachable aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4Zcu35RjOZV95DRECpiMOWcZS86YX3gnpxBw0cOJfqFRzO7bpd4-9Ipawi2XNnYI6crsn93T6VvgmKb1icByGsYVKkYQBj_EgTaEo95jbA8qi-QwAwwR0nPtchrUS7aQSOsuvJzqD2Gm7RpHWJ7T6cUmHT_WW57w-TVYBgIocNSQt-M9MIhToujMt3tmDU4yJ0prI6qto5_Hsvkp5UeoiqBbRw7VJOZxVb0LtK00aMqLOdpXiDuUJSYbzcQuNguh1jkqMw1oxR73Y"/>
+<img alt="Member 2" class="inline-block h-10 w-10 rounded-full ring-4 ring-background object-cover" data-alt="A portrait of a male tech lead in a high-tech laboratory environment. Soft blue ambient lighting from digital displays illuminates his features, suggesting a futuristic and data-driven setting. He wears a dark grey minimalist hoodie, blending technical proficiency with casual modern work culture. The mood is focused and sophisticated." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMZHG5gEP_FjBC9r-wjysvm0KQy95hgljt6t7yki0_3q65jKfZFi0GJ4d_bb5bGVT13q2_PCUzLs5V_GVn_PLcRfL81KNAFNlZrKJl6cMsQ8cLWRrjnFHde9414f67YaskNc8iSuyXCyw-M5im5nLWV88vXXv4uvzpP1ZnBsbomob7btQQZC860ZBKPuRHIiYmv1bpeawv9qAdVmV9RzsHo9e3fBQ1E0Uno7oncrgTEhtUnaZEytNjwdQawy7kBU47MnevvhVNFRjT"/>
+<img alt="Member 3" class="inline-block h-10 w-10 rounded-full ring-4 ring-background object-cover" data-alt="A professional headshot of a female data analyst sitting in a clean, minimalist co-working space. High-key, diffused lighting fills the room, creating an open and transparent visual style. She wears a structured white blazer, contributing to a polished and authoritative professional look within the ClientPulse design framework." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWN2JOhOrqK3jNEvo6KclY_Lo_E51ksuuO1E8Dfrz0tK-33dZE89PpcjlmC5lVlWOIIx2kkO5bdqlrAQK_kWlPOMltt9uu4b_-YJsy2iYXmVSWZHKhqkZFcOcmC-JbT1GZFkuoA3B-MnSVNQLvUxvsS3i8kB9agqToVltOGYBxEw16e7IYnI6K0-evYr9oII_fj3bsNnLuwqUKoDnSK9zWgvCD-uMft3wPiQkdA4r5ICcyUm4EoxL7mMg9xi2sSY1jIHqYbJjRbsUk"/>
+<div class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-surface-container-high ring-4 ring-background text-label font-bold text-secondary">+12</div>
+</div>
+</div>
+<!-- Tag Chips -->
+<div class="space-y-md">
+<p class="text-caption font-bold text-secondary uppercase">Project Tags</p>
+<div class="flex flex-wrap gap-sm">
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-surface-container text-on-surface rounded-full text-caption font-medium border border-outline-variant hover:bg-surface-container-high transition-colors cursor-default">
+                                    Strategic Analysis
+                                    <span class="material-symbols-outlined text-[16px] cursor-pointer hover:text-error transition-colors">close</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-surface-container text-on-surface rounded-full text-caption font-medium border border-outline-variant hover:bg-surface-container-high transition-colors cursor-default">
+                                    Q4 Expansion
+                                    <span class="material-symbols-outlined text-[16px] cursor-pointer hover:text-error transition-colors">close</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-surface-container text-on-surface rounded-full text-caption font-medium border border-outline-variant hover:bg-surface-container-high transition-colors cursor-default">
+                                    FinTech
+                                    <span class="material-symbols-outlined text-[16px] cursor-pointer hover:text-error transition-colors">close</span>
+</div>
+<div class="inline-flex items-center px-3 py-1.5 bg-primary/5 text-primary rounded-full text-caption font-bold border border-primary/20 hover:bg-primary/10 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[16px] mr-1">add</span> Add Tag
+                                </div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Dashboard Example (Bento Grid) -->
+<section class="max-w-6xl mx-auto pb-3xl">
+<div class="flex items-end justify-between mb-lg border-b border-outline-variant pb-md">
+<div>
+<h2 class="font-headline-1 text-headline-1 text-on-surface">Integrated Dashboard View</h2>
+<p class="font-caption text-caption text-secondary">A practical combination of library components</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-6 grid-rows-2 gap-lg h-auto lg:h-[400px]">
+<!-- Main Metric -->
+<div class="md:col-span-3 md:row-span-2 bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm flex flex-col">
+<div class="flex justify-between items-start mb-xl">
+<div>
+<p class="text-caption font-bold text-secondary uppercase tracking-widest">Total Managed Assets</p>
+<h3 class="text-[48px] font-display text-on-surface mt-2">$42.8M</h3>
+</div>
+<span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed rounded-full font-bold text-body">+24% <span class="material-symbols-outlined align-middle text-[18px]">trending_up</span></span>
+</div>
+<div class="mt-auto h-48 w-full bg-surface-container-low rounded-lg relative overflow-hidden flex items-end">
+<!-- Mock chart bars -->
+<div class="flex-1 bg-primary/20 h-[30%] mx-1 rounded-t"></div>
+<div class="flex-1 bg-primary/20 h-[45%] mx-1 rounded-t"></div>
+<div class="flex-1 bg-primary/20 h-[35%] mx-1 rounded-t"></div>
+<div class="flex-1 bg-primary/20 h-[60%] mx-1 rounded-t"></div>
+<div class="flex-1 bg-primary h-[85%] mx-1 rounded-t"></div>
+<div class="flex-1 bg-primary/60 h-[70%] mx-1 rounded-t"></div>
+<div class="flex-1 bg-primary/40 h-[50%] mx-1 rounded-t"></div>
+</div>
+</div>
+<!-- Client Health -->
+<div class="md:col-span-3 md:row-span-1 bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm flex items-center gap-xl">
+<div class="relative w-32 h-16 overflow-hidden">
+<svg class="w-full h-full" viewbox="0 0 100 50">
+<path d="M10,50 A40,40 0 0,1 90,50" fill="none" stroke="#eaedff" stroke-linecap="round" stroke-width="15"></path>
+<path d="M10,50 A40,40 0 0,1 90,50" fill="none" stroke="#1b4fe8" stroke-dasharray="126" stroke-dashoffset="15" stroke-linecap="round" stroke-width="15"></path>
+</svg>
+</div>
+<div class="flex-1">
+<h4 class="font-headline-1 text-headline-1">Overall Health</h4>
+<p class="text-body text-secondary">Based on 14 active projects</p>
+<div class="mt-3">
+<span class="inline-flex items-center gap-2 px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-full font-bold text-caption">
+<span class="h-2 w-2 rounded-full bg-tertiary"></span> SYSTEM OPTIMAL
+                                </span>
+</div>
+</div>
+</div>
+<!-- Team Capacity -->
+<div class="md:col-span-3 md:row-span-1 bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm flex flex-col justify-center">
+<div class="flex items-center justify-between mb-md">
+<p class="font-headline-3 text-headline-3">Team Capacity</p>
+<span class="text-headline-3 font-bold">88%</span>
+</div>
+<div class="w-full h-4 bg-surface-container rounded-full overflow-hidden mb-4">
+<div class="bg-primary h-full w-[88%] rounded-full"></div>
+</div>
+<div class="flex items-center -space-x-2">
+<div class="h-8 w-8 rounded-full bg-primary/20 border-2 border-surface-container-lowest flex items-center justify-center text-[10px] font-bold">JD</div>
+<div class="h-8 w-8 rounded-full bg-secondary/20 border-2 border-surface-container-lowest flex items-center justify-center text-[10px] font-bold">AS</div>
+<div class="h-8 w-8 rounded-full bg-tertiary/20 border-2 border-surface-container-lowest flex items-center justify-center text-[10px] font-bold">ML</div>
+<div class="h-8 w-8 rounded-full bg-error/20 border-2 border-surface-container-lowest flex items-center justify-center text-[10px] font-bold">+5</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Micro-interaction Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate progress bars on load
+            const bars = document.querySelectorAll('.bg-primary.h-full, .bg-tertiary.h-full, .bg-secondary.h-full, .bg-error.h-full');
+            bars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.transition = 'width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                    bar.style.width = width;
+                }, 100);
+            });
+
+            // Handle sorting UI interaction
+            const headers = document.querySelectorAll('th.cursor-pointer');
+            headers.forEach(header => {
+                header.addEventListener('click', () => {
+                    const icon = header.querySelector('.material-symbols-outlined');
+                    if (icon.textContent === 'unfold_more') icon.textContent = 'expand_more';
+                    else if (icon.textContent === 'expand_more') icon.textContent = 'expand_less';
+                    else icon.textContent = 'unfold_more';
+                });
+            });
+        });
+    </script>
+</body></html>

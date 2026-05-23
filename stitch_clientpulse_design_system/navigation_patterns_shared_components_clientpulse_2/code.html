@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ClientPulse Design System | Navigation Patterns</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#faf8ff",
+                        "on-primary-fixed": "#001453",
+                        "surface-tint": "#184de6",
+                        "on-primary-container": "#d3d9ff",
+                        "tertiary": "#005338",
+                        "on-surface": "#131b2e",
+                        "inverse-primary": "#b8c4ff",
+                        "on-secondary-fixed": "#0d1c2f",
+                        "secondary-fixed": "#d5e3fd",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#d2d9f4",
+                        "secondary-fixed-dim": "#b9c7e0",
+                        "primary-container": "#1b4fe8",
+                        "surface": "#faf8ff",
+                        "secondary": "#515f74",
+                        "surface-container-high": "#e2e7ff",
+                        "inverse-surface": "#283044",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#3a485c",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f2f3ff",
+                        "tertiary-fixed-dim": "#61dca6",
+                        "surface-variant": "#dae2fd",
+                        "surface-container-highest": "#dae2fd",
+                        "on-tertiary-fixed-variant": "#005237",
+                        "on-background": "#131b2e",
+                        "on-error": "#ffffff",
+                        "surface-container": "#eaedff",
+                        "tertiary-container": "#006e4b",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#eef0ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#57657b",
+                        "outline": "#747687",
+                        "on-primary-fixed-variant": "#0037b9",
+                        "primary-fixed-dim": "#b8c4ff",
+                        "secondary-container": "#d5e3fd",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#dde1ff",
+                        "tertiary-fixed": "#7ff9c1",
+                        "on-surface-variant": "#434655",
+                        "primary": "#0038bd",
+                        "on-tertiary-fixed": "#002114",
+                        "background": "#faf8ff",
+                        "on-tertiary-container": "#77f2ba",
+                        "outline-variant": "#c4c5d8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "3xl": "64px",
+                        "base": "8px",
+                        "2xl": "48px"
+                    },
+                    "fontFamily": {
+                        "body": ["Inter"],
+                        "caption": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label": ["Inter"],
+                        "headline-2": ["Inter"],
+                        "headline-1": ["Inter"],
+                        "display": ["Inter"],
+                        "headline-3": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body": ["14px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "caption": ["12px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label": ["12px", {"lineHeight": "1", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "headline-2": ["20px", {"lineHeight": "1.4", "letterSpacing": "-0.2px", "fontWeight": "600"}],
+                        "headline-1": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.3px", "fontWeight": "600"}],
+                        "display": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.5px", "fontWeight": "700"}],
+                        "headline-3": ["16px", {"lineHeight": "1.5", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        :root {
+            --sidebar-transition: 200ms ease-in-out;
+            --drawer-transition: 280ms cubic-bezier(0.4, 0, 0.2, 1);
+            --modal-transition: 200ms ease-out;
+            --page-transition: 150ms ease-in;
+            --tab-transition: 200ms ease-in-out;
+            --motion-standard: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Interactive Motion Specs */
+        .interactive-button {
+            transition: transform 100ms ease-in, opacity 100ms ease-in;
+        }
+        .interactive-button:active {
+            transform: scale(0.98);
+        }
+
+        .interactive-card {
+            transition: transform var(--motion-standard), box-shadow var(--motion-standard);
+        }
+        .interactive-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .focus-transition {
+            transition: box-shadow 200ms ease-in-out, border-color 200ms ease-in-out;
+        }
+        .focus-transition:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(27,79,232,0.2);
+            border-color: #0038bd;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 231, 255, 0.5);
+        }
+
+        .page-fade-in {
+            animation: fadeIn var(--page-transition);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .sidebar-transition {
+            transition: width var(--sidebar-transition), transform var(--sidebar-transition);
+        }
+
+        .nav-item-transition {
+            transition: all var(--sidebar-transition);
+        }
+
+        .tab-indicator-container {
+            position: relative;
+        }
+
+        .tab-indicator {
+            position: absolute;
+            bottom: -1px;
+            height: 2px;
+            background-color: #0038bd;
+            transition: all var(--tab-transition);
+        }
+    </style>
+</head>
+<body class="bg-surface-container-low text-on-surface">
+<div class="flex min-h-screen page-fade-in">
+<!-- Main Sidebar for Documentation Context -->
+<aside class="fixed inset-y-0 left-0 flex flex-col z-40 bg-inverse-surface dark:bg-on-surface h-full w-[256px] sidebar-transition border-r border-outline-variant/10">
+<div class="px-lg py-xl flex flex-col gap-sm">
+<h1 class="font-headline-2 text-headline-2 font-bold text-white tracking-tight">ClientPulse</h1>
+<p class="text-surface-variant font-caption text-caption opacity-70">Design System v1.2</p>
+</div>
+<nav class="flex-1 px-md flex flex-col gap-xs mt-lg">
+<a class="flex items-center gap-md px-md py-sm border-l-4 border-primary bg-primary-container/10 text-white font-bold nav-item-transition interactive-button" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body text-body font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-surface-variant hover:text-white transition-colors hover:bg-surface-variant/10 nav-item-transition interactive-button" href="#">
+<span class="material-symbols-outlined" data-icon="folder_managed">folder_managed</span>
+<span class="font-body text-body font-medium">Projects</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-surface-variant hover:text-white transition-colors hover:bg-surface-variant/10 nav-item-transition interactive-button" href="#">
+<span class="material-symbols-outlined" data-icon="checklist">checklist</span>
+<span class="font-body text-body font-medium">Tasks</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-surface-variant hover:text-white transition-colors hover:bg-surface-variant/10 nav-item-transition interactive-button" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-body text-body font-medium">Team</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-surface-variant hover:text-white transition-colors hover:bg-surface-variant/10 nav-item-transition interactive-button" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-body text-body font-medium">Reporting</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-surface-variant hover:text-white transition-colors hover:bg-surface-variant/10 nav-item-transition interactive-button" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body text-body font-medium">Settings</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-surface-variant/10 p-md flex flex-col gap-xs">
+<a class="flex items-center gap-md px-md py-sm text-surface-variant hover:text-white transition-colors nav-item-transition interactive-button" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-body text-body font-medium">Help Center</span>
+</a>
+<div class="flex items-center gap-md px-md py-sm mt-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary font-bold text-caption overflow-hidden">
+<img alt="Admin" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDx-H8qd0A9X9e7gHUMDaQRpVRDt4P1wR1LgzcthqKP4eOA0BBb9U6FdfPfbnWXvZeZtGWa4ozbEYkThsbHkpKdviQh5_iODK0r0EAGqpRaIO-0fS-6P_fpnsiJBIsVfZzNbqil3xhD7g8RJIrM_U2AFpT8Gw_cr1ujPQ8czzaRX6fw8P0tLGmniJvpeGpv_vW8SEPmwgSks2Qbc1mC4_lBiqBgftYWsBYMuyAcDDyfDNeWfb0zgU2jfizo2t1whMGI4RRq6BNrxL9"/>
+</div>
+<div class="flex flex-col">
+<span class="text-white font-label text-label">Alex Rivera</span>
+<span class="text-surface-variant font-caption text-[10px] uppercase tracking-wider">Admin</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-[256px] p-2xl sidebar-transition">
+<!-- Documentation Header -->
+<header class="mb-3xl max-w-5xl">
+<span class="text-primary font-label text-label uppercase tracking-[2px] mb-sm block">Core Components</span>
+<h1 class="font-display text-display text-on-surface mb-md">Navigation Patterns &amp; Shared Components</h1>
+<p class="text-on-surface-variant font-body-lg text-body-lg max-w-2xl">
+                A comprehensive guide to ClientPulse's navigation hierarchy, interactive states, and layout shells designed for enterprise-scale data management.
+            </p>
+</header>
+<!-- Section 1: SideBar Comparisons -->
+<section class="mb-3xl">
+<div class="flex items-center gap-md mb-xl">
+<div class="h-8 w-1 bg-primary rounded-full"></div>
+<h2 class="font-headline-1 text-headline-1">1. AppSidebar Variants</h2>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-2xl">
+<!-- Expanded Sidebar Showcase -->
+<div class="flex flex-col gap-md">
+<div class="bg-surface-container rounded-lg p-md border border-outline-variant">
+<span class="font-label text-label text-on-surface-variant mb-md block">Variant: Expanded (256px)</span>
+<div class="h-[500px] w-[256px] bg-inverse-surface rounded shadow-lg overflow-hidden flex flex-col group cursor-pointer hover:shadow-xl transition-all duration-300">
+<div class="p-lg flex items-center gap-sm">
+<div class="w-8 h-8 bg-primary-container rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<span class="text-white font-headline-3 font-bold">ClientPulse</span>
+</div>
+<div class="px-md flex flex-col gap-xs mt-md">
+<div class="flex items-center gap-md px-md py-sm bg-primary-container/10 border-l-4 border-primary text-white">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body font-medium">Dashboard</span>
+</div>
+<div class="flex items-center gap-md px-md py-sm text-surface-variant transition-colors hover:bg-white/5">
+<span class="material-symbols-outlined" data-icon="folder_managed">folder_managed</span>
+<span class="font-body font-medium">Projects</span>
+</div>
+<div class="flex items-center gap-md px-md py-sm text-surface-variant transition-colors hover:bg-white/5">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-body font-medium">Reporting</span>
+</div>
+</div>
+</div>
+</div>
+<p class="font-caption text-caption text-on-surface-variant px-sm">
+                        The expanded state provides full context for top-level navigation, used primarily on desktop resolutions above 1280px.
+                    </p>
+</div>
+<!-- Collapsed Sidebar Showcase -->
+<div class="flex flex-col gap-md">
+<div class="bg-surface-container rounded-lg p-md border border-outline-variant">
+<span class="font-label text-label text-on-surface-variant mb-md block">Variant: Collapsed (64px)</span>
+<div class="h-[500px] w-[64px] bg-inverse-surface rounded shadow-lg overflow-hidden flex flex-col items-center hover:w-[256px] transition-all duration-300 ease-in-out">
+<div class="p-lg w-full flex justify-center">
+<div class="w-8 h-8 bg-primary-container rounded flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white text-sm" data-icon="rocket_launch">rocket_launch</span>
+</div>
+</div>
+<div class="flex flex-col gap-sm mt-md w-full">
+<div class="w-full flex items-center gap-md px-lg py-sm bg-primary-container/10 border-l-4 border-primary text-white">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+</div>
+<div class="w-full flex items-center gap-md px-lg py-sm text-surface-variant hover:bg-white/5">
+<span class="material-symbols-outlined" data-icon="folder_managed">folder_managed</span>
+</div>
+<div class="w-full flex items-center gap-md px-lg py-sm text-surface-variant hover:bg-white/5">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+</div>
+</div>
+</div>
+</div>
+<p class="font-caption text-caption text-on-surface-variant px-sm">
+                        The collapsed state optimizes screen real estate for data-heavy views while maintaining core accessibility.
+                    </p>
+</div>
+</div>
+</section>
+<!-- Section 2: NavItem States -->
+<section class="mb-3xl">
+<div class="flex items-center gap-md mb-xl">
+<div class="h-8 w-1 bg-primary rounded-full"></div>
+<h2 class="font-headline-1 text-headline-1">2. NavItem States</h2>
+</div>
+<div class="bg-inverse-surface p-xl rounded-xl max-w-xl">
+<div class="grid grid-cols-1 gap-lg">
+<!-- Default -->
+<div class="flex flex-col gap-xs">
+<span class="text-surface-variant font-caption text-[10px] uppercase">Default</span>
+<div class="flex items-center gap-md px-md py-sm text-surface-variant nav-item-transition group cursor-default">
+<span class="material-symbols-outlined" data-icon="folder">folder</span>
+<span class="font-body font-medium">Projects Library</span>
+</div>
+</div>
+<!-- Hover -->
+<div class="flex flex-col gap-xs">
+<span class="text-surface-variant font-caption text-[10px] uppercase">Hover</span>
+<div class="flex items-center gap-md px-md py-sm bg-surface-variant/10 text-white nav-item-transition cursor-pointer ring-1 ring-primary/20">
+<span class="material-symbols-outlined" data-icon="folder">folder</span>
+<span class="font-body font-medium">Projects Library</span>
+</div>
+</div>
+<!-- Active -->
+<div class="flex flex-col gap-xs">
+<span class="text-surface-variant font-caption text-[10px] uppercase">Active</span>
+<div class="flex items-center gap-md px-md py-sm bg-primary-container/10 border-l-4 border-primary text-white font-bold nav-item-transition">
+<span class="material-symbols-outlined" data-icon="folder" style="font-variation-settings: 'FILL' 1;">folder</span>
+<span class="font-body font-medium">Projects Library</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: TopBar Variants -->
+<section class="mb-3xl">
+<div class="flex items-center gap-md mb-xl">
+<div class="h-8 w-1 bg-primary rounded-full"></div>
+<h2 class="font-headline-1 text-headline-1">3. TopBar Variants</h2>
+</div>
+<div class="space-y-2xl">
+<!-- Admin TopBar -->
+<div class="space-y-md">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-3">Admin Console Bar</h3>
+<span class="bg-primary/10 text-primary px-sm py-xs rounded font-label text-[10px] uppercase">Internal Admin</span>
+</div>
+<div class="h-16 flex justify-between items-center px-lg w-full bg-surface border-b border-outline-variant shadow-sm rounded-lg overflow-hidden">
+<div class="flex items-center gap-md flex-1">
+<div class="relative w-full max-w-sm">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full h-10 pl-10 pr-4 bg-surface-container-low border border-outline-variant rounded-md font-body text-body focus-transition" placeholder="Global search..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex items-center gap-md">
+<button class="p-xs text-on-surface-variant hover:bg-surface-container rounded-full transition-colors relative group interactive-button">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
+</button>
+<button class="p-xs text-on-surface-variant hover:bg-surface-container rounded-full transition-colors interactive-button">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+</div>
+<div class="h-8 w-px bg-outline-variant"></div>
+<img alt="Admin" class="w-8 h-8 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPJV8U8NgreGMcP1xzJ7qQ97FOnlIlgHoizNLTd3qCDW7LCwbq-eY5_HHb2NBoXeqkLrMSeOiYzUzYlGi4gAAWlFvGLEsgx1Q4Iq1U83RuAT3s1wNTn2HFIA4MAHj3XexOIlsoWa_ZsrFO6RKfDmVpO3nSqDgGiOy0q5mGQIvLfa7RkcTI4Z0TDybZ8oGg3_GsuhJgUM07abH3sg68BZANpZ-vYNoD4YASVBAQOXdaM2i3-E_P4cy3tYjbC_3jdjrkz0h6jUFNCG7q"/>
+</div>
+</div>
+</div>
+<!-- Member TopBar -->
+<div class="space-y-md">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-3">Team Member View</h3>
+<span class="bg-surface-variant text-on-surface-variant px-sm py-xs rounded font-label text-[10px] uppercase">Standard User</span>
+</div>
+<div class="h-16 flex justify-between items-center px-lg w-full bg-surface border-b border-outline-variant shadow-sm rounded-lg overflow-hidden">
+<nav class="flex items-center gap-sm font-label text-label">
+<a class="text-on-surface-variant hover:text-primary transition-colors interactive-button" href="#">Projects</a>
+<span class="material-symbols-outlined text-outline text-sm" data-icon="chevron_right">chevron_right</span>
+<a class="text-on-surface-variant hover:text-primary transition-colors interactive-button" href="#">Q3 Roadmap</a>
+<span class="material-symbols-outlined text-outline text-sm" data-icon="chevron_right">chevron_right</span>
+<span class="text-on-surface font-bold">Analytics Panel</span>
+</nav>
+<div class="flex items-center gap-md">
+<div class="text-right">
+<div class="text-on-surface font-label text-label">Sarah Jenkins</div>
+<div class="text-on-surface-variant text-[10px]">Product Team</div>
+</div>
+<img alt="User" class="w-8 h-8 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4hSQkgbFLqDGec8qLbc1qxj4lgc8hVgFLJmlos3stg6W6WIJnciNcx5-33dZv91KBhgWaSrn3xhZy1i4rCqbC77unSUvALqBOE7TFF_wK5pPxHq_upyEMer4NspdRtl5HEM9zCyS95wtUxiCqBPo4mOwIWCynHUffJTGcbS7I3Hu-2PUPgWXEbvEZuQtLoMFinF0Ng7N_M9BpxV0DeNxAwxtoQeFHpIsmO7crrU4B9WcY33Iwr52C_Cy9_A0U_Gav6sXMKi9yQUCC"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: TabBar Pattern -->
+<section class="mb-3xl">
+<div class="flex items-center gap-md mb-xl">
+<div class="h-8 w-1 bg-primary rounded-full"></div>
+<h2 class="font-headline-1 text-headline-1">4. TabBar Pattern</h2>
+</div>
+<div class="bg-white rounded-xl border border-outline-variant p-2xl">
+<div class="tab-indicator-container flex border-b border-outline-variant mb-xl">
+<button class="tab-item px-lg pb-md text-primary font-bold font-body text-body relative z-10 interactive-button" data-index="0">
+                        Overview
+                    </button>
+<button class="tab-item px-lg pb-md text-on-surface-variant hover:text-primary transition-colors font-body text-body relative z-10 interactive-button" data-index="1">
+                        Milestones
+                    </button>
+<button class="tab-item px-lg pb-md text-on-surface-variant hover:text-primary transition-colors font-body text-body relative z-10 interactive-button" data-index="2">
+                        Documents
+                    </button>
+<button class="tab-item px-lg pb-md text-on-surface-variant hover:text-primary transition-colors font-body text-body relative z-10 interactive-button" data-index="3">
+                        Team
+                    </button>
+<div class="tab-indicator" id="main-tab-indicator"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<div class="glass-card p-xl rounded-xl interactive-card">
+<span class="text-outline font-label text-[10px] uppercase">Active State Logic</span>
+<p class="mt-sm font-body text-body">Tabs utilize a horizontal sliding indicator with <code>--tab-transition</code> logic. The active item maintains font-bold for persistent hierarchy.</p>
+</div>
+<div class="glass-card p-xl rounded-xl interactive-card">
+<span class="text-outline font-label text-[10px] uppercase">Desktop Spacing</span>
+<p class="mt-sm font-body text-body">Horizontal padding is set to 24px (lg) with a 16px (md) bottom padding to maintain a comfortable visual rhythm.</p>
+</div>
+<div class="glass-card p-xl rounded-xl interactive-card">
+<span class="text-outline font-label text-[10px] uppercase">Visual Hierarchy</span>
+<p class="mt-sm font-body text-body">Unselected tabs use Neutral 500 (on-surface-variant) to recede into the background, ensuring primary focus remains on active content.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Style Guide Footer / Token Palette -->
+<footer class="mt-3xl pt-2xl border-t border-outline-variant">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-xl">
+<div>
+<span class="font-label text-label text-outline uppercase mb-md block">Primary Blue</span>
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 bg-primary-container rounded shadow-sm hover:scale-105 transition-transform"></div>
+<span class="font-body text-body font-bold">#1B4FE8</span>
+</div>
+</div>
+<div>
+<span class="font-label text-label text-outline uppercase mb-md block">Dark Navy</span>
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 bg-inverse-surface rounded shadow-sm hover:scale-105 transition-transform"></div>
+<span class="font-body text-body font-bold">#0F172A</span>
+</div>
+</div>
+<div>
+<span class="font-label text-label text-outline uppercase mb-md block">Font Family</span>
+<span class="font-display text-headline-2 block mt-sm">Inter</span>
+</div>
+<div>
+<span class="font-label text-label text-outline uppercase mb-md block">Grid Unit</span>
+<span class="font-display text-headline-2 block mt-sm">8px Base</span>
+</div>
+</div>
+</footer>
+</main>
+</div>
+<!-- Micro-interactions Script -->
+<script>
+    // Tab indicator logic
+    const tabItems = document.querySelectorAll('.tab-item');
+    const indicator = document.getElementById('main-tab-indicator');
+
+    function updateIndicator(el) {
+        if (!el) return;
+        indicator.style.width = `${el.offsetWidth}px`;
+        indicator.style.left = `${el.offsetLeft}px`;
+    }
+
+    tabItems.forEach(item => {
+        item.addEventListener('click', () => {
+            tabItems.forEach(t => {
+                t.classList.remove('text-primary', 'font-bold');
+                t.classList.add('text-on-surface-variant');
+            });
+            item.classList.add('text-primary', 'font-bold');
+            item.classList.remove('text-on-surface-variant');
+            updateIndicator(item);
+        });
+    });
+
+    // Initial position
+    window.addEventListener('load', () => {
+        const activeTab = document.querySelector('.tab-item.font-bold');
+        updateIndicator(activeTab);
+    });
+
+    // Re-calculate indicator on resize
+    window.addEventListener('resize', () => {
+        const activeTab = document.querySelector('.tab-item.font-bold');
+        updateIndicator(activeTab);
+    });
+</script>
+</body></html>

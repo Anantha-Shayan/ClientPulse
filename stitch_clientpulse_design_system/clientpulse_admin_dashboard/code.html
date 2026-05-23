@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ClientPulse Admin Console - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-tint": "#184de6",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed-variant": "#3a485c",
+                    "inverse-primary": "#b8c4ff",
+                    "on-primary-fixed-variant": "#0037b9",
+                    "on-surface": "#131b2e",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#d5e3fd",
+                    "surface-container-low": "#f2f3ff",
+                    "on-primary-container": "#d3d9ff",
+                    "background": "#faf8ff",
+                    "tertiary-fixed": "#7ff9c1",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#001453",
+                    "primary-fixed": "#dde1ff",
+                    "on-surface-variant": "#434655",
+                    "secondary-fixed": "#d5e3fd",
+                    "inverse-surface": "#283044",
+                    "inverse-on-surface": "#eef0ff",
+                    "primary-fixed-dim": "#b8c4ff",
+                    "on-secondary-fixed": "#0d1c2f",
+                    "on-tertiary-container": "#77f2ba",
+                    "primary-container": "#1b4fe8",
+                    "tertiary": "#005338",
+                    "surface-bright": "#faf8ff",
+                    "secondary-fixed-dim": "#b9c7e0",
+                    "surface-container-lowest": "#ffffff",
+                    "primary": "#0038bd",
+                    "outline": "#747687",
+                    "surface-variant": "#dae2fd",
+                    "on-background": "#131b2e",
+                    "tertiary-fixed-dim": "#61dca6",
+                    "surface-container": "#eaedff",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#005237",
+                    "on-error": "#ffffff",
+                    "surface-container-high": "#e2e7ff",
+                    "secondary": "#515f74",
+                    "surface-dim": "#d2d9f4",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed": "#002114",
+                    "error": "#ba1a1a",
+                    "on-secondary-container": "#57657b",
+                    "tertiary-container": "#006e4b",
+                    "surface-container-highest": "#dae2fd",
+                    "surface": "#faf8ff",
+                    "outline-variant": "#c4c5d8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "lg": "24px",
+                    "2xl": "48px",
+                    "3xl": "64px",
+                    "xl": "32px",
+                    "md": "16px",
+                    "sm": "8px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "label": ["Inter"],
+                    "headline-1": ["Inter"],
+                    "display": ["Inter"],
+                    "headline-3": ["Inter"],
+                    "body": ["Inter"],
+                    "caption": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-2": ["Inter"]
+            },
+            "fontSize": {
+                    "label": ["12px", {"lineHeight": "1", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "headline-1": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.3px", "fontWeight": "600"}],
+                    "display": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.5px", "fontWeight": "700"}],
+                    "headline-3": ["16px", {"lineHeight": "1.5", "fontWeight": "600"}],
+                    "body": ["14px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "caption": ["12px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-2": ["20px", {"lineHeight": "1.4", "letterSpacing": "-0.2px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .health-bar-bg { background: #E2E8F0; }
+        .custom-shadow { box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08); }
+    </style>
+</head>
+<body class="bg-[#F1F5F9] text-on-surface">
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 top-0 h-full w-[256px] bg-inverse-surface flex flex-col py-lg z-50">
+<div class="px-md mb-xl flex items-center gap-sm">
+<img alt="ClientPulse Logo" class="w-10 h-10 object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0ug15-6c5QWjyawetnXkD9hnwdaZ1PrYcMP2DH3BoGLSCsVrs9y_WS0EYRyX392QWjLJh-0Xv0MXibiiZvNuzk3-YeyYNL4iNNY2THthNKqYw877PP5aAr8_Yj677-zD2d0zs1LTQKOyhFIruX8bZmqhToYhTJF6ptEWYI1ZzzvStC_C0HMbEBfbpeTSRMFjV_Vxqt3ItmJ4q5LENrji5avGjjO64gexDi5kNrhot27APNtJiq4OtKzVVJFP"/>
+<div>
+<h1 class="font-headline-1 text-headline-1 text-on-primary">ClientPulse</h1>
+<p class="font-caption text-caption text-surface-variant">Admin Console</p>
+</div>
+</div>
+<nav class="flex-grow space-y-xs">
+<div class="flex items-center gap-sm px-md py-sm bg-surface-tint/10 text-primary-fixed-dim border-l-4 border-surface-tint cursor-pointer transition-all duration-200">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body text-body">Dashboard</span>
+</div>
+<div class="flex items-center gap-sm px-md py-sm text-surface-variant hover:bg-surface-variant/10 hover:text-on-primary cursor-pointer transition-all duration-200">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-body text-body">Projects</span>
+</div>
+<div class="flex items-center gap-sm px-md py-sm text-surface-variant hover:bg-surface-variant/10 hover:text-on-primary cursor-pointer transition-all duration-200">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body text-body">Users</span>
+</div>
+<div class="flex items-center gap-sm px-md py-sm text-surface-variant hover:bg-surface-variant/10 hover:text-on-primary cursor-pointer transition-all duration-200">
+<span class="material-symbols-outlined">history</span>
+<span class="font-body text-body">Activity Logs</span>
+</div>
+<div class="flex items-center gap-sm px-md py-sm text-surface-variant hover:bg-surface-variant/10 hover:text-on-primary cursor-pointer transition-all duration-200">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-body text-body">Analytics</span>
+</div>
+</nav>
+<div class="mt-auto px-md pt-lg border-t border-surface-variant/20">
+<div class="flex items-center gap-sm px-md py-sm text-surface-variant hover:text-on-primary cursor-pointer">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A professional headshot of Priya Singh, a female administrative lead with a confident smile, wearing business attire, set against a soft-focus office background with high-key lighting for a clean, professional aesthetic that matches the ClientPulse dashboard's corporate and modern visual language." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkQ3A0BK9y_6pqWqis1k61EjHjSySvWViG1eXe2s86VG7gwFjjDzvErlqDyhkNtzWIq8gnGrPs7rJzp0RZYPCAHyDuokcBH8IC8TvNAv8Owbs7HfhBoq-5We_nsGVY-rOiJTFp2qY6E_imHSCxPMHWEFdOuQJ1iukRz7O6VPS6gYEwxFFA1zJI5pCuBMotC0htjF2xLXTDZCIEhDIFlJUrxui9qzqoeWbV4_iW_as-0BFhQZj2eCxx7w94FU0bGr3Pa1fkbhxtl9ax"/>
+<div class="overflow-hidden">
+<p class="font-body text-body text-on-primary truncate">Priya Singh</p>
+<p class="font-caption text-caption text-surface-variant">Admin</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-sm">person</span>
+</div>
+</div>
+</aside>
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 right-0 h-[64px] left-[256px] bg-surface dark:bg-surface-container-low flex justify-between items-center px-lg w-auto z-40 border-b border-outline-variant shadow-sm">
+<div class="flex items-center gap-md">
+<h2 class="font-headline-2 text-headline-2 text-on-surface">Dashboard</h2>
+<div class="relative w-72">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-xl pr-md py-xs bg-surface-container-lowest border border-outline-variant rounded-lg font-body text-body focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Search analytics..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="p-sm hover:bg-surface-container-high rounded-full transition-colors active:scale-95 relative">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+<span class="absolute top-xs right-xs w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
+</button>
+<div class="h-8 w-px bg-outline-variant mx-xs"></div>
+<img class="w-10 h-10 rounded-full object-cover border border-outline-variant cursor-pointer active:scale-95 transition-transform" data-alt="Close up profile picture of Priya Singh, an administrative professional with a welcoming expression. The image is bright and airy, reflecting a clean and modern high-performance SaaS interface style with neutral background tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBth1QUmWFpu-5hdnSjJb-psq_JTvdoLNpI1jf1tr-ti6kC_ZhIH2zUmE8zi3g2pRuUyZa_4Tpuxiyx8fFChx1NDzaEhKc-vAq_XbsETDu407rqWmj_emjM14_W3o6Ej23UJdbVqm6-mI0a8-1mJ1qjJFBZSPNqX57dGP-AdLaKuhQWZM3VXLi7pcs96KY_ROgXXl8gn_3Mev8_IeM7BrIaFikfSMMxAKGaJpKKmBYWlrYVG0_d9xlc40iIo10-0lmncr8xVD9QciLd"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[256px] pt-[64px] min-h-screen p-lg space-y-lg">
+<!-- Top Row: StatCards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg">
+<!-- Total Projects -->
+<div class="bg-white p-md rounded-lg custom-shadow border border-neutral-300 flex flex-col justify-between hover:border-primary-container transition-colors">
+<div class="flex justify-between items-start mb-sm">
+<span class="font-caption text-caption text-neutral-500 uppercase tracking-wider">Total Projects</span>
+<div class="p-xs bg-primary-container/10 rounded-lg">
+<span class="material-symbols-outlined text-primary-container">folder</span>
+</div>
+</div>
+<div class="flex items-baseline gap-xs">
+<span class="font-headline-1 text-headline-1 text-on-surface">124</span>
+<span class="flex items-center text-primary font-label text-label">
+<span class="material-symbols-outlined text-sm">arrow_upward</span>
+                        12%
+                    </span>
+</div>
+</div>
+<!-- Active Projects -->
+<div class="bg-white p-md rounded-lg custom-shadow border border-neutral-300 flex flex-col justify-between hover:border-tertiary-container transition-colors">
+<div class="flex justify-between items-start mb-sm">
+<span class="font-caption text-caption text-neutral-500 uppercase tracking-wider">Active Projects</span>
+<div class="p-xs bg-tertiary-fixed-dim/20 rounded-lg">
+<span class="material-symbols-outlined text-tertiary">rocket_launch</span>
+</div>
+</div>
+<div class="flex items-baseline gap-xs">
+<span class="font-headline-1 text-headline-1 text-on-surface">42</span>
+<span class="flex items-center text-tertiary font-label text-label">
+<span class="material-symbols-outlined text-sm">arrow_upward</span>
+                        8%
+                    </span>
+</div>
+</div>
+<!-- Team Members -->
+<div class="bg-white p-md rounded-lg custom-shadow border border-neutral-300 flex flex-col justify-between hover:border-secondary-container transition-colors">
+<div class="flex justify-between items-start mb-sm">
+<span class="font-caption text-caption text-neutral-500 uppercase tracking-wider">Team Members</span>
+<div class="p-xs bg-secondary-container rounded-lg">
+<span class="material-symbols-outlined text-secondary">group</span>
+</div>
+</div>
+<div class="flex items-baseline gap-xs">
+<span class="font-headline-1 text-headline-1 text-on-surface">18</span>
+<span class="text-neutral-400 font-label text-label">—</span>
+</div>
+</div>
+<!-- Completed This Month -->
+<div class="bg-white p-md rounded-lg custom-shadow border border-neutral-300 flex flex-col justify-between hover:border-outline transition-colors">
+<div class="flex justify-between items-start mb-sm">
+<span class="font-caption text-caption text-neutral-500 uppercase tracking-wider">Completed This Month</span>
+<div class="p-xs bg-neutral-100 rounded-lg">
+<span class="material-symbols-outlined text-neutral-500">task_alt</span>
+</div>
+</div>
+<div class="flex items-baseline gap-xs">
+<span class="font-headline-1 text-headline-1 text-on-surface">28</span>
+<span class="flex items-center text-error font-label text-label">
+<span class="material-symbols-outlined text-sm">arrow_downward</span>
+                        3%
+                    </span>
+</div>
+</div>
+</div>
+<!-- Middle Row: Charts and Activity -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Left: Donut Chart -->
+<div class="lg:col-span-5 bg-white p-lg rounded-lg custom-shadow border border-neutral-300 flex flex-col">
+<h3 class="font-headline-3 text-headline-3 mb-xl">Project Health Distribution</h3>
+<div class="flex-grow flex items-center justify-center relative">
+<!-- SVG Donut Chart Mockup -->
+<svg class="w-48 h-48 transform -rotate-90">
+<circle cx="96" cy="96" fill="transparent" r="80" stroke="#ba1a1a" stroke-dasharray="502.4" stroke-dashoffset="452.16" stroke-width="20"></circle>
+<circle cx="96" cy="96" fill="transparent" r="80" stroke="#ffd900" stroke-dasharray="502.4" stroke-dashoffset="351.68" stroke-width="20"></circle>
+<circle cx="96" cy="96" fill="transparent" r="80" stroke="#006e4b" stroke-dasharray="502.4" stroke-dashoffset="0" stroke-width="20" style="stroke-dashoffset: 150.72;"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+<span class="font-headline-1 text-headline-1">124</span>
+<span class="font-caption text-caption text-neutral-500">Projects</span>
+</div>
+</div>
+<div class="mt-xl flex justify-center gap-lg">
+<div class="flex items-center gap-xs">
+<div class="w-3 h-3 rounded-full bg-tertiary-container"></div>
+<span class="font-label text-label">On Track (70%)</span>
+</div>
+<div class="flex items-center gap-xs">
+<div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+<span class="font-label text-label">At Risk (20%)</span>
+</div>
+<div class="flex items-center gap-xs">
+<div class="w-3 h-3 rounded-full bg-error"></div>
+<span class="font-label text-label">Critical (10%)</span>
+</div>
+</div>
+</div>
+<!-- Right: Activity Feed -->
+<div class="lg:col-span-7 bg-white p-lg rounded-lg custom-shadow border border-neutral-300">
+<div class="flex justify-between items-center mb-lg">
+<h3 class="font-headline-3 text-headline-3">Recent Activity</h3>
+<button class="font-label text-label text-primary hover:underline">View All</button>
+</div>
+<div class="space-y-md">
+<div class="flex items-start gap-md pb-md border-b border-neutral-100 last:border-0">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A portrait of a male tech professional, Mark R., with a modern, clean-shaven look. He is lit with cool, soft light that highlights a bright office setting. The style is professional and minimalist, aligning with a corporate analytics dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDexK8sR61MGib1VCzuMcmoU9OqveMxs-rjvHSTTC6bpEjEpewgbwAQzWf-VUbFd3Vj1YS5gQkYRbYm0F7_e9EtmEQO7enX5IonyE2FNwAvwCtx3gn-Uhh5HM18oaFmEvrfS3luLif90EwB6En6e4drhqc8AOkfjVKSSFCoNGS9iFNubqU27vxQzLJAMAW4S3k-o5_TdlOvVQ3-u3eErQMEPpe1FiD7NxT-QYIvALJ-li2mTe8tqWIpSJb-GJIIZ32KEt0u1tAb-U6Q"/>
+<div class="flex-grow">
+<p class="font-body text-body"><span class="font-bold">Mark R.</span> updated <span class="text-primary-container font-medium">"Nexus Redesign"</span> to <span class="bg-tertiary-fixed-dim/30 text-tertiary px-xs rounded text-[12px] font-bold">Completed</span></p>
+<span class="font-caption text-caption text-neutral-400">2m ago</span>
+</div>
+</div>
+<div class="flex items-start gap-md pb-md border-b border-neutral-100 last:border-0">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Sarah L., a creative project manager, depicted in a professional and vibrant setting. Her image features high-contrast, clean lighting, and a neutral, organized background. The visual tone is technical and approachable, fitting a high-performance SaaS interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_ppsOr1WN7tGlUKcFww5tOOtzV19lt0FVj4aG30N8BF9Bqier2SoQ06j4z8nzY2ziZdNmTSSN8MtHHSLx701gmaQvXIbKRr5mu1waLiryu3gigcshhtFW1Quo5PNMSMp_Z8IjmTpO_-TK4u0pX1uCvW4XTKVY3kAGbgt6XM4jXoq9MhniYjCjtVHjyRqR8QkaYDPBxZELdq0_ZIYQJAoX-6Mzqw2Rk7_qOT9kVoc40Frq5w30gKQW9xdg8KfzC7ddbeqdTC9jssqN"/>
+<div class="flex-grow">
+<p class="font-body text-body"><span class="font-bold">Sarah L.</span> added 4 new tasks to <span class="text-primary-container font-medium">"CloudSync API"</span></p>
+<span class="font-caption text-caption text-neutral-400">15m ago</span>
+</div>
+</div>
+<div class="flex items-start gap-md pb-md last:border-0">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="David K., a senior technical lead, portrayed in a bright, modern professional environment. The lighting is crisp and clear, creating a focused and trustworthy look. The style matches the corporate and professional aesthetic of the ClientPulse platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFoiF-z6wYgzMZidrLtTU8M5HbgIGP798t_1ed6C4xrhVKHP8vqZTAEXo7nQrsw7fz6Y6VlvEjTvWDtwXlTXSHbW6G2TmOoezb5JRDwINTpxFO0lgdjSBHutZTEbxq-y-1JdAuVoBMArGpS60ATgm12ZKu6oNJiWaJF_FE6P5gQ7KusiWHfv4ONSdogIDHtK2QeSWkMp5K7A-i9oJvFI35yIMYu0dlajYDIA_RR6G5k3RDOUdZVXeP8bCl9WOrN8MwgPbb3Y7pCmrR"/>
+<div class="flex-grow">
+<p class="font-body text-body"><span class="font-bold">David K.</span> flagged <span class="text-primary-container font-medium">"Alpha Mobile"</span> as <span class="bg-error-container text-error px-xs rounded text-[12px] font-bold">At Risk</span></p>
+<span class="font-caption text-caption text-neutral-400">1h ago</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Row: Table -->
+<div class="bg-white rounded-lg custom-shadow border border-neutral-300 overflow-hidden">
+<div class="p-lg border-b border-neutral-100 flex justify-between items-center">
+<h3 class="font-headline-3 text-headline-3">Projects Overview</h3>
+<div class="flex gap-sm">
+<button class="flex items-center gap-xs px-md py-xs border border-neutral-300 rounded-lg font-label text-label hover:bg-neutral-50 transition-colors">
+<span class="material-symbols-outlined text-sm">filter_alt</span>
+                        Filter
+                    </button>
+<button class="flex items-center gap-xs px-md py-xs bg-primary-container text-white rounded-lg font-label text-label hover:bg-primary transition-colors shadow-sm">
+<span class="material-symbols-outlined text-sm">add</span>
+                        New Project
+                    </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-neutral-100 border-b border-neutral-200">
+<tr>
+<th class="px-lg py-md font-label text-label text-neutral-500 uppercase">Project Name</th>
+<th class="px-lg py-md font-label text-label text-neutral-500 uppercase">Client</th>
+<th class="px-lg py-md font-label text-label text-neutral-500 uppercase">Status</th>
+<th class="px-lg py-md font-label text-label text-neutral-500 uppercase">Health Score</th>
+<th class="px-lg py-md font-label text-label text-neutral-500 uppercase">Team</th>
+<th class="px-lg py-md font-label text-label text-neutral-500 uppercase">Due Date</th>
+<th class="px-lg py-md font-label text-label text-neutral-500 uppercase w-20">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-neutral-100">
+<!-- Row 1 -->
+<tr class="hover:bg-neutral-50 transition-colors group">
+<td class="px-lg py-md">
+<div class="flex items-center gap-sm">
+<div class="p-xs bg-primary-container/10 rounded">
+<span class="material-symbols-outlined text-primary-container text-sm">devices</span>
+</div>
+<span class="font-body text-body font-medium">Nexus Redesign</span>
+</div>
+</td>
+<td class="px-lg py-md font-body text-body">Acme Corp</td>
+<td class="px-lg py-md">
+<span class="px-sm py-xs rounded-full bg-tertiary-fixed-dim/30 text-tertiary font-label text-label">Completed</span>
+</td>
+<td class="px-lg py-md">
+<div class="flex items-center gap-sm">
+<div class="w-24 h-2 health-bar-bg rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container w-[100%]"></div>
+</div>
+<span class="font-label text-label text-neutral-600">100%</span>
+</div>
+</td>
+<td class="px-lg py-md">
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border-2 border-white object-cover" data-alt="Small avatar of team member Mark" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUzX6iiECAy3U7HpMoqyr3MTMNvMQX531ZgC5JOSHkwkD_xJg94iRz1wGm8r7hDju61xpalocb7arl9TRHtZrJSN2H9CHlFKcsl04SOk76nC8VO0RZcv_fu1_KfjiwranDiJrI6vn0MWSnXWxPEeXZdEDibW2laky0d5GhXvnLdJCnRVSVlCiUFQUYozNBvP8Be9q3il9OTSiTTVfppthgwvdJcyEYfzmvkoMC2iBQmVqPzgPeVE5cZcxkejM4SZdDjQTcKZjf3a9v"/>
+<img class="w-6 h-6 rounded-full border-2 border-white object-cover" data-alt="Small avatar of team member Sarah" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2C-hOPwa0XV8j0rre34e4r3W2oZlA6TaEyIf4EFEFsRlPLIg9e8GgiT3yAZcHg4st-J8B4WdUuIUVvH6QcAebozMav-lneU2d0c4_f3gU09fcKWJ0NpCleBCKJYz6aSyjP_yY8-46IV-MyfX2vQsVPUbiftOPmrc4bOXyMU9lG4gDUBI8twwVAR4SfdgxC9TM8xg9XvhcuTDfqw1-9Rg1rYFk-v71yLO-QmWwIlukDl1WGJ4qybV09a2QdT5nLG86FBxzF2VnWua1"/>
+<div class="w-6 h-6 rounded-full bg-neutral-200 border-2 border-white flex items-center justify-center text-[10px] font-bold text-neutral-500">+3</div>
+</div>
+</td>
+<td class="px-lg py-md font-body text-body">Oct 12, 2024</td>
+<td class="px-lg py-md text-center">
+<button class="p-xs hover:bg-neutral-200 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-neutral-500">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-neutral-50 transition-colors group">
+<td class="px-lg py-md">
+<div class="flex items-center gap-sm">
+<div class="p-xs bg-primary-container/10 rounded">
+<span class="material-symbols-outlined text-primary-container text-sm">smartphone</span>
+</div>
+<span class="font-body text-body font-medium">Alpha Mobile</span>
+</div>
+</td>
+<td class="px-lg py-md font-body text-body">Global Tech</td>
+<td class="px-lg py-md">
+<span class="px-sm py-xs rounded-full bg-secondary-container text-on-secondary-container font-label text-label">In Progress</span>
+</td>
+<td class="px-lg py-md">
+<div class="flex items-center gap-sm">
+<div class="w-24 h-2 health-bar-bg rounded-full overflow-hidden">
+<div class="h-full bg-yellow-400 w-[65%]"></div>
+</div>
+<span class="font-label text-label text-neutral-600">65%</span>
+</div>
+</td>
+<td class="px-lg py-md">
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border-2 border-white object-cover" data-alt="Small avatar of team member David" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOsaFpAwU31_pitPnLubx9RWqDfzK5THxi48dH99Hnuxp3r3fu2j2j9m-B7VVByuc9AC7kQeIXzBf2K4P8HwZE3p8NLGb_77TLpxsBYV4E58b6faJoFraGW6dIyMiKsPR2nSTBQfu3WBRe0Ugv3ViwpUJ6jiuGR7vVUnKfA4ojDUHPzvnENLehfab0gto0-HIbNtq91Sg-mNeKQ_jTNAAAY2mq1WZtw8wsFgqGQlp7geU2DmLD8ZmIU2_YO4xaxlxBTs0K5Mv329Xo"/>
+<img class="w-6 h-6 rounded-full border-2 border-white object-cover" data-alt="Small avatar of team member Priya" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBj1-FTUSjP1dhiQlf3GqnU5UPeizERZG5wAi3MJCx1VS17tlERnzC8RFU_-Nyn70aCm8noLhAUMzq42PEAY7HM6ptnTDJ4bUTppkwOLEvG2vzE8Wx5x6wlBd19cOkm4LPLm-lYSRF1g3yYTdtLiGVFyPr67Du7MAW2MFnRt-3BjomrsNYJqf_K3ejXbuiXo-c-3kYC7U8pd0H0WSZHWXqAY_mp_MUZoGJr62hEpCWtaGPpQteLjttRGM8TI4W1dPo-3n2unIFDH4JB"/>
+</div>
+</td>
+<td class="px-lg py-md font-body text-body">Nov 05, 2024</td>
+<td class="px-lg py-md text-center">
+<button class="p-xs hover:bg-neutral-200 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-neutral-500">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-neutral-50 transition-colors group">
+<td class="px-lg py-md">
+<div class="flex items-center gap-sm">
+<div class="p-xs bg-primary-container/10 rounded">
+<span class="material-symbols-outlined text-primary-container text-sm">api</span>
+</div>
+<span class="font-body text-body font-medium">CloudSync API</span>
+</div>
+</td>
+<td class="px-lg py-md font-body text-body">Innovate Inc</td>
+<td class="px-lg py-md">
+<span class="px-sm py-xs rounded-full bg-surface-container-highest text-on-surface-variant font-label text-label">Planning</span>
+</td>
+<td class="px-lg py-md">
+<div class="flex items-center gap-sm">
+<div class="w-24 h-2 health-bar-bg rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[85%]"></div>
+</div>
+<span class="font-label text-label text-neutral-600">85%</span>
+</div>
+</td>
+<td class="px-lg py-md">
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border-2 border-white object-cover" data-alt="Small avatar of team member Sarah" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDNB-3SGkccoseQ_8Km_eZ-wLaNC9z62SEmQNKF1F9tXzLEbdmSv1yFVYyC9zlgGSIPNKG_thH_EIhZIuxyLBMta2ZKg1xb5KvPsR2hAG4hbrDGzJj7ZcMEJRI8aDfqXs0yvJypy2TsfJ7YeAUk1BfhTlQlXQXbktatRJuo3_X4ewuSThOoaYqqA-MQnWj1qPLVOyq7ghwplEPTwW9dl64oSR3iQUfQnVZXlGUaY84mU7yuf_dQkmnGrp5EJzy8hdUBsAeb_eD-9J3"/>
+<div class="w-6 h-6 rounded-full bg-neutral-200 border-2 border-white flex items-center justify-center text-[10px] font-bold text-neutral-500">+1</div>
+</div>
+</td>
+<td class="px-lg py-md font-body text-body">Dec 20, 2024</td>
+<td class="px-lg py-md text-center">
+<button class="p-xs hover:bg-neutral-200 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-neutral-500">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-md bg-neutral-50 border-t border-neutral-100 flex justify-between items-center">
+<span class="font-caption text-caption text-neutral-500">Showing 3 of 124 projects</span>
+<div class="flex items-center gap-xs">
+<button class="p-xs hover:bg-white rounded transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<span class="font-label text-label px-sm bg-white border border-neutral-200 rounded">1</span>
+<button class="p-xs hover:bg-white rounded transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interactions for dashboard elements
+        document.querySelectorAll('.StatCard').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.classList.add('scale-[1.02]');
+            });
+            card.addEventListener('mouseleave', () => {
+                card.classList.remove('scale-[1.02]');
+            });
+        });
+
+        // Simple alert for interactions
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const ripples = document.createElement('span');
+                ripples.style.left = e.clientX + 'px';
+                ripples.style.top = e.clientY + 'px';
+                btn.appendChild(ripples);
+                setTimeout(() => {
+                    ripples.remove();
+                }, 1000);
+            });
+        });
+    </script>
+</body></html>

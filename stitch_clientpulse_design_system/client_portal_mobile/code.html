@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>ClientPulse Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#005338",
+                        "secondary-fixed-dim": "#b9c7e0",
+                        "primary": "#0038bd",
+                        "on-secondary-fixed-variant": "#3a485c",
+                        "on-error-container": "#93000a",
+                        "outline": "#747687",
+                        "on-primary-fixed-variant": "#0037b9",
+                        "on-primary-fixed": "#001453",
+                        "on-background": "#131b2e",
+                        "inverse-primary": "#b8c4ff",
+                        "surface-tint": "#184de6",
+                        "surface-container-highest": "#dae2fd",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#002114",
+                        "on-secondary-container": "#57657b",
+                        "secondary-container": "#d5e3fd",
+                        "secondary": "#515f74",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#005237",
+                        "surface-container-low": "#f2f3ff",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#eaedff",
+                        "on-secondary-fixed": "#0d1c2f",
+                        "surface-bright": "#faf8ff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#131b2e",
+                        "surface-dim": "#d2d9f4",
+                        "background": "#faf8ff",
+                        "error": "#ba1a1a",
+                        "primary-container": "#1b4fe8",
+                        "primary-fixed-dim": "#b8c4ff",
+                        "tertiary-container": "#006e4b",
+                        "outline-variant": "#c4c5d8",
+                        "on-surface-variant": "#434655",
+                        "inverse-surface": "#283044",
+                        "inverse-on-surface": "#eef0ff",
+                        "secondary-fixed": "#d5e3fd",
+                        "primary-fixed": "#dde1ff",
+                        "on-tertiary-container": "#77f2ba",
+                        "on-primary-container": "#d3d9ff",
+                        "tertiary-fixed": "#7ff9c1",
+                        "tertiary-fixed-dim": "#61dca6",
+                        "surface-variant": "#dae2fd",
+                        "surface": "#faf8ff",
+                        "surface-container-high": "#e2e7ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "3xl": "64px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "base": "8px",
+                        "2xl": "48px"
+                    },
+                    "fontFamily": {
+                        "body": ["Inter"],
+                        "label": ["Inter"],
+                        "headline-1": ["Inter"],
+                        "caption": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display": ["Inter"],
+                        "headline-3": ["Inter"],
+                        "headline-2": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body": ["14px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label": ["12px", {"lineHeight": "1", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "headline-1": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.3px", "fontWeight": "600"}],
+                        "caption": ["12px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.5px", "fontWeight": "700"}],
+                        "headline-3": ["16px", {"lineHeight": "1.5", "fontWeight": "600"}],
+                        "headline-2": ["20px", {"lineHeight": "1.4", "letterSpacing": "-0.2px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+        .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .gauge-svg { transform: rotate(-90deg); }
+        .gauge-track { stroke: #eaedff; }
+        .gauge-fill { stroke: #184de6; stroke-linecap: round; transition: stroke-dashoffset 1s ease-out; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-md h-[64px] bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary text-headline-2" data-icon="hub">hub</span>
+<span class="font-headline-2 text-headline-2 font-bold text-primary">ClientPulse</span>
+</div>
+<button class="p-xs hover:bg-surface-container-low active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="pt-[64px] pb-xl px-md space-y-lg">
+<!-- Hero Health Gauge -->
+<section class="mt-lg">
+<div class="bg-primary-container rounded-xl p-lg text-on-primary-container relative overflow-hidden">
+<div class="flex flex-col items-center justify-center space-y-sm relative z-10">
+<div class="relative w-32 h-32 flex items-center justify-center">
+<svg class="gauge-svg w-full h-full" viewbox="0 0 100 100">
+<circle class="gauge-track" cx="50" cy="50" fill="none" r="45" stroke-width="8"></circle>
+<circle class="gauge-fill" cx="50" cy="50" fill="none" r="45" stroke-dasharray="283" stroke-dashoffset="70" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-display text-display leading-none">75%</span>
+<span class="font-label text-label opacity-80 uppercase">Score</span>
+</div>
+</div>
+<h2 class="font-headline-1 text-headline-1 text-center">Project On Track</h2>
+<p class="font-body text-body text-center opacity-90 max-w-[240px]">We're currently ahead of the Q3 milestone schedule.</p>
+</div>
+<!-- Subtle background texture -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-5 rounded-full -mr-16 -mt-16"></div>
+</div>
+</section>
+<!-- Stats Grid -->
+<section class="grid grid-cols-1 gap-md">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex items-center justify-between">
+<div>
+<span class="font-label text-label text-on-surface-variant uppercase mb-xs block">Milestones</span>
+<span class="font-headline-1 text-headline-1 text-on-surface">12 / 16</span>
+</div>
+<div class="w-12 h-12 bg-secondary-container rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="flag">flag</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex items-center justify-between">
+<div>
+<span class="font-label text-label text-on-surface-variant uppercase mb-xs block">Tasks Pending</span>
+<span class="font-headline-1 text-headline-1 text-on-surface">08</span>
+</div>
+<div class="w-12 h-12 bg-secondary-container rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex items-center justify-between">
+<div>
+<span class="font-label text-label text-on-surface-variant uppercase mb-xs block">Days Remaining</span>
+<span class="font-headline-1 text-headline-1 text-on-surface">24</span>
+</div>
+<div class="w-12 h-12 bg-secondary-container rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="event">event</span>
+</div>
+</div>
+</section>
+<!-- Project Timeline -->
+<section class="space-y-md">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-2 text-headline-2 text-on-surface">Project Timeline</h3>
+<button class="text-primary font-label text-label">View Full</button>
+</div>
+<div class="relative pl-sm">
+<!-- Vertical Line -->
+<div class="absolute left-[11px] top-0 bottom-0 w-[2px] bg-outline-variant"></div>
+<div class="space-y-xl">
+<!-- Item 1 (Active/Current) -->
+<div class="relative flex gap-md">
+<div class="z-10 w-6 h-6 rounded-full bg-primary flex items-center justify-center text-on-primary mt-1 border-4 border-background">
+<span class="material-symbols-outlined text-[14px]" data-icon="check">check</span>
+</div>
+<div class="flex-1">
+<h4 class="font-headline-3 text-headline-3 text-primary">API Integration Phase</h4>
+<p class="font-body text-body text-on-surface-variant">Ongoing • 85% complete</p>
+<div class="mt-sm bg-surface-container rounded-lg p-sm border border-outline-variant border-dashed">
+<p class="font-caption text-caption italic">"Endpoints are successfully mapped; testing webhooks today."</p>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="relative flex gap-md">
+<div class="z-10 w-6 h-6 rounded-full bg-surface-variant flex items-center justify-center text-outline mt-1 border-4 border-background">
+<div class="w-2 h-2 rounded-full bg-outline"></div>
+</div>
+<div class="flex-1">
+<h4 class="font-headline-3 text-headline-3 text-on-surface">User Acceptance Testing</h4>
+<p class="font-body text-body text-on-surface-variant">Scheduled • Oct 24 - Nov 02</p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="relative flex gap-md">
+<div class="z-10 w-6 h-6 rounded-full bg-surface-variant flex items-center justify-center text-outline mt-1 border-4 border-background">
+<div class="w-2 h-2 rounded-full bg-outline"></div>
+</div>
+<div class="flex-1">
+<h4 class="font-headline-3 text-headline-3 text-on-surface">Production Launch</h4>
+<p class="font-body text-body text-on-surface-variant">Upcoming • Nov 15</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Access Documents -->
+<section class="space-y-md">
+<h3 class="font-headline-2 text-headline-2 text-on-surface">Quick Access</h3>
+<div class="space-y-sm">
+<div class="flex items-center gap-md p-md bg-surface-container-lowest border border-outline-variant rounded-xl active:bg-surface-container-low transition-colors">
+<div class="w-10 h-10 bg-error-container text-error rounded flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+<div class="flex-1">
+<p class="font-headline-3 text-headline-3 text-on-surface">SOW_v2.4.pdf</p>
+<p class="font-caption text-caption text-on-surface-variant">Updated 2 days ago • 1.2 MB</p>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="download">download</span>
+</div>
+<div class="flex items-center gap-md p-md bg-surface-container-lowest border border-outline-variant rounded-xl active:bg-surface-container-low transition-colors">
+<div class="w-10 h-10 bg-secondary-container text-primary rounded flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+</div>
+<div class="flex-1">
+<p class="font-headline-3 text-headline-3 text-on-surface">Project_Charter.docx</p>
+<p class="font-caption text-caption text-on-surface-variant">Created Oct 01 • 456 KB</p>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="download">download</span>
+</div>
+<div class="flex items-center gap-md p-md bg-surface-container-lowest border border-outline-variant rounded-xl active:bg-surface-container-low transition-colors">
+<div class="w-10 h-10 bg-tertiary-container text-tertiary-fixed rounded flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="table_chart">table_chart</span>
+</div>
+<div class="flex-1">
+<p class="font-headline-3 text-headline-3 text-on-surface">Budget_Overview.xlsx</p>
+<p class="font-caption text-caption text-on-surface-variant">Updated yesterday • 892 KB</p>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="download">download</span>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="pt-xl pb-md text-center">
+<div class="flex items-center justify-center gap-xs text-on-surface-variant">
+<span class="font-label text-label opacity-60">Powered by</span>
+<span class="material-symbols-outlined text-body leading-none opacity-80" data-icon="hub">hub</span>
+<span class="font-label text-label font-bold text-primary">ClientPulse</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant mt-sm opacity-50">© 2024 Performance Analytics Corp.</p>
+</footer>
+</main>
+<!-- Simple interaction for gauge effect -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const gaugeFill = document.querySelector('.gauge-fill');
+            if (gaugeFill) {
+                // Animate to 75% (dashoffset calculation: 283 * (1 - 0.75) = 70.75)
+                setTimeout(() => {
+                    gaugeFill.style.strokeDashoffset = '70';
+                }, 300);
+            }
+        });
+    </script>
+</body></html>

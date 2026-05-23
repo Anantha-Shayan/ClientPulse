@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Layout &amp; Containers Library - ClientPulse</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#515f74",
+                        "primary": "#0038bd",
+                        "outline": "#747687",
+                        "on-tertiary-fixed-variant": "#005237",
+                        "on-secondary-fixed-variant": "#3a485c",
+                        "tertiary-fixed": "#7ff9c1",
+                        "on-secondary-fixed": "#0d1c2f",
+                        "secondary-container": "#d5e3fd",
+                        "on-tertiary-fixed": "#002114",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#eaedff",
+                        "secondary-fixed": "#d5e3fd",
+                        "tertiary-fixed-dim": "#61dca6",
+                        "primary-fixed": "#dde1ff",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f2f3ff",
+                        "secondary-fixed-dim": "#b9c7e0",
+                        "surface-tint": "#184de6",
+                        "on-background": "#131b2e",
+                        "on-surface-variant": "#434655",
+                        "on-tertiary-container": "#77f2ba",
+                        "on-surface": "#131b2e",
+                        "on-primary-fixed-variant": "#0037b9",
+                        "on-error": "#ffffff",
+                        "primary-container": "#1b4fe8",
+                        "inverse-on-surface": "#eef0ff",
+                        "outline-variant": "#c4c5d8",
+                        "on-primary-fixed": "#001453",
+                        "primary-fixed-dim": "#b8c4ff",
+                        "inverse-primary": "#b8c4ff",
+                        "surface": "#faf8ff",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#dae2fd",
+                        "surface-container-highest": "#dae2fd",
+                        "inverse-surface": "#283044",
+                        "on-secondary-container": "#57657b",
+                        "background": "#faf8ff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#d3d9ff",
+                        "surface-dim": "#d2d9f4",
+                        "tertiary-container": "#006e4b",
+                        "tertiary": "#005338",
+                        "surface-bright": "#faf8ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e2e7ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "base": "8px",
+                        "md": "16px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "3xl": "64px",
+                        "2xl": "48px"
+                    },
+                    "fontFamily": {
+                        "headline-3": ["Inter"],
+                        "body": ["Inter"],
+                        "display": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label": ["Inter"],
+                        "headline-2": ["Inter"],
+                        "caption": ["Inter"],
+                        "headline-1": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-3": ["16px", { "lineHeight": "1.5", "fontWeight": "600" }],
+                        "body": ["14px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.5px", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label": ["12px", { "lineHeight": "1", "letterSpacing": "0.5px", "fontWeight": "500" }],
+                        "headline-2": ["20px", { "lineHeight": "1.4", "letterSpacing": "-0.2px", "fontWeight": "600" }],
+                        "caption": ["12px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-1": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.3px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .backdrop-blur-custom {
+            backdrop-filter: blur(8px);
+            background-color: rgba(19, 27, 46, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-background font-body text-on-background antialiased">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 h-[64px] flex items-center justify-between px-lg max-w-[1280px] left-1/2 -translate-x-1/2 bg-surface border-b border-outline-variant shadow-sm">
+<div class="flex items-center gap-lg">
+<span class="font-display text-display font-bold text-primary">ClientPulse</span>
+<div class="hidden md:flex gap-md">
+<a class="text-secondary hover:text-primary transition-colors cursor-pointer active:opacity-80 font-body text-body" href="#">Dashboard</a>
+<a class="text-primary border-b-2 border-primary pb-1 font-body text-body" href="#">Design System</a>
+<a class="text-secondary hover:text-primary transition-colors cursor-pointer active:opacity-80 font-body text-body" href="#">Clients</a>
+<a class="text-secondary hover:text-primary transition-colors cursor-pointer active:opacity-80 font-body text-body" href="#">Reports</a>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-secondary cursor-pointer" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-secondary cursor-pointer" data-icon="settings">settings</span>
+<img alt="User" class="w-8 h-8 rounded-full border border-outline-variant" data-alt="A professional headshot of a corporate user with a clean, well-lit background. The style is modern and high-key, aligning with a corporate analytics dashboard aesthetic. The lighting is soft and directional, emphasizing clarity and professionalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkLTF1x8ogBZS15MYQcxcY-3tel9dnGQr4wPzTUgmVPzggNXYgd6T-HaOv87sOVsK46GyscnGJIPsbb7IcUr3Czw7uV4yuXn8jE037QPDF2CnzvrvmlY-j9LKJ3GSgRaiYlsN3lkT7b9IAuobGcep4SzJeD_MjypaeV2DMHjdhpIBs60OlHUDDEviRvjy1XYKqq6oPFgks-kTtXGSXGvYV35-eTjLTURGvBL_GurDxKjy99evgsiYGUVlMGfziXgxMrlrFBaxTFNFA"/>
+</div>
+</nav>
+<!-- Sidebar (Documentation Style) -->
+<aside class="fixed left-0 top-[64px] h-[calc(100vh-64px)] w-[240px] flex flex-col py-lg z-40 bg-surface border-r border-outline-variant">
+<div class="px-lg mb-lg">
+<span class="font-label text-label text-secondary uppercase tracking-wider">Library</span>
+</div>
+<div class="flex flex-col flex-1 overflow-y-auto">
+<a class="flex items-center gap-md px-lg py-sm text-primary font-bold border-l-4 border-primary bg-primary-container/10 transition-all font-label text-label" href="#pagewrapper">
+<span class="material-symbols-outlined" data-icon="web">web</span>
+<span>PageWrapper</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:bg-surface-variant transition-all font-label text-label" href="#cards">
+<span class="material-symbols-outlined" data-icon="view_agenda">view_agenda</span>
+<span>Cards</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:bg-surface-variant transition-all font-label text-label" href="#drawers">
+<span class="material-symbols-outlined" data-icon="side_navigation">side_navigation</span>
+<span>SlideDrawers</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:bg-surface-variant transition-all font-label text-label" href="#modals">
+<span class="material-symbols-outlined" data-icon="tab">tab</span>
+<span>Modals</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:bg-surface-variant transition-all font-label text-label" href="#dividers">
+<span class="material-symbols-outlined" data-icon="horizontal_rule">horizontal_rule</span>
+<span>Section Dividers</span>
+</a>
+<a class="flex items-center gap-md px-lg py-sm text-secondary hover:bg-surface-variant transition-all font-label text-label" href="#emptystates">
+<span class="material-symbols-outlined" data-icon="folder_off">folder_off</span>
+<span>Empty States</span>
+</a>
+</div>
+<div class="mt-auto px-lg">
+<button class="w-full flex items-center justify-center gap-sm bg-primary-container text-white py-sm rounded-lg font-label text-label shadow-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+<span>Export Specs</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-[240px] mt-[64px] p-2xl min-h-screen">
+<div class="max-w-[1280px] mx-auto">
+<header class="mb-3xl">
+<h1 class="font-display text-display text-on-surface mb-xs">Layout &amp; Containers Library</h1>
+<p class="font-body-lg text-body-lg text-secondary">A comprehensive guide to ClientPulse’s structural elements, container states, and spatial logic.</p>
+</header>
+<!-- 1. PageWrapper Section -->
+<section class="mb-3xl" id="pagewrapper">
+<div class="flex items-center gap-md mb-lg">
+<h2 class="font-headline-1 text-headline-1">1. PageWrapper</h2>
+<span class="px-sm py-xs bg-surface-container rounded-full text-primary font-label text-label">Structural</span>
+</div>
+<div class="relative bg-surface-container-low border border-dashed border-outline-variant p-2xl rounded-xl">
+<div class="absolute inset-x-0 top-0 h-4 bg-primary/10 flex items-center justify-center text-[10px] text-primary font-bold">MAX-WIDTH 1280px CANVAS</div>
+<div class="flex flex-col gap-lg bg-white p-xl rounded-lg shadow-sm border border-outline-variant">
+<div class="h-12 w-full bg-surface-container rounded-md flex items-center px-md text-secondary font-label text-label">Dynamic Content Region</div>
+<div class="grid grid-cols-12 gap-lg">
+<div class="col-span-8 h-64 bg-surface-container rounded-md flex items-center justify-center text-secondary font-label text-label">Main Grid (Col 1-8)</div>
+<div class="col-span-4 h-64 bg-surface-container rounded-md flex items-center justify-center text-secondary font-label text-label">Sidebar Grid (Col 9-12)</div>
+</div>
+</div>
+</div>
+<p class="mt-md font-caption text-caption text-secondary italic">Visual representation of the 12-column fluid grid contained within a fixed 1280px wrapper.</p>
+</section>
+<!-- 2. Cards Section -->
+<section class="mb-3xl" id="cards">
+<div class="flex items-center gap-md mb-lg">
+<h2 class="font-headline-1 text-headline-1">2. Cards</h2>
+<span class="px-sm py-xs bg-surface-container rounded-full text-primary font-label text-label">Elevation</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-2xl">
+<div class="flex flex-col gap-sm">
+<span class="font-label text-label text-secondary">Default Card</span>
+<div class="bg-white border border-outline-variant rounded-xl p-lg shadow-sm">
+<h3 class="font-headline-2 text-headline-2 mb-sm">Standard Surface</h3>
+<p class="text-secondary font-body text-body">Flat container with subtle border and small lift. Ideal for static dashboard widgets.</p>
+</div>
+</div>
+<div class="flex flex-col gap-sm">
+<span class="font-label text-label text-secondary">Hoverable Card</span>
+<div class="bg-white border border-outline-variant rounded-xl p-lg shadow-sm hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-sm">
+<h3 class="font-headline-2 text-headline-2 group-hover:text-primary transition-colors">Interactive Surface</h3>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary" data-icon="open_in_new">open_in_new</span>
+</div>
+<p class="text-secondary font-body text-body">Elevates on mouse over. Used for list items, clickable analytics cards, or navigation tiles.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. SlideDrawers Section -->
+<section class="mb-3xl" id="drawers">
+<div class="flex items-center gap-md mb-lg">
+<h2 class="font-headline-1 text-headline-1">3. SlideDrawers</h2>
+</div>
+<div class="relative h-[400px] w-full bg-surface-container rounded-xl overflow-hidden border border-outline-variant flex items-center justify-center">
+<div class="absolute inset-0 grid grid-cols-3 gap-md p-lg opacity-20">
+<div class="bg-outline h-32 rounded"></div>
+<div class="bg-outline h-32 rounded"></div>
+<div class="bg-outline h-32 rounded"></div>
+</div>
+<!-- Left Drawer Simulation -->
+<div class="absolute left-0 top-0 bottom-0 w-64 bg-white shadow-lg border-r border-outline-variant z-10 flex flex-col animate-slide-in-left">
+<div class="p-md border-b border-outline-variant flex justify-between items-center">
+<span class="font-headline-3 text-headline-3">Left Drawer</span>
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="close">close</span>
+</div>
+<div class="p-md space-y-md">
+<div class="h-4 bg-surface-container rounded w-3/4"></div>
+<div class="h-4 bg-surface-container rounded w-1/2"></div>
+<div class="h-24 bg-surface-container rounded w-full"></div>
+</div>
+</div>
+<!-- Right Drawer Simulation -->
+<div class="absolute right-0 top-0 bottom-0 w-80 bg-white shadow-lg border-l border-outline-variant z-10 flex flex-col">
+<div class="p-md border-b border-outline-variant flex justify-between items-center">
+<span class="font-headline-3 text-headline-3">Right Drawer</span>
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="close">close</span>
+</div>
+<div class="p-md space-y-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="info">info</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label text-label text-on-surface">Information Hub</span>
+<span class="font-caption text-caption text-secondary">Contextual details</span>
+</div>
+</div>
+<div class="h-32 bg-surface-container rounded w-full"></div>
+<button class="w-full bg-primary py-sm rounded-lg text-white font-label text-label">Apply Changes</button>
+</div>
+</div>
+<span class="font-label text-label text-secondary px-md py-sm bg-white rounded-full shadow-sm z-0">Main Content Canvas</span>
+</div>
+</section>
+<!-- 4. Modals Section -->
+<section class="mb-3xl" id="modals">
+<div class="flex items-center gap-md mb-lg">
+<h2 class="font-headline-1 text-headline-1">4. Modals</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-xl">
+<!-- Small Modal -->
+<div class="flex flex-col gap-sm">
+<span class="font-label text-label text-secondary">Modal SM (400px)</span>
+<div class="h-64 bg-surface-container rounded-xl flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 backdrop-blur-sm bg-black/5"></div>
+<div class="w-[80%] bg-white rounded-lg shadow-lg border border-outline-variant p-md z-10">
+<span class="font-headline-3 text-headline-3 block mb-xs">Delete Item?</span>
+<span class="font-caption text-caption text-secondary block mb-md">This action cannot be undone.</span>
+<div class="flex justify-end gap-sm">
+<button class="px-md py-xs font-label text-label text-secondary">Cancel</button>
+<button class="px-md py-xs font-label text-label bg-error text-white rounded">Delete</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Medium Modal -->
+<div class="flex flex-col gap-sm">
+<span class="font-label text-label text-secondary">Modal MD (600px)</span>
+<div class="h-64 bg-surface-container rounded-xl flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 backdrop-blur-sm bg-black/5"></div>
+<div class="w-[90%] bg-white rounded-lg shadow-lg border border-outline-variant p-md z-10">
+<div class="flex justify-between items-center mb-md">
+<span class="font-headline-2 text-headline-2">Filter Tasks</span>
+<span class="material-symbols-outlined text-secondary" data-icon="close">close</span>
+</div>
+<div class="space-y-sm mb-lg">
+<div class="h-4 bg-surface-container rounded"></div>
+<div class="h-4 bg-surface-container rounded w-2/3"></div>
+</div>
+<button class="w-full bg-primary py-sm rounded-lg text-white font-label text-label">Apply Filters</button>
+</div>
+</div>
+</div>
+<!-- Large Modal -->
+<div class="flex flex-col gap-sm">
+<span class="font-label text-label text-secondary">Modal LG (900px)</span>
+<div class="h-64 bg-surface-container rounded-xl flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 backdrop-blur-sm bg-black/5"></div>
+<div class="w-[95%] h-[80%] bg-white rounded-lg shadow-lg border border-outline-variant p-md z-10 overflow-hidden flex flex-col">
+<div class="flex justify-between items-center mb-md">
+<span class="font-headline-2 text-headline-2">Export Project Report</span>
+<span class="material-symbols-outlined text-secondary" data-icon="close">close</span>
+</div>
+<div class="flex-1 overflow-auto space-y-md">
+<div class="grid grid-cols-2 gap-sm">
+<div class="h-10 bg-surface-container rounded"></div>
+<div class="h-10 bg-surface-container rounded"></div>
+</div>
+<div class="h-24 bg-surface-container rounded"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. SectionDivider Section -->
+<section class="mb-3xl" id="dividers">
+<div class="flex items-center gap-md mb-lg">
+<h2 class="font-headline-1 text-headline-1">5. Section Dividers</h2>
+</div>
+<div class="bg-white border border-outline-variant rounded-xl p-xl space-y-2xl">
+<div class="space-y-md">
+<div class="flex items-center gap-md">
+<span class="font-headline-3 text-headline-3 whitespace-nowrap">Project Details</span>
+<div class="h-px bg-outline-variant flex-1"></div>
+</div>
+<div class="grid grid-cols-3 gap-lg">
+<div class="h-10 bg-surface-container rounded"></div>
+<div class="h-10 bg-surface-container rounded"></div>
+<div class="h-10 bg-surface-container rounded"></div>
+</div>
+</div>
+<div class="space-y-md">
+<div class="flex items-center gap-md">
+<div class="h-px bg-outline-variant flex-1"></div>
+<span class="font-headline-3 text-headline-3 whitespace-nowrap text-secondary">Risk Assessment</span>
+<div class="h-px bg-outline-variant flex-1"></div>
+</div>
+<div class="h-32 bg-surface-container rounded"></div>
+</div>
+<div class="space-y-md">
+<div class="flex items-center gap-md">
+<div class="p-xs bg-primary-container/10 rounded flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<span class="font-headline-3 text-headline-3 whitespace-nowrap">Compliance Status</span>
+<div class="h-px bg-outline-variant flex-1"></div>
+</div>
+<div class="h-12 bg-surface-container-low border border-dashed border-outline-variant rounded flex items-center px-md text-secondary font-caption text-caption italic">Awaiting verification signatures...</div>
+</div>
+</div>
+</section>
+<!-- 6. Empty States Section -->
+<section class="mb-3xl" id="emptystates">
+<div class="flex items-center gap-md mb-lg">
+<h2 class="font-headline-1 text-headline-1">6. Empty States</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-2xl">
+<!-- State 1 -->
+<div class="bg-white border border-outline-variant rounded-xl p-2xl flex flex-col items-center text-center">
+<div class="w-48 h-48 mb-lg flex items-center justify-center">
+<img alt="No Projects" class="w-full h-auto" data-alt="A clean and professional vector illustration of a document folder with a magnifying glass hovering over it. The style is a blue line art aesthetic that fits perfectly in a minimalist SaaS dashboard. The primary color used is #1B4FE8 with light grey accents, creating a calm and informative empty state visual." src="https://lh3.googleusercontent.com/aida/ADBb0uixWZRc34izawxWmaJUcE8DRSlPfJkmkVqhP81O38XF4Ts3NmeBG8C59mfeFAoNw16yq1now4U0AkIyL9ZeRzUehN7fsPUHRLSWDiZUcbX0rjDfX0Kj1vCwBryf_7osOQyGqz0q-8SKqZGjcIx-aV4RJFMHnEhVbOSsA2CvnK-fC2Km-7s6GsvsdWmwxGTF5gdl_qO5nlM2Mt80wVAbDX_cZoQDtyM5OvEnyNMNWEdy51HYl4yepmX5Zt4w"/>
+</div>
+<h3 class="font-headline-2 text-headline-2 mb-xs">No Projects Found</h3>
+<p class="font-body text-body text-secondary mb-lg max-w-xs">It looks like you haven't created any analytics projects yet. Start by creating your first one.</p>
+<button class="bg-primary text-white px-lg py-sm rounded-lg font-headline-3 text-headline-3 shadow-sm hover:opacity-90 transition-all flex items-center gap-sm">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                            New Project
+                        </button>
+</div>
+<!-- State 2 -->
+<div class="bg-white border border-outline-variant rounded-xl p-2xl flex flex-col items-center text-center">
+<div class="w-48 h-48 mb-lg flex items-center justify-center bg-surface-container rounded-full">
+<span class="material-symbols-outlined text-primary text-[64px]" data-icon="database_off">database_off</span>
+</div>
+<h3 class="font-headline-2 text-headline-2 mb-xs">No Data to Display</h3>
+<p class="font-body text-body text-secondary mb-lg max-w-xs">Sync your external client data to populate this dashboard with real-time analytics.</p>
+<div class="flex gap-md">
+<button class="border border-outline-variant text-on-surface px-lg py-sm rounded-lg font-headline-3 text-headline-3 hover:bg-surface-variant transition-all">Documentation</button>
+<button class="bg-primary text-white px-lg py-sm rounded-lg font-headline-3 text-headline-3 shadow-sm hover:opacity-90 transition-all">Connect Source</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Interactive Layer (Toast Notification) -->
+<div class="fixed bottom-lg right-lg bg-inverse-surface text-inverse-on-surface px-lg py-md rounded-xl shadow-lg flex items-center gap-md transform translate-y-24 transition-transform duration-300 z-[100]" id="copy-toast">
+<span class="material-symbols-outlined text-tertiary-fixed" data-icon="check_circle">check_circle</span>
+<span class="font-body text-body">Component specifications copied to clipboard.</span>
+</div>
+<script>
+        // Smooth scroll and active state tracking
+        const navLinks = document.querySelectorAll('aside a');
+        const sections = document.querySelectorAll('section');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-primary', 'font-bold', 'border-l-4', 'border-primary', 'bg-primary-container/10');
+                link.classList.add('text-secondary');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('text-primary', 'font-bold', 'border-l-4', 'border-primary', 'bg-primary-container/10');
+                    link.classList.remove('text-secondary');
+                }
+            });
+        });
+
+        // Micro-interaction for Copy Specs button
+        const exportBtn = document.querySelector('button');
+        const toast = document.getElementById('copy-toast');
+
+        exportBtn.addEventListener('click', () => {
+            toast.classList.remove('translate-y-24');
+            toast.classList.add('translate-y-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-24');
+                toast.classList.remove('translate-y-0');
+            }, 3000);
+        });
+
+        // Simple modal triggers simulation
+        document.querySelectorAll('.material-symbols-outlined[data-icon="close"]').forEach(closeBtn => {
+            closeBtn.addEventListener('click', (e) => {
+                e.target.closest('.shadow-lg').style.opacity = '0.5';
+                setTimeout(() => {
+                    e.target.closest('.shadow-lg').style.opacity = '1';
+                }, 500);
+            });
+        });
+    </script>
+</body></html>

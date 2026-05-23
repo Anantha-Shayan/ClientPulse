@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ClientPulse - New Project</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-on-surface": "#eef0ff",
+                    "primary-fixed-dim": "#b8c4ff",
+                    "on-background": "#131b2e",
+                    "error": "#ba1a1a",
+                    "on-surface": "#131b2e",
+                    "surface-variant": "#dae2fd",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#001453",
+                    "on-tertiary-fixed-variant": "#005237",
+                    "secondary-container": "#d5e3fd",
+                    "primary": "#0038bd",
+                    "outline": "#747687",
+                    "on-tertiary-fixed": "#002114",
+                    "surface": "#faf8ff",
+                    "tertiary-container": "#006e4b",
+                    "on-secondary-container": "#57657b",
+                    "surface-bright": "#faf8ff",
+                    "tertiary": "#005338",
+                    "on-primary-container": "#d3d9ff",
+                    "inverse-surface": "#283044",
+                    "on-tertiary-container": "#77f2ba",
+                    "surface-dim": "#d2d9f4",
+                    "surface-container": "#eaedff",
+                    "secondary-fixed": "#d5e3fd",
+                    "surface-container-low": "#f2f3ff",
+                    "secondary": "#515f74",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#184de6",
+                    "on-error": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#b8c4ff",
+                    "outline-variant": "#c4c5d8",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#dae2fd",
+                    "on-secondary-fixed-variant": "#3a485c",
+                    "surface-container-high": "#e2e7ff",
+                    "on-surface-variant": "#434655",
+                    "background": "#faf8ff",
+                    "primary-container": "#1b4fe8",
+                    "on-secondary-fixed": "#0d1c2f",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed": "#7ff9c1",
+                    "secondary-fixed-dim": "#b9c7e0",
+                    "tertiary-fixed-dim": "#61dca6",
+                    "primary-fixed": "#dde1ff",
+                    "on-primary-fixed-variant": "#0037b9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "3xl": "64px",
+                    "md": "16px",
+                    "base": "8px",
+                    "sm": "8px",
+                    "2xl": "48px",
+                    "lg": "24px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "caption": ["Inter"],
+                    "headline-1": ["Inter"],
+                    "display": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-3": ["Inter"],
+                    "label": ["Inter"],
+                    "headline-2": ["Inter"],
+                    "body": ["Inter"]
+            },
+            "fontSize": {
+                    "caption": ["12px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-1": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.3px", "fontWeight": "600"}],
+                    "display": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.5px", "fontWeight": "700"}],
+                    "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-3": ["16px", {"lineHeight": "1.5", "fontWeight": "600"}],
+                    "label": ["12px", {"lineHeight": "1", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "headline-2": ["20px", {"lineHeight": "1.4", "letterSpacing": "-0.2px", "fontWeight": "600"}],
+                    "body": ["14px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c4c5d8;
+            border-radius: 10px;
+        }
+        .drawer-slide-in {
+            animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface overflow-hidden">
+<!-- Background UI Layer -->
+<div class="flex h-screen w-full blur-[2px] pointer-events-none select-none opacity-40">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-surface-container-low border-r border-outline-variant flex flex-col py-lg z-10">
+<div class="px-lg mb-xl">
+<h1 class="font-headline-2 text-headline-2 font-bold text-primary">ClientPulse</h1>
+<p class="font-caption text-caption text-on-surface-variant">Enterprise Admin</p>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="flex items-center px-lg py-md text-primary bg-primary-container/10 border-l-4 border-primary">
+<span class="material-symbols-outlined mr-md" data-icon="dashboard">dashboard</span>
+<span class="font-body text-body">Dashboard</span>
+</div>
+<div class="flex items-center px-lg py-md text-on-surface-variant">
+<span class="material-symbols-outlined mr-md" data-icon="assignment">assignment</span>
+<span class="font-body text-body">Projects</span>
+</div>
+<div class="flex items-center px-lg py-md text-on-surface-variant">
+<span class="material-symbols-outlined mr-md" data-icon="insights">insights</span>
+<span class="font-body text-body">Analytics</span>
+</div>
+<div class="flex items-center px-lg py-md text-on-surface-variant">
+<span class="material-symbols-outlined mr-md" data-icon="group">group</span>
+<span class="font-body text-body">Team</span>
+</div>
+</nav>
+</aside>
+<!-- Main Content Area with TopNavBar -->
+<main class="ml-[280px] flex-1 flex flex-col">
+<header class="h-16 w-full flex justify-between items-center px-lg bg-surface/80 backdrop-blur-md border-b border-outline-variant shadow-sm z-20">
+<div class="flex items-center bg-surface-container rounded-full px-md py-xs w-64">
+<span class="material-symbols-outlined text-on-surface-variant mr-xs" data-icon="search">search</span>
+<span class="text-on-surface-variant font-body">Search...</span>
+</div>
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="help">help</span>
+<img alt="User" class="w-8 h-8 rounded-full border border-outline-variant" data-alt="A professional headshot of a corporate user with a soft blurred office background, high-key lighting, and a clean professional aesthetic consistent with a modern SaaS analytics platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfOAD4M8HHX5PuinYQs91z9R8CRBk7Va74E-vq9e8FRuGc8Bmh7A2bLZNQJANaVJNYkxcA4xXreN2h0qh9zNpJm466_U447Mw5o4yY4GKGrCRHdvG40Po36o926rA7oNEJzk65KMrEIcjh6MGB2leTi3tMz65s5YD5haiyLMghzF8aq0bTcWozau8E5us_fD3j7DzLORcgPVEv69HJuQ3YiCdPUkgYbLUHES8bZED1MJOnVQ36yryAEvt8eidVksecwSCGH19SE67F"/>
+</div>
+</header>
+<div class="p-xl grid grid-cols-12 gap-lg">
+<div class="col-span-12 h-64 bg-surface-container rounded-lg border border-outline-variant"></div>
+<div class="col-span-4 h-48 bg-surface-container rounded-lg border border-outline-variant"></div>
+<div class="col-span-4 h-48 bg-surface-container rounded-lg border border-outline-variant"></div>
+<div class="col-span-4 h-48 bg-surface-container rounded-lg border border-outline-variant"></div>
+</div>
+</main>
+</div>
+<!-- Backdrop -->
+<div class="fixed inset-0 bg-on-background/40 backdrop-blur-sm z-[50]" id="drawerBackdrop"></div>
+<!-- Drawer -->
+<div class="fixed top-0 right-0 h-full w-[560px] bg-surface shadow-2xl z-[60] flex flex-col drawer-slide-in" id="projectDrawer">
+<!-- Drawer Header -->
+<div class="flex justify-between items-start px-xl py-lg border-b border-outline-variant">
+<div>
+<h2 class="font-headline-2 text-headline-2 font-bold text-on-surface">New Project</h2>
+<p class="font-body text-body text-on-surface-variant mt-xs">Fill in the details to create a project</p>
+</div>
+<button class="p-base hover:bg-surface-container rounded-full transition-colors" id="closeDrawer">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="close">close</span>
+</button>
+</div>
+<!-- Drawer Content -->
+<div class="flex-1 overflow-y-auto custom-scrollbar px-xl py-lg space-y-xl">
+<!-- Section 1: Basic Info -->
+<section class="space-y-lg">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="info" style="font-variation-settings: 'FILL' 1;">info</span>
+<h3 class="font-headline-3 text-headline-3">Basic Information</h3>
+</div>
+<div class="space-y-md">
+<div class="flex flex-col gap-xs">
+<label class="font-label text-label text-on-surface-variant">Project Name</label>
+<input class="w-full h-[40px] px-md border border-error bg-surface rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="Enter project name" type="text"/>
+<span class="font-caption text-caption text-error">This field is required</span>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label text-label text-on-surface-variant">Description</label>
+<textarea class="w-full p-md border border-outline-variant bg-surface rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all resize-none" placeholder="Describe the project goals and scope..." rows="4"></textarea>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label text-label text-on-surface-variant">Status</label>
+<select class="w-full h-[40px] px-md border border-outline-variant bg-surface rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all appearance-none cursor-pointer">
+<option>Planning</option>
+<option>In Progress</option>
+<option>On Hold</option>
+<option>Completed</option>
+</select>
+</div>
+</div>
+</section>
+<hr class="border-outline-variant"/>
+<!-- Section 2: Timeline & Budget -->
+<section class="space-y-lg">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="calendar_today" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+<h3 class="font-headline-3 text-headline-3">Timeline &amp; Budget</h3>
+</div>
+<div class="grid grid-cols-2 gap-lg">
+<div class="flex flex-col gap-xs">
+<label class="font-label text-label text-on-surface-variant">Start Date</label>
+<input class="h-[40px] px-md border border-outline-variant bg-surface rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" type="date"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label text-label text-on-surface-variant">End Date</label>
+<input class="h-[40px] px-md border border-outline-variant bg-surface rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" type="date"/>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label text-label text-on-surface-variant">Budget</label>
+<div class="relative">
+<span class="absolute left-md top-1/2 -translate-y-1/2 font-body text-on-surface-variant">$</span>
+<input class="w-full h-[40px] pl-xl pr-md border border-outline-variant bg-surface rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="0.00" type="number"/>
+</div>
+</div>
+</section>
+<hr class="border-outline-variant"/>
+<!-- Section 3: Tags -->
+<section class="space-y-lg">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="sell" style="font-variation-settings: 'FILL' 1;">sell</span>
+<h3 class="font-headline-3 text-headline-3">Tags</h3>
+</div>
+<div class="flex gap-md">
+<input class="flex-1 h-[40px] px-md border border-outline-variant bg-surface rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="Add a tag" type="text"/>
+<button class="bg-primary text-on-primary h-[40px] px-lg font-label text-label rounded-lg hover:bg-primary-container transition-colors shadow-sm active:scale-95">Add</button>
+</div>
+<div class="flex flex-wrap gap-sm">
+<div class="flex items-center gap-xs px-md py-xs bg-secondary-container text-on-secondary-container rounded-full font-label text-label">
+                        High Priority
+                        <span class="material-symbols-outlined text-[16px] cursor-pointer" data-icon="close">close</span>
+</div>
+<div class="flex items-center gap-xs px-md py-xs bg-secondary-container text-on-secondary-container rounded-full font-label text-label">
+                        Internal
+                        <span class="material-symbols-outlined text-[16px] cursor-pointer" data-icon="close">close</span>
+</div>
+<div class="flex items-center gap-xs px-md py-xs bg-secondary-container text-on-secondary-container rounded-full font-label text-label">
+                        Q4 Roadmap
+                        <span class="material-symbols-outlined text-[16px] cursor-pointer" data-icon="close">close</span>
+</div>
+</div>
+</section>
+<hr class="border-outline-variant"/>
+<!-- Section 4: Team -->
+<section class="space-y-lg">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="groups" style="font-variation-settings: 'FILL' 1;">groups</span>
+<h3 class="font-headline-3 text-headline-3">Team Assignment</h3>
+</div>
+<div class="space-y-md">
+<div class="relative">
+<span class="absolute left-md top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant" data-icon="person_add">person_add</span>
+<input class="w-full h-[40px] pl-xl pr-md border border-outline-variant bg-surface rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="Search members by name..." type="text"/>
+</div>
+<div class="flex items-center pl-sm">
+<div class="flex -space-x-3">
+<img alt="John Doe" class="w-8 h-8 rounded-full border-2 border-surface ring-1 ring-outline-variant" data-alt="A close-up portrait of a professional man with a friendly smile, styled as a corporate avatar in a high-tech analytics company. The lighting is crisp and modern with a clean background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLTIRDNwN2dTuwxFUX4yZxCBG9QRyFIBMj9P4GgJDRXj6BZrOghYiwvniZnCz8b8cz9C1l7I7im4UhscEJg4fzyr0tkv22xEb-rj0S_RW3cDasVJN0Tla0yfkYme58nrfW3WAkILmBjFMKfa6E0pdoSwnq2r9EsAf5mVFAzQYDGHIZqp8EgE8FtlWdItk6FqxIKu5Cvf42R8DmeYqDXcPJFagsAsj_SC3AjxHtE48LhOomVqVGcduYjTivqqu2298fCHkPSYL3BM1q"/>
+<img alt="Alice Smith" class="w-8 h-8 rounded-full border-2 border-surface ring-1 ring-outline-variant" data-alt="A close-up portrait of a professional woman wearing business attire, styled as a high-resolution corporate avatar. Soft studio lighting with a neutral, professional backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4IujP3f33J8fcewv1DYUgDUwYJDmVI_Qh00O_lTlgsbt4FodXRWXbUHzIGnklkzeTBSE0yeBCk3T_i_Nt_COquZ038mueAQsXBM-xpysY-rdU-h5NgJuP9N-D07POWB-7mSKj2z4KtiyhAuUGlDvypBnHT6ooa--I34cmoTKxP3nmsBVEJTbEEki9pDATaXy9NH2Y23xVxM337Mr72ilSH3wnQkV_Gcn_HzMmJcaPV1npKK6XWUMl0AN0b42d9n5csAEtQCVwl3S8"/>
+<img alt="Mark Taylor" class="w-8 h-8 rounded-full border-2 border-surface ring-1 ring-outline-variant" data-alt="A modern professional portrait of a young male executive, presented as a rounded avatar for a software dashboard. The visual style is clean, sharp, and corporate." src="https://lh3.googleusercontent.com/aida-public/AB6AXuANReCNlaa-5Wv9Y2hhLwC-bOHUgowlejEQR0sPqOR4kig6xQmCzVQbDkcrKGVjsEvG5n5Pn4HhNkv5nchcA5BL_tw8pMQeS1dC4Ef209Coq8rC62RibbGH5nd7LSRmAeWqT8mUQ-8dRx7RuCUQ9mEbg7pGBdTpX9tvRXvXxWr3FYGQfcc2zrgtuXRb1JbumXatVKWmKZQtMHZoaXpVESL2HeLw5HTzA-hupl0GH0l5CLoYfHGj-fI_KMGfjDC4JULjCqn1ftbPTv2G"/>
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-surface-container-highest flex items-center justify-center font-label text-label text-on-surface ring-1 ring-outline-variant">+2</div>
+</div>
+<span class="ml-md font-body text-body text-on-surface-variant">5 members selected</span>
+</div>
+</div>
+</section>
+<hr class="border-outline-variant"/>
+<!-- Section 5: Client -->
+<section class="space-y-lg mb-xl">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="business" style="font-variation-settings: 'FILL' 1;">business</span>
+<h3 class="font-headline-3 text-headline-3">Client Information</h3>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label text-label text-on-surface-variant">Select Client</label>
+<div class="relative">
+<select class="w-full h-[40px] px-md border border-outline-variant bg-surface rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all appearance-none cursor-pointer">
+<option>Acme Corporation</option>
+<option>Globex Ltd.</option>
+<option>Soylent Corp</option>
+<option>Initech</option>
+</select>
+<span class="absolute right-md top-1/2 -translate-y-1/2 material-symbols-outlined pointer-events-none text-on-surface-variant" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Drawer Footer -->
+<div class="px-xl py-lg bg-surface border-t border-outline-variant flex justify-end gap-md sticky bottom-0">
+<button class="px-xl h-[44px] font-headline-3 text-headline-3 text-secondary border border-outline-variant rounded-lg hover:bg-surface-container-low transition-colors" id="cancelBtn">Cancel</button>
+<button class="px-xl h-[44px] font-headline-3 text-headline-3 text-on-primary bg-primary rounded-lg shadow-sm hover:bg-primary-container transition-all active:scale-95">Save Project</button>
+</div>
+</div>
+<script>
+        // Simple logic to close the drawer for demo purposes
+        const drawer = document.getElementById('projectDrawer');
+        const backdrop = document.getElementById('drawerBackdrop');
+        const closeBtn = document.getElementById('closeDrawer');
+        const cancelBtn = document.getElementById('cancelBtn');
+
+        const closeDrawer = () => {
+            drawer.style.transform = 'translateX(100%)';
+            drawer.style.transition = 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+            backdrop.style.opacity = '0';
+            backdrop.style.transition = 'opacity 0.3s ease';
+            setTimeout(() => {
+                drawer.classList.add('hidden');
+                backdrop.classList.add('hidden');
+            }, 300);
+        };
+
+        closeBtn.addEventListener('click', closeDrawer);
+        cancelBtn.addEventListener('click', closeDrawer);
+        backdrop.addEventListener('click', closeDrawer);
+    </script>
+</body></html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>All Projects | ClientPulse</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#005338",
+                        "secondary-fixed-dim": "#b9c7e0",
+                        "primary": "#0038bd",
+                        "on-secondary-fixed-variant": "#3a485c",
+                        "on-error-container": "#93000a",
+                        "outline": "#747687",
+                        "on-primary-fixed-variant": "#0037b9",
+                        "on-primary-fixed": "#001453",
+                        "on-background": "#131b2e",
+                        "inverse-primary": "#b8c4ff",
+                        "surface-tint": "#184de6",
+                        "surface-container-highest": "#dae2fd",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#002114",
+                        "on-secondary-container": "#57657b",
+                        "secondary-container": "#d5e3fd",
+                        "secondary": "#515f74",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#005237",
+                        "surface-container-low": "#f2f3ff",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#eaedff",
+                        "on-secondary-fixed": "#0d1c2f",
+                        "surface-bright": "#faf8ff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#131b2e",
+                        "surface-dim": "#d2d9f4",
+                        "background": "#faf8ff",
+                        "error": "#ba1a1a",
+                        "primary-container": "#1b4fe8",
+                        "primary-fixed-dim": "#b8c4ff",
+                        "tertiary-container": "#006e4b",
+                        "outline-variant": "#c4c5d8",
+                        "on-surface-variant": "#434655",
+                        "inverse-surface": "#283044",
+                        "inverse-on-surface": "#eef0ff",
+                        "secondary-fixed": "#d5e3fd",
+                        "primary-fixed": "#dde1ff",
+                        "on-tertiary-container": "#77f2ba",
+                        "on-primary-container": "#d3d9ff",
+                        "tertiary-fixed": "#7ff9c1",
+                        "tertiary-fixed-dim": "#61dca6",
+                        "surface-variant": "#dae2fd",
+                        "surface": "#faf8ff",
+                        "surface-container-high": "#e2e7ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "3xl": "64px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "base": "8px",
+                        "2xl": "48px"
+                    },
+                    "fontFamily": {
+                        "body": ["Inter"],
+                        "label": ["Inter"],
+                        "headline-1": ["Inter"],
+                        "caption": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display": ["Inter"],
+                        "headline-3": ["Inter"],
+                        "headline-2": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body": ["14px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label": ["12px", {"lineHeight": "1", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "headline-1": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.3px", "fontWeight": "600"}],
+                        "caption": ["12px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.5px", "fontWeight": "700"}],
+                        "headline-3": ["16px", {"lineHeight": "1.5", "fontWeight": "600"}],
+                        "headline-2": ["20px", {"lineHeight": "1.4", "letterSpacing": "-0.2px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body {
+            -webkit-tap-highlight-color: transparent;
+            scroll-behavior: smooth;
+        }
+        .progress-glow {
+            box-shadow: 0 0 8px rgba(27, 79, 232, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-md h-[64px] bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline">
+<div class="flex items-center gap-md">
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container-low active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary">hub</span>
+</button>
+<h1 class="text-headline-2 font-headline-2 font-bold text-primary dark:text-primary-fixed-dim">ClientPulse</h1>
+</div>
+<div class="flex items-center">
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container-low active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-[80px] pb-[100px] px-md max-w-md mx-auto min-h-screen">
+<!-- Search and Filter Section -->
+<section class="mb-lg">
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-md flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">search</span>
+</div>
+<input class="block w-full pl-[48px] pr-md py-md bg-surface-container-lowest border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 text-body font-body outline-none" placeholder="Search projects..." type="text"/>
+<div class="absolute inset-y-0 right-0 pr-sm flex items-center">
+<button class="p-sm text-outline hover:text-primary active:scale-90 transition-all">
+<span class="material-symbols-outlined">tune</span>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-between mt-md">
+<span class="font-label text-label text-on-surface-variant uppercase tracking-wider">Active Projects (12)</span>
+<button class="text-primary font-label text-label flex items-center gap-xs">
+                    View Archive <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</section>
+<!-- Vertical Project Stack -->
+<div class="space-y-md">
+<!-- Project Card 1: Active -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-sm active:scale-[0.98] transition-all">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<h3 class="font-headline-3 text-headline-3 text-on-surface">Cloud Migration Phase II</h3>
+<p class="font-caption text-caption text-on-surface-variant">Horizon Global Systems</p>
+</div>
+<span class="bg-tertiary-container text-on-tertiary-fixed-variant font-label text-label px-sm py-[2px] rounded-full flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span> Healthy
+                    </span>
+</div>
+<div class="mt-lg">
+<div class="flex justify-between items-end mb-xs">
+<span class="font-label text-label text-on-surface-variant">Progress</span>
+<span class="font-headline-3 text-headline-3 text-primary">78%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2 overflow-hidden">
+<div class="bg-primary h-full rounded-full progress-glow" style="width: 78%"></div>
+</div>
+</div>
+<div class="mt-lg flex justify-between items-center">
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-surface-container-lowest" data-alt="Close up portrait of a professional female project manager with a friendly smile, set in a brightly lit modern office environment with soft blue and white tones. The lighting is clean and professional, emphasizing a high-performance corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWSD591RDEUL_8VG1BB6zDJ_OWyQunl1cL8B9eGWyUhG-D6h0-XJZd92zD3yXlqwESAFbxGwihw-1rwe_7H7cHpwCM3SNmWlY9LQbfc0MeI1sfdxD-3S1e20k-JPRIs6duVXegLskVZHl1RocZCFPtDznMQod48xsj85Yk5ylfrAXOdRJ1wLP9L6PjsZNpcaf7IoGlqr8rS9DiqNLvQVLeqAOvpnDTR9YypPm-L5oj-Nft0mjE_9u17Ivp2IKQ23P76eaS4diVlRBX"/>
+<img class="w-8 h-8 rounded-full border-2 border-surface-container-lowest" data-alt="A focused male software engineer with glasses looking at a screen in a sleek tech office. The background is blurred with hints of cool primary blue accents and minimalist white furniture, evoking a sense of deep technical analysis and focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOsOAq01BYbA1u4PgOuv2DLWDdtm3RXQo-5T12t2qktCI2m__i1qLnUb4wzeoNbvbC_JAPftHvLKUOgDpiGXxi5TE-dYqJoN5TsoHMPuHAzU49vzFhCB28iSj4Py4dQhnt_f1uj0pNBkgmUpxPbnTpCFN4w2Dl0IsZuimEi5MbbYTasYAagXyDo5UCQLmDtU7tNX94fj0YvNsLr1lfRPqzvIjhM0UDnCiTWp0o1Zy0xX7uAzW1E7KOmSrHKNJ-YRiCNVfPUSXQtpxm"/>
+<img class="w-8 h-8 rounded-full border-2 border-surface-container-lowest" data-alt="Portrait of a young executive man in a modern collaborative workspace. High-key natural lighting fills the frame, with a clean palette of light grays and blues, projecting institutional trust and innovative leadership." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgmzEmlyn_QeqU_PSpmisbnL7yn7FerV6o2smfb6_4D-afc8RqkdliEvHbT2Jhv9tN1qxRJfVRBRkAnzDXnM4YNO2YEbQF24k9mgwPEr5kKD7LkLRXK7ZQnkeghyo4AOxK4tST9mM-OL3fVEdZnEZu1qnCacvtg1T-lCCT5_GN0VSi8qmmRUi8gCFx-i8p0YbzjIeiIkvvXLQhGpzV6cE5THMV8BMOQsMIy9W-1LAAaKdXUA8tcU8qGyS1t1Pujn1yE_NLQpcQ9pYH"/>
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-label text-label border-2 border-surface-container-lowest">
+                            +4
+                        </div>
+</div>
+<span class="font-caption text-caption text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span> Oct 12
+                    </span>
+</div>
+</article>
+<!-- Project Card 2: Warning -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-sm active:scale-[0.98] transition-all">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<h3 class="font-headline-3 text-headline-3 text-on-surface">Data Analytics Engine</h3>
+<p class="font-caption text-caption text-on-surface-variant">Starlight Financials</p>
+</div>
+<span class="bg-error-container text-on-error-container font-label text-label px-sm py-[2px] rounded-full flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-error"></span> Risk
+                    </span>
+</div>
+<div class="mt-lg">
+<div class="flex justify-between items-end mb-xs">
+<span class="font-label text-label text-on-surface-variant">Progress</span>
+<span class="font-headline-3 text-headline-3 text-secondary">34%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2 overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 34%"></div>
+</div>
+</div>
+<div class="mt-lg flex justify-between items-center">
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-surface-container-lowest" data-alt="A professional woman leader in a corporate setting, standing confidently in front of a glass wall with architectural lines. The lighting is crisp and neutral, reflecting a modern analytics-driven workspace with high clarity and precision." src="https://lh3.googleusercontent.com/aida-public/AB6AXuANQu4S9UluZAk1XmSrSmmcR4W1ORcbu5mdzMtGZZm10-GSmVl2Ff59EL5j0hSeEqzNyciqJjg9vRv-lqTNVejnJDrbE9pbTamGbuo3VV6YzW4xPhG0xJkT7C_O0x5VkXSxJSpNArDHKYQ5eGxnyenIIpBu9JpKkfNk_pFqqKLFbjpTT2h1z_LIjapgrhrNJD473a_PiJB4J20ZO0RHoX290XYOJwkqJohhpq_ec6t1HBgcqXF25_29w6rFMddjMP9oqAxsl8H-bd_n"/>
+<img class="w-8 h-8 rounded-full border-2 border-surface-container-lowest" data-alt="A senior financial analyst working at a clean, white desk with a laptop. The room is flooded with bright, natural light, utilizing a professional color palette of deep navy and bright whites to create an atmosphere of effortless control." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3QYyPH145esSQIT3ljISJvr04QlE2LrYYTEoaTZulN_htoEX3gvfEdbSdq8S4rRLUSNz1Ah8ZHuaoOiTlGUItV1CWiUNI4QazMHzCE8KCmcSRttlAjpJ_rgKYc0VAC8VjNJ8OAuW9Yrc5W8e_draleGORd6xFAxT_Ds-5x2-UAgi5AAWW-WnSXUS_GENFtFG60NNfxEOpWrj9KLLUnhpLSGqtPVpLpUVQBqi-m1DTuVltp1eakv-ye57JPhhZ3j_LpWbesMTnxuIW"/>
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-label text-label border-2 border-surface-container-lowest">
+                            +2
+                        </div>
+</div>
+<span class="font-caption text-caption text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span> Nov 05
+                    </span>
+</div>
+</article>
+<!-- Project Card 3: New -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-sm active:scale-[0.98] transition-all">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<h3 class="font-headline-3 text-headline-3 text-on-surface">CRM Integration</h3>
+<p class="font-caption text-caption text-on-surface-variant">Vertex Logistics</p>
+</div>
+<span class="bg-secondary-container text-on-secondary-container font-label text-label px-sm py-[2px] rounded-full">
+                        Ongoing
+                    </span>
+</div>
+<div class="mt-lg">
+<div class="flex justify-between items-end mb-xs">
+<span class="font-label text-label text-on-surface-variant">Progress</span>
+<span class="font-headline-3 text-headline-3 text-primary">12%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 12%"></div>
+</div>
+</div>
+<div class="mt-lg flex justify-between items-center">
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-surface-container-lowest" data-alt="Close up of a creative director in a minimalist, high-end design studio. Soft ambient lighting highlights the clean surfaces and neutral tones of the environment, establishing a sophisticated, developer-tool aesthetic for the project." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7F83wkzv2LqVcp2lT-1BWq99eFd2j8gfnp8-JobRSCEFqhia2gImtr6NDdxz8Fk_prCeN2baVEoJKbpIdxkNZibWbQVhKpb_-p4Z_CPLsC6S51x97_cWnd1z2FxVAAtfGvcx1vj6t5n0JHWk_cdQgD5SKhlqwJXGZtsVZcMWp1MMWvYN-iRKqvXFho03lRlbsgSV8auNgjPZnhycEhpmMtzqUrDan9f3T59BtLjlHKaT5doYsTZu1s50G4AfXdeLDEv-hiCDYOpqC"/>
+<img class="w-8 h-8 rounded-full border-2 border-surface-container-lowest" data-alt="A male professional in a smart-casual outfit standing in a bright, modern corridor with geometric shadows. The overall mood is technologically advanced and serene, using a refined light-mode first interface style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOqRqrkPZBdF97cxebL0N2wB3gfEGU_mGa6NmcP_GKgXX_PWz8ZlJqekpPSHIPf1-yhI7Fegp0uim3MAQH9ISTkfbEw2DHdW7YN9J3EYPc9bcSG7q3KYWWOYQgqrxDtPYZw3ty83yPnaCzfmyLaQMT11PqluwEp-JZXDIVOMTLsr5i76yxkxAHFzgPQRTj8vX_I_foVdxl16VcAgLH4AahQSioReC7XtVfmk8_pH1VbYU_nWIsCDL3nDHcIk7_WImSFA0_sLyG35uh"/>
+</div>
+<span class="font-caption text-caption text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span> Dec 22
+                    </span>
+</div>
+</article>
+<!-- Project Card 4: High Completion -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-sm active:scale-[0.98] transition-all">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<h3 class="font-headline-3 text-headline-3 text-on-surface">Legacy Audit 2024</h3>
+<p class="font-caption text-caption text-on-surface-variant">Aether Corp</p>
+</div>
+<span class="bg-tertiary-container text-on-tertiary-fixed-variant font-label text-label px-sm py-[2px] rounded-full flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span> Healthy
+                    </span>
+</div>
+<div class="mt-lg">
+<div class="flex justify-between items-end mb-xs">
+<span class="font-label text-label text-on-surface-variant">Progress</span>
+<span class="font-headline-3 text-headline-3 text-primary">95%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 95%"></div>
+</div>
+</div>
+<div class="mt-lg flex justify-between items-center">
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-surface-container-lowest" data-alt="A portrait of a senior consultant in an executive boardroom with blurred city lights in the background. The lighting is premium and warm yet professional, aligning with the institutional trust and clarity of the analytics SaaS brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5O2MBvw-ilS6JQRAwNbwp68PO_XCkZt8OaOhScpFjQ_Rxl8J3cuHcSvqb-q76NaD3WJ0nLIhJhzZOppNUGgx1rXv_EMO0R4QQCQOBkzZbsmuwpRzXWKpUfG6u_GvGc-Za3Pd5LW1JtH5JzvpoSpQiXNffEPJr3FbGEL3Fux8ZhYL3wfvCOBTxtsD5Xs1u4Xro206WEe8ICD5PpE9beOx3raRoxns2oqNsNnz1wEr28us9Gz85gQH1pyza0jfSOPQlhvZSEylEXdC-"/>
+</div>
+<span class="font-caption text-caption text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span> Jan 15
+                    </span>
+</div>
+</article>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-sm py-xs pb-safe bg-surface-container dark:bg-surface-container-lowest shadow-md rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-secondary-fixed-variant dark:text-secondary-fixed-dim px-4 py-1 hover:bg-secondary-container dark:hover:bg-secondary active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mb-1">dashboard</span>
+<span class="font-label text-label">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-full px-4 py-1 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">folder_open</span>
+<span class="font-label text-label">Projects</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-secondary-fixed-variant dark:text-secondary-fixed-dim px-4 py-1 hover:bg-secondary-container dark:hover:bg-secondary active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mb-1">analytics</span>
+<span class="font-label text-label">Analytics</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-secondary-fixed-variant dark:text-secondary-fixed-dim px-4 py-1 hover:bg-secondary-container dark:hover:bg-secondary active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mb-1">group</span>
+<span class="font-label text-label">Team</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-secondary-fixed-variant dark:text-secondary-fixed-dim px-4 py-1 hover:bg-secondary-container dark:hover:bg-secondary active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mb-1">settings</span>
+<span class="font-label text-label">Settings</span>
+</a>
+</nav>
+<!-- Floating Action Button (FAB) - Local relevance for "All Projects" screen -->
+<button class="fixed right-lg bottom-[90px] w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center hover:bg-primary-container active:scale-90 transition-all z-40">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<script>
+        // Micro-interaction for search focus
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-[1.01]');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-[1.01]');
+        });
+
+        // Simple scroll effect for TopAppBar
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 10) {
+                header.classList.add('shadow-sm');
+            } else {
+                header.classList.remove('shadow-sm');
+            }
+        });
+    </script>
+</body></html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Milestones - Nova SDK Release</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#b9c7e0",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#dae2fd",
+                        "on-secondary-fixed": "#0d1c2f",
+                        "inverse-on-surface": "#eef0ff",
+                        "secondary-container": "#d5e3fd",
+                        "tertiary": "#005338",
+                        "secondary-fixed": "#d5e3fd",
+                        "surface-container-highest": "#dae2fd",
+                        "on-background": "#131b2e",
+                        "primary": "#0038bd",
+                        "background": "#faf8ff",
+                        "tertiary-fixed-dim": "#61dca6",
+                        "primary-fixed": "#dde1ff",
+                        "on-secondary": "#ffffff",
+                        "surface": "#faf8ff",
+                        "tertiary-fixed": "#7ff9c1",
+                        "secondary": "#515f74",
+                        "on-surface-variant": "#434655",
+                        "on-secondary-container": "#57657b",
+                        "surface-container-low": "#f2f3ff",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#006e4b",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#0037b9",
+                        "on-primary-container": "#d3d9ff",
+                        "outline": "#747687",
+                        "on-surface": "#131b2e",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#b8c4ff",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#283044",
+                        "on-tertiary-container": "#77f2ba",
+                        "outline-variant": "#c4c5d8",
+                        "surface-container": "#eaedff",
+                        "surface-tint": "#184de6",
+                        "primary-container": "#1b4fe8",
+                        "surface-dim": "#d2d9f4",
+                        "on-secondary-fixed-variant": "#3a485c",
+                        "surface-bright": "#faf8ff",
+                        "on-tertiary-fixed-variant": "#005237",
+                        "on-tertiary-fixed": "#002114",
+                        "surface-container-high": "#e2e7ff",
+                        "on-primary-fixed": "#001453",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#b8c4ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "2xl": "48px",
+                        "xl": "32px",
+                        "3xl": "64px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "display": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body": ["Inter"],
+                        "headline-1": ["Inter"],
+                        "headline-2": ["Inter"],
+                        "caption": ["Inter"],
+                        "label": ["Inter"],
+                        "headline-3": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.5px", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body": ["14px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-1": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.3px", "fontWeight": "600"}],
+                        "headline-2": ["20px", {"lineHeight": "1.4", "letterSpacing": "-0.2px", "fontWeight": "600"}],
+                        "headline-3": ["16px", {"lineHeight": "1.5", "fontWeight": "600"}],
+                        "caption": ["12px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label": ["12px", {"lineHeight": "1", "letterSpacing": "0.5px", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 1;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #c4c5d8; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 z-40 py-lg flex flex-col bg-inverse-surface text-on-primary-fixed border-r border-outline-variant">
+<div class="px-md mb-xl flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container shadow-sm">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<div>
+<h2 class="font-headline-2 text-headline-2 font-bold text-on-primary-fixed">Project Alpha</h2>
+<p class="font-label text-label opacity-70">Enterprise Tier</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1 px-sm">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface transition-all hover:bg-surface-variant/20 group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label text-label">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-primary dark:text-primary-fixed border-l-4 border-primary bg-primary-container/10 group" href="#">
+<span class="material-symbols-outlined">folder</span>
+<span class="font-label text-label">Projects</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface transition-all hover:bg-surface-variant/20 group" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label text-label">Teams</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface transition-all hover:bg-surface-variant/20 group" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-label text-label">Reports</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface transition-all hover:bg-surface-variant/20 group" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label text-label">Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-sm pt-xl border-t border-outline/20">
+<button class="w-full flex items-center justify-center gap-sm bg-primary-container text-white py-sm rounded-lg mb-lg font-label text-label hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                New Project
+            </button>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface transition-all group" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label text-label">Support</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface transition-all group" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label text-label">Sign Out</span>
+</a>
+</div>
+</aside>
+<div class="ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="h-16 flex items-center justify-between px-lg sticky top-0 z-50 w-full bg-surface border-b border-outline-variant shadow-sm">
+<div class="flex items-center gap-md">
+<div class="relative group">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-body focus:outline-none focus:ring-2 focus:ring-primary/20 w-64 transition-all" placeholder="Search analytics..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-colors">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-colors">help</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-colors">settings</button>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-low p-1 rounded-lg transition-colors">
+<div class="w-8 h-8 rounded-full bg-primary-container overflow-hidden">
+<img alt="User profile avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaO3178Mv-hxDg3O5rmd_aI5WseB6cDUmLfIn-Tacz4A8u88Uyt4iTwwnHawITRAHWHjgZWhjQf8OVn8QSRev1QbYPBQApRztGU-ahmeRMh4aDCjU0pxH16iJKCawjtXCjK703SN0s2kQAu6iM1UYS3P9ZimAGl8Kn8ZhFDVzwkou-l6tLve5XFCRgcmQgGsMx_wYyj-eMcM1W1Vkf-8ESE8k2qaYNGbKhpuYpOkltnT47VuUhVnTOR_lqdNDcvt1YrKSfFHB5Rpnk"/>
+</div>
+<span class="font-label text-label text-on-surface hidden lg:block">Alex Chen</span>
+</div>
+</div>
+</header>
+<!-- Project Header (Sticky) -->
+<div class="sticky top-16 z-30 bg-surface border-b border-outline-variant px-lg py-md">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-3xl">terminal</span>
+</div>
+<div>
+<div class="flex items-center gap-sm mb-1">
+<h1 class="font-headline-1 text-headline-1 text-on-surface">Nova SDK Release</h1>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed px-sm py-xs rounded-full font-label text-[10px] flex items-center gap-1 uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+                                On Track
+                            </span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">Infrastructure • Last updated 2h ago</p>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<button class="flex items-center gap-xs px-md py-sm bg-white border border-outline-variant text-on-surface-variant rounded-lg font-label text-label hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-lg">share</span> Share
+                    </button>
+<button class="flex items-center gap-xs px-md py-sm bg-primary text-white rounded-lg font-label text-label hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-lg">edit</span> Edit Project
+                    </button>
+</div>
+</div>
+<!-- Underline-style TabBar -->
+<div class="max-w-7xl mx-auto mt-lg flex items-center gap-xl border-b border-outline-variant">
+<a class="px-md py-sm font-label text-label text-on-surface-variant hover:text-on-surface transition-colors" href="#">Overview</a>
+<a class="px-md py-sm font-label text-label text-primary border-b-2 border-primary" href="#">Milestones</a>
+<a class="px-md py-sm font-label text-label text-on-surface-variant hover:text-on-surface transition-colors" href="#">Tasks</a>
+<a class="px-md py-sm font-label text-label text-on-surface-variant hover:text-on-surface transition-colors" href="#">Team</a>
+<a class="px-md py-sm font-label text-label text-on-surface-variant hover:text-on-surface transition-colors" href="#">Files</a>
+</div>
+</div>
+<!-- Main Content Area -->
+<main class="flex-1 p-lg max-w-7xl mx-auto w-full">
+<div class="flex items-center justify-between mb-xl">
+<div>
+<h2 class="font-headline-2 text-headline-2 text-on-surface">Release Milestones</h2>
+<p class="font-body text-body text-on-surface-variant">Track major phases and delivery targets for the Nova SDK deployment.</p>
+</div>
+<button class="flex items-center gap-sm px-lg py-md bg-primary text-white rounded-lg font-headline-3 text-headline-3 shadow-md hover:shadow-lg transition-all active:scale-95">
+<span class="material-symbols-outlined">add</span>
+                    Add Milestone
+                </button>
+</div>
+<!-- Milestone Cards List -->
+<div class="space-y-lg">
+<!-- 1. Overdue Milestone -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-[10px] shadow-sm overflow-hidden relative border-l-[6px] border-l-error">
+<div class="p-lg">
+<div class="flex items-start justify-between mb-md">
+<div class="flex-1">
+<div class="flex items-center gap-sm mb-sm">
+<h3 class="font-headline-3 text-headline-3 text-on-surface">Final Security Audit</h3>
+<span class="px-sm py-xs bg-error-container text-on-error-container rounded-full font-label text-[10px] uppercase">Overdue</span>
+</div>
+<div class="flex items-center gap-lg text-on-surface-variant font-caption text-caption">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-lg">calendar_today</span>
+                                        Jan 05, 2025
+                                    </div>
+<div class="font-bold text-error">
+                                        3 days overdue
+                                    </div>
+</div>
+</div>
+<div class="flex items-center gap-xs">
+<button class="p-sm text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors"><span class="material-symbols-outlined">edit</span></button>
+<button class="p-sm text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+<button class="p-sm text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors"><span class="material-symbols-outlined">check_circle</span></button>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="flex-1">
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="w-0 h-full bg-error rounded-full transition-all duration-1000"></div>
+</div>
+</div>
+<span class="font-label text-label text-on-surface-variant w-32 text-right">0 of 12 tasks done</span>
+</div>
+</div>
+</div>
+<!-- 2. In Progress Milestone (Expanded) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-[10px] shadow-sm overflow-hidden relative border-l-[6px] border-l-primary">
+<div class="p-lg border-b border-outline-variant/30">
+<div class="flex items-start justify-between mb-md">
+<div class="flex-1">
+<div class="flex items-center gap-sm mb-sm">
+<h3 class="font-headline-3 text-headline-3 text-on-surface">Beta Testing Phase</h3>
+<span class="px-sm py-xs bg-secondary-container text-on-secondary-fixed-variant rounded-full font-label text-[10px] uppercase">In Progress</span>
+</div>
+<div class="flex items-center gap-lg text-on-surface-variant font-caption text-caption">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-lg">calendar_today</span>
+                                        Dec 15, 2024
+                                    </div>
+<div class="text-primary">
+                                        (18 days remaining)
+                                    </div>
+</div>
+</div>
+<div class="flex items-center gap-xs">
+<button class="p-sm text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors"><span class="material-symbols-outlined">edit</span></button>
+<button class="p-sm text-primary bg-primary-container/10 rounded-lg"><span class="material-symbols-outlined">keyboard_arrow_up</span></button>
+<button class="p-sm text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors"><span class="material-symbols-outlined">check_circle</span></button>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="flex-1">
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="w-[66%] h-full bg-primary rounded-full"></div>
+</div>
+</div>
+<span class="font-label text-label text-on-surface-variant w-32 text-right">12 of 18 tasks done</span>
+</div>
+</div>
+<!-- Task List (Indented) -->
+<div class="bg-surface-container-low/50 px-lg py-sm ml-lg border-l border-outline-variant">
+<div class="space-y-xs">
+<!-- Task Row -->
+<div class="flex items-center justify-between p-sm hover:bg-surface-variant/30 rounded-lg transition-colors group">
+<div class="flex items-center gap-md">
+<input checked="" class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-body text-body text-on-surface line-through opacity-60">Setup Beta environment</span>
+<span class="px-sm py-xs bg-surface-container-highest text-on-surface-variant rounded font-label text-[10px]">Low</span>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex -space-x-2">
+<img alt="Assignee" class="w-6 h-6 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARUJwcDt7NPH0Lx746qVRh8uWpa4KlH9djzcVQrdLSQhcC2UXV759T0ZYNQsw2lOgynRwDpfec90aPa0oUbnmS8IrlfZgU7douLrF8fDzK67RAlEJ11gTLO9dyL6H1ndibuVQO7ZoEdARS5LjQf2j36qhrkTpSm3YssRqytXrngDqI08Sa9eT4yHg32LSDwzgx2DMF-nb-JtnuKdqchC8__5EoEHpJbf3wB4P1VDtHr6ycI69pQa-ZcO1BuADS7V4qe9fYV9XHhw9V"/>
+</div>
+<span class="font-caption text-caption text-on-surface-variant">Nov 28</span>
+</div>
+</div>
+<!-- Task Row -->
+<div class="flex items-center justify-between p-sm hover:bg-surface-variant/30 rounded-lg transition-colors group">
+<div class="flex items-center gap-md">
+<input class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-body text-body text-on-surface">Collect performance telemetry</span>
+<span class="px-sm py-xs bg-error-container/20 text-error rounded font-label text-[10px] border border-error/20">High</span>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex -space-x-2">
+<img alt="Assignee" class="w-6 h-6 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA82es83d3E-uElyWCk5t1rXS86NtTz0Jzsu0HXh1BIDezTufZkRCoyjFYrqY2kVDHeNdm7LePGcFWGEp32wRZ5ZOCU8jnS2i8H-ZmN-jJQNqhYxJq0239LzGU-TB0YFwhkLKn72l_lFof4tN2_PuxrW5b5zsLv_85Rzok_YCWjlF9IR7SDgijNcuFYIuk5N4ZMHVrcxu6rvocysNyERxL7vUz5v8Eokn77F_yhJdxo4wt3fMGUZJ05RSmHKn9NiTJcEJ3RJwyGSI0-"/>
+</div>
+<span class="font-caption text-caption text-on-surface-variant">Dec 02</span>
+</div>
+</div>
+<!-- Task Row -->
+<div class="flex items-center justify-between p-sm hover:bg-surface-variant/30 rounded-lg transition-colors group">
+<div class="flex items-center gap-md">
+<input class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-body text-body text-on-surface">UX Feedback session (Round 1)</span>
+<span class="px-sm py-xs bg-secondary-container/20 text-secondary rounded font-label text-[10px] border border-secondary/20">Medium</span>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex -space-x-2">
+<img alt="Assignee" class="w-6 h-6 rounded-full border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAV9Q9oJodBB7kPZdM3npUAD6YBen0_QGPt1kqZUPWRubK5i5ztuBEDxwdDEqV1m9_W8b-NnJz4D6SGfJJ1sjvu3S2IDaA34WBBvnLRpqjUzl8wKqt1qszd1WAuEsSkWoyIzY-SGszbm5kC1WQsKiSPBsVqSgRjJrc4btnf6XGlISeVZcjGbrA3V8qaUL5Q8NwMC9P7c61kY5U-hc5isMRGunRhlxF6cdTzIosd6CwkOtlXUtn2vmO_Z6r0OuZKCdHRhz4w60r_G2q"/>
+</div>
+<span class="font-caption text-caption text-on-surface-variant">Dec 05</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 3. Completed Milestone -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-[10px] shadow-sm overflow-hidden relative border-l-[6px] border-l-tertiary opacity-[0.65]">
+<div class="p-lg">
+<div class="flex items-start justify-between mb-md">
+<div class="flex-1">
+<div class="flex items-center gap-sm mb-sm">
+<h3 class="font-headline-3 text-headline-3 text-on-surface line-through">API Documentation</h3>
+<div class="flex items-center gap-xs px-sm py-xs bg-tertiary-container text-on-tertiary-container rounded-full font-label text-[10px] uppercase">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                        Completed
+                                    </div>
+</div>
+<div class="flex items-center gap-lg text-on-surface-variant font-caption text-caption">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-lg">calendar_today</span>
+                                        Nov 12, 2024
+                                    </div>
+</div>
+</div>
+<div class="flex items-center gap-xs">
+<button class="p-sm text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors"><span class="material-symbols-outlined">edit</span></button>
+<button class="p-sm text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+<button class="p-sm text-tertiary"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span></button>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="flex-1">
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="w-full h-full bg-tertiary rounded-full"></div>
+</div>
+</div>
+<span class="font-label text-label text-on-surface-variant w-32 text-right">24 of 24 tasks done</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Background Decoration for Agency Aesthetic -->
+<div class="fixed top-0 right-0 -z-10 w-1/3 h-1/3 bg-gradient-to-bl from-primary/5 to-transparent blur-3xl pointer-events-none"></div>
+<div class="fixed bottom-0 left-64 -z-10 w-1/4 h-1/4 bg-gradient-to-tr from-secondary/5 to-transparent blur-3xl pointer-events-none"></div>
+<script>
+        // Simple micro-interaction for progress bar on load
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const overdueBar = document.querySelector('.bg-error.w-0');
+                if (overdueBar) overdueBar.style.width = '8%'; // Small progress shown even if "0 tasks done"
+            }, 500);
+        });
+
+        // Toggle Task List Visibility (Mockup)
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const icon = btn.querySelector('.material-symbols-outlined');
+                if (icon && icon.textContent === 'keyboard_arrow_up') {
+                    const taskList = btn.closest('.bg-surface-container-lowest').querySelector('.bg-surface-container-low');
+                    if (taskList.style.display === 'none') {
+                        taskList.style.display = 'block';
+                        icon.textContent = 'keyboard_arrow_up';
+                    } else {
+                        taskList.style.display = 'none';
+                        icon.textContent = 'keyboard_arrow_down';
+                    }
+                }
+            });
+        });
+    </script>
+</body></html>

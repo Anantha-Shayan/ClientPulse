@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>All Projects | ClientPulse</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#006e4b",
+                        "on-tertiary": "#ffffff",
+                        "background": "#faf8ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "outline": "#747687",
+                        "surface-container-highest": "#dae2fd",
+                        "surface-container": "#eaedff",
+                        "outline-variant": "#c4c5d8",
+                        "surface-dim": "#d2d9f4",
+                        "primary-fixed": "#dde1ff",
+                        "on-secondary-fixed-variant": "#3a485c",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#005338",
+                        "inverse-primary": "#b8c4ff",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#d5e3fd",
+                        "primary": "#0038bd",
+                        "on-secondary-container": "#57657b",
+                        "primary-container": "#1b4fe8",
+                        "tertiary-fixed": "#7ff9c1",
+                        "on-tertiary-container": "#77f2ba",
+                        "inverse-on-surface": "#eef0ff",
+                        "tertiary-fixed-dim": "#61dca6",
+                        "on-tertiary-fixed-variant": "#005237",
+                        "on-primary-container": "#d3d9ff",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#d5e3fd",
+                        "surface-variant": "#dae2fd",
+                        "surface-container-high": "#e2e7ff",
+                        "on-primary-fixed-variant": "#0037b9",
+                        "surface-bright": "#faf8ff",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f2f3ff",
+                        "surface-tint": "#184de6",
+                        "primary-fixed-dim": "#b8c4ff",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#b9c7e0",
+                        "on-surface": "#131b2e",
+                        "on-tertiary-fixed": "#002114",
+                        "inverse-surface": "#283044",
+                        "secondary": "#515f74",
+                        "surface": "#faf8ff",
+                        "on-primary-fixed": "#001453",
+                        "on-surface-variant": "#434655",
+                        "on-background": "#131b2e",
+                        "on-secondary-fixed": "#0d1c2f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "2xl": "48px",
+                        "xl": "32px",
+                        "md": "16px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "base": "8px",
+                        "3xl": "64px"
+                    },
+                    "fontFamily": {
+                        "display": ["Inter"],
+                        "caption": ["Inter"],
+                        "label": ["Inter"],
+                        "headline-1": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-3": ["Inter"],
+                        "headline-2": ["Inter"],
+                        "body": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.5px", "fontWeight": "700"}],
+                        "caption": ["12px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label": ["12px", {"lineHeight": "1", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "headline-1": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.3px", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-3": ["16px", {"lineHeight": "1.5", "fontWeight": "600"}],
+                        "headline-2": ["20px", {"lineHeight": "1.4", "letterSpacing": "-0.2px", "fontWeight": "600"}],
+                        "body": ["14px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .project-card:hover .card-menu { opacity: 1; }
+        .avatar-stack > img:not(:first-child) { margin-left: -8px; }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<!-- SideNavBar (Authority: JSON & Component logic) -->
+<aside class="fixed left-0 top-0 h-full w-[256px] bg-inverse-surface flex flex-col py-lg z-50">
+<div class="px-md mb-3xl">
+<h1 class="font-headline-1 text-headline-1 text-on-primary">ClientPulse</h1>
+<p class="font-body text-caption text-surface-variant/70">Admin Console</p>
+</div>
+<nav class="flex-grow space-y-xs">
+<!-- Dashboard Tab (Inactive) -->
+<a class="flex items-center gap-sm px-md py-sm text-surface-variant hover:text-on-primary hover:bg-surface-variant/10 transition-colors cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body text-body">Dashboard</span>
+</a>
+<!-- Projects Tab (Active) -->
+<a class="flex items-center gap-sm px-md py-sm bg-surface-tint/10 text-primary-fixed-dim border-l-4 border-surface-tint transition-all duration-200 cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span class="font-body text-body">Projects</span>
+</a>
+<!-- Users Tab (Inactive) -->
+<a class="flex items-center gap-sm px-md py-sm text-surface-variant hover:text-on-primary hover:bg-surface-variant/10 transition-colors cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-body text-body">Users</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm text-surface-variant hover:text-on-primary hover:bg-surface-variant/10 transition-colors cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-body text-body">Activity Logs</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm text-surface-variant hover:text-on-primary hover:bg-surface-variant/10 transition-colors cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-body text-body">Analytics</span>
+</a>
+</nav>
+<div class="mt-auto px-md">
+<div class="flex items-center gap-sm px-md py-sm text-surface-variant hover:text-on-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-body text-body">Priya Singh</span>
+</div>
+</div>
+</aside>
+<!-- TopNavBar (Authority: JSON & Component logic) -->
+<header class="fixed top-0 right-0 h-[64px] left-[256px] bg-surface dark:bg-surface-container-low border-b border-outline-variant dark:border-outline shadow-sm flex justify-between items-center px-lg z-40">
+<div class="flex items-center gap-md">
+<h2 class="font-headline-2 text-headline-2 text-on-surface">Dashboard</h2>
+<div class="relative w-80">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-lg pl-xl pr-sm py-xs text-body focus:ring-2 focus:ring-primary/20" placeholder="Search projects..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-xs rounded-full transition-colors active:scale-95">notifications</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img alt="Priya Singh Admin Avatar" class="w-full h-full object-cover" data-alt="A professional headshot of a female executive with a warm, confident expression. She is wearing a modern professional blazer. The background is a softly blurred high-end corporate office in light-mode tones. The lighting is flattering and bright, reflecting a sophisticated and professional tech company atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZecjB6OWoMUpq0Getxh1kmtpqnheEjT2BlisvGRZD7Qp3tbhWhSobZ9Bgy0lxmNuP-3ui4xHSrSBc3qaWqKNmAN2JvtmpqYBwXB_Jxd8ZSTngKvgDiELhcyoE6p0qHQ9i6p5Tzvsigqgym-XosXfdS1L1Y0SVp4M7IllJlNwWqBBlYHcsBzo927PSIQwtUQYwzpaCDBQOikJXr2eKc0-wdTMdOU6ylo7aBGU9XffwPDqxtiTgr6A77DVkjMGRvgfcjplvymE16rpJ"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[256px] pt-[64px] min-h-screen p-xl">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-xl">
+<div>
+<h1 class="font-headline-1 text-headline-1 text-on-surface mb-xs">All Projects</h1>
+<p class="font-body text-body text-on-surface-variant">27 projects across 5 countries</p>
+</div>
+<button class="bg-primary-container text-white px-lg py-sm rounded-lg flex items-center gap-xs font-headline-3 hover:opacity-90 transition-opacity shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>New Project</span>
+</button>
+</div>
+<!-- Filter Bar -->
+<div class="bg-surface-container-lowest p-md rounded-xl border border-outline-variant/30 flex flex-wrap items-center gap-md mb-xl shadow-sm">
+<div class="relative flex-grow max-w-xs">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-xl pr-sm py-sm bg-transparent border border-outline-variant rounded-lg text-body focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="Search..." type="text"/>
+</div>
+<div class="flex items-center gap-sm">
+<span class="font-label text-label text-on-surface-variant">Status</span>
+<select class="bg-transparent border border-outline-variant rounded-lg px-sm py-sm text-body min-w-[120px] focus:border-primary outline-none">
+<option>All Statuses</option>
+<option>On Track</option>
+<option>At Risk</option>
+<option>Critical</option>
+</select>
+</div>
+<div class="flex items-center gap-sm">
+<span class="font-label text-label text-on-surface-variant">Tag</span>
+<select class="bg-transparent border border-outline-variant rounded-lg px-sm py-sm text-body min-w-[120px] focus:border-primary outline-none">
+<option>All Tags</option>
+<option>Development</option>
+<option>Design</option>
+<option>Marketing</option>
+</select>
+</div>
+<div class="flex items-center gap-sm">
+<span class="font-label text-label text-on-surface-variant">Date Range</span>
+<div class="flex items-center gap-xs border border-outline-variant rounded-lg px-sm py-sm text-body bg-transparent cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span>Last 30 Days</span>
+</div>
+</div>
+</div>
+<!-- Project Card Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+<!-- Project Card 1: On Track -->
+<div class="project-card relative bg-white rounded-[10px] border border-outline-variant/30 shadow-sm overflow-hidden flex flex-col group hover:shadow-md transition-all duration-300">
+<div class="h-1 bg-tertiary w-full"></div>
+<div class="p-lg flex-grow">
+<div class="flex justify-between items-start mb-md">
+<div>
+<h3 class="font-headline-2 text-headline-2 text-on-surface mb-xs">Nova SDK Release</h3>
+<p class="font-body text-body text-on-surface-variant">Starlight Corp</p>
+</div>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed px-sm py-xs rounded-full font-label text-label flex items-center gap-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                            On Track 98/100
+                        </span>
+</div>
+<div class="mb-lg">
+<div class="flex justify-between items-center mb-xs">
+<span class="font-label text-label text-on-surface-variant">Milestone Progress</span>
+<span class="font-label text-label text-on-surface">12/14 milestones</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-tertiary h-full w-[85%]" style="width: 85%;"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="avatar-stack flex items-center">
+<img class="w-7 h-7 rounded-full border-2 border-white object-cover" data-alt="Close-up portrait of a creative professional male in his 30s with a modern haircut and glasses, looking thoughtful. Studio lighting, soft shadows, neutral background, high-end photography style consistent with a modern corporate environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPVwILfkLksB5Db8agFQn_9WnYGT6QkUsfGPgAVCImeylSrZ-hz4cbx7KPOk_pt8l1sTY_u5LAaDNVy_0zdgx45-0KM8y8mcd_1WTXPM9MNvo_Tnf0O5w1FgN7qf1lfGA_oqrxt3ysTCcHxcBs5gHwvUAbccr8pBPfZoSFCmAmEnwKAh_G6AbM4zlIvnKudjGQsTzYXhEWbm4oI_0oFvX9Wc735j-LYctzRWlukHfYYgGD1gpLQxtI1KZMlbS7LO2ngMe5fGQTzJsO"/>
+<img class="w-7 h-7 rounded-full border-2 border-white object-cover" data-alt="Portrait of a smiling male software engineer with short dark hair. Bright, even lighting with a clean light-mode aesthetic. The background is a minimalist modern office space. Professional and approachable visual style for a high-performance team dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSdZV-_jY33LGMNSOWC9F1AcoUPCFhfIMGJ48vws-IQS9bhYGQPirWVwKphW8XfmUXUkz_cv2e0Vd7QxyJ2D2oD_5YHbEFdolYbEAbXjhpUiuyNSU0vDTe3lKGZaJFMva24-XcQ5935uUBlojYIXsWgk1X25njGMFfpSrzPzX3G5syz1wPsJnEZZKw-fzICDfd28z4RRKvpkSkzau8TRROVNbTLACWrlbIX0qkbdbv3uLQwU6I7X22SPoQw-c201Fcob7uAJi2DNV-"/>
+<img class="w-7 h-7 rounded-full border-2 border-white object-cover" data-alt="Portrait of a female project manager with blonde hair and a friendly expression. Soft daylight lighting, crisp details, elegant and professional aesthetic. The style is clean and modern, suitable for a corporate SaaS interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA95QmSFzTv5vkDTuHVlAsZ4h7gjUSy1R5YO23FqWTzx-WAKwzWQqwfk-2JLFXEUcC3Gvm7A-fSlbn6HkCyDRpef0OBqo-ln56tBWjAhq5HeJUblBvNnvDcweD_dG3mm9vSJchv32XJOfUZlnHmJZ0T8ByiGG8OxQFeZ0StgktZhiInVU7T-3rvI4qg_C9C4nzqOfxeqjKhmMso9yWoiZrx7RAJQNgeTKjfMrOZ8TMqm0TEkRIv6tsNFc4bwIsv2pG1sCxyYJJndo-V"/>
+<div class="w-7 h-7 rounded-full border-2 border-white bg-surface-container text-on-surface-variant flex items-center justify-center font-label text-[10px]">+4</div>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="font-caption text-caption">Oct 24, 2023</span>
+</div>
+</div>
+</div>
+<div class="card-menu opacity-0 absolute top-md right-md p-xs hover:bg-surface-container rounded-full cursor-pointer transition-opacity">
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</div>
+</div>
+<!-- Project Card 2: At Risk -->
+<div class="project-card relative bg-white rounded-[10px] border border-outline-variant/30 shadow-sm overflow-hidden flex flex-col group hover:shadow-md transition-all duration-300">
+<div class="h-1 bg-secondary-container w-full"></div>
+<div class="p-lg flex-grow">
+<div class="flex justify-between items-start mb-md">
+<div>
+<h3 class="font-headline-2 text-headline-2 text-on-surface mb-xs">UI/UX Revamp</h3>
+<p class="font-body text-body text-on-surface-variant">Lumina Design</p>
+</div>
+<span class="bg-secondary-container text-on-secondary-container px-sm py-xs rounded-full font-label text-label flex items-center gap-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                            At Risk 64/100
+                        </span>
+</div>
+<div class="mb-lg">
+<div class="flex justify-between items-center mb-xs">
+<span class="font-label text-label text-on-surface-variant">Milestone Progress</span>
+<span class="font-label text-label text-on-surface">5/12 milestones</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-secondary h-full w-[42%]" style="width: 42%;"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="avatar-stack flex items-center">
+<img class="w-7 h-7 rounded-full border-2 border-white object-cover" data-alt="Close-up portrait of a female designer with a creative look, wearing subtle gold accessories. The lighting is warm and artistic, set against a clean, modern workspace background. High-quality professional photography with a light-mode corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTgJ5Y04ewMLq0-XQ1WpiWu7Iv0CjkuhRb0iwbuKWzZ86PgwbIXUquQ4x4_AmogM7-UaKce9fGRBnjofSWIfQl1x08ING9jjvYzdfDqcfWS1XkPfQ07bVvmHMfigQyDMvIAYxamqYH7rDH7kk7jeGDFg5b76EHtve5Ix7UvkBtOdFs8YlC3MdZjlCzYiFHi7Zs6D8QWZHwfyg2pU0yeDbRWK6TTpbh3ly8epCjt5BwQcR3nMUifQV-AJxoV_EyemX3T0c1pYDiOqR1"/>
+<img class="w-7 h-7 rounded-full border-2 border-white object-cover" data-alt="Portrait of a young male professional with dark hair and a focused expression. He is wearing a clean white shirt. The background is a bright, airy architectural space. Modern and technical visual style for an elite analytics platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBX2v4eZFSaU26o0dieBAvq0R74SoeeK6UwTe6vHMWIJh5p4JANqoEkhpLGf3aup_0yS9Z-dSAeoWSe2b59rtxVCwLza39GSYH7EBX5v-tOz7G_4jIiaV2AoL4a-skEQ2wZjxuihvbz14qGKT3uFarRbOwjbwO-ujQwENi1ZPLrAP43HuMxajvSvlOjsPrAVkQMXX4meG6u_nxpssUiv6w66CoEYhp4QawqQ0Y6zm4Nhb2UnOeVNzp4nxbo4eWxUwXFSDYq8lhx0M5F"/>
+<div class="w-7 h-7 rounded-full border-2 border-white bg-surface-container text-on-surface-variant flex items-center justify-center font-label text-[10px]">+2</div>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="font-caption text-caption">Nov 12, 2023</span>
+</div>
+</div>
+</div>
+<div class="card-menu opacity-0 absolute top-md right-md p-xs hover:bg-surface-container rounded-full cursor-pointer transition-opacity">
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</div>
+</div>
+<!-- Project Card 3: Critical -->
+<div class="project-card relative bg-white rounded-[10px] border border-outline-variant/30 shadow-sm overflow-hidden flex flex-col group hover:shadow-md transition-all duration-300">
+<div class="h-1 bg-error w-full"></div>
+<div class="p-lg flex-grow">
+<div class="flex justify-between items-start mb-md">
+<div>
+<h3 class="font-headline-2 text-headline-2 text-on-surface mb-xs">Migration v4.0</h3>
+<p class="font-body text-body text-on-surface-variant">DataScale Systems</p>
+</div>
+<span class="bg-error-container text-on-error-container px-sm py-xs rounded-full font-label text-label flex items-center gap-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                            Critical 32/100
+                        </span>
+</div>
+<div class="mb-lg">
+<div class="flex justify-between items-center mb-xs">
+<span class="font-label text-label text-on-surface-variant">Milestone Progress</span>
+<span class="font-label text-label text-on-surface">2/10 milestones</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-error h-full w-[20%]" style="width: 20%;"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="avatar-stack flex items-center">
+<img class="w-7 h-7 rounded-full border-2 border-white object-cover" data-alt="Portrait of a senior developer with a beard and glasses, looking directly at the camera with expertise. Sharp focus, clean lighting, set in a sophisticated modern lab or office. Professional photography for a technical dashboard interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCikb9JhAqstht7irUb6xpHv6pp0NesIkdzGV5_LZXderKwvx5aWbKp2n6i97Yh9zWyHx2Vpl6lZsuz0oBwH77siQy_oCLwwsOiWjePvdeMjd5kLJ8fhTo47wXeC0bkyI6EAMd3hET61vPvhVYG3ocdwfFbStObdS8SLTkpRkl3ZKz1l2ZgpwsgTzT17O45oGJV-kusBlT7f0F6Uo2FUn8u44Huy6bp4MA_9L0yrnyoavCR3il2y-LfOnartzAZJgKApSBDkDiuK_d"/>
+<div class="w-7 h-7 rounded-full border-2 border-white bg-surface-container text-on-surface-variant flex items-center justify-center font-label text-[10px]">+1</div>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="font-caption text-caption">Oct 18, 2023</span>
+</div>
+</div>
+</div>
+<div class="card-menu opacity-0 absolute top-md right-md p-xs hover:bg-surface-container rounded-full cursor-pointer transition-opacity">
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</div>
+</div>
+<!-- Repeated Card 4 -->
+<div class="project-card relative bg-white rounded-[10px] border border-outline-variant/30 shadow-sm overflow-hidden flex flex-col group hover:shadow-md transition-all duration-300">
+<div class="h-1 bg-tertiary w-full"></div>
+<div class="p-lg flex-grow">
+<div class="flex justify-between items-start mb-md">
+<div>
+<h3 class="font-headline-2 text-headline-2 text-on-surface mb-xs">Marketing Campaign</h3>
+<p class="font-body text-body text-on-surface-variant">Growth Labs</p>
+</div>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed px-sm py-xs rounded-full font-label text-label flex items-center gap-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                            On Track 92/100
+                        </span>
+</div>
+<div class="mb-lg">
+<div class="flex justify-between items-center mb-xs">
+<span class="font-label text-label text-on-surface-variant">Milestone Progress</span>
+<span class="font-label text-label text-on-surface">8/10 milestones</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-tertiary h-full w-[80%]" style="width: 80%;"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="avatar-stack flex items-center">
+<img class="w-7 h-7 rounded-full border-2 border-white object-cover" data-alt="High-fashion portrait of a young female marketing professional with a bold and creative style. Bright studio lighting, clean light-mode aesthetic, vibrant but professional colors. Perfect for a modern agency software user profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxvbzP4bIrF5x-cJc8ZbXaBCtYXvBhBjy4axIajzNDzyKRqn4ylGoBAOrRVyx1zN1bJzWzliGIFlpDAPoog-0ay46nkuTFrjUX5veyZ0vue3EokqQpXyGzO4iZFuAsOPP6o4qcWAwZqe-DAOwMkD4wp8fIx6qkMF87MXmyILghTpHqKAOZLA2F8hYoWGXLf4rrNP60h3d54YIXlQwOWt09SSZJIL-zPb_lEs-rS7TledWtanm32m3_RQ6bg-DxFH1Ok1PYr65r_ViC"/>
+<div class="w-7 h-7 rounded-full border-2 border-white bg-surface-container text-on-surface-variant flex items-center justify-center font-label text-[10px]">+5</div>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="font-caption text-caption">Dec 01, 2023</span>
+</div>
+</div>
+</div>
+<div class="card-menu opacity-0 absolute top-md right-md p-xs hover:bg-surface-container rounded-full cursor-pointer transition-opacity">
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</div>
+</div>
+<!-- Repeated Card 5 -->
+<div class="project-card relative bg-white rounded-[10px] border border-outline-variant/30 shadow-sm overflow-hidden flex flex-col group hover:shadow-md transition-all duration-300">
+<div class="h-1 bg-tertiary w-full"></div>
+<div class="p-lg flex-grow">
+<div class="flex justify-between items-start mb-md">
+<div>
+<h3 class="font-headline-2 text-headline-2 text-on-surface mb-xs">Customer Loyalty Pro</h3>
+<p class="font-body text-body text-on-surface-variant">Retail Hub</p>
+</div>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed px-sm py-xs rounded-full font-label text-label flex items-center gap-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                            On Track 95/100
+                        </span>
+</div>
+<div class="mb-lg">
+<div class="flex justify-between items-center mb-xs">
+<span class="font-label text-label text-on-surface-variant">Milestone Progress</span>
+<span class="font-label text-label text-on-surface">15/15 milestones</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-tertiary h-full w-[100%]" style="width: 100%;"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="avatar-stack flex items-center">
+<img class="w-7 h-7 rounded-full border-2 border-white object-cover" data-alt="Portrait of a male account manager with a friendly smile, set in a clean corporate environment. Natural light, professional composition, and high-quality photography. The aesthetic is bright and modern, representing institutional trust." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgQDxHfM1x3bx84vt_WIajWL4IRzZ7JBuRoBHULm8x0ezLWVJq5LkVT4pPuZMWxwJa8AGSVKrN8sHHItON6DjQ9i_ARWvQKOt7xblCSjkyPnhQT8pBODh7GFBUSy2Yd3Sah1rhX2iqi71wGjOXpsTf0tY9-Mz_brt1RPkAS4lLF2osW28lwdvKccF8E5C0PXPR1h-tZoTQ6LXGTvpdY__kf7TG8N5EtJZya3BCcbekI1ykO49eYzNmEok2-rYzode1MIl8ZqaKYHk9"/>
+<img class="w-7 h-7 rounded-full border-2 border-white object-cover" data-alt="Professional portrait of a female executive with a confident posture. Clean, minimalist office background, bright soft lighting. High-end modern photography for an enterprise-level SaaS dashboard application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAb3ie36dfBEtVxUttewzDebxEqkAiIPH4uTJ2-SSZUtKbV50ST7q829XV0Lg_E018qlBGRnL8h-Shg05hIfi_82QiY1C2xsjQ9fDmXRz83pAbFCZFI35hRpDnPwAdev-XEOES2DrZEKpX5qHpCMfgnw45o963GGf--j3brx5nkQvTIi9dDEL26SKEjRnrtZLRSl67PlOQcuuVRmW1yluYQjdNC5C_UD0Pl28uzhkkr7oiiiNRSCiCQZljaariYW32xkYBKwDUgdx28"/>
+<div class="w-7 h-7 rounded-full border-2 border-white bg-surface-container text-on-surface-variant flex items-center justify-center font-label text-[10px]">+3</div>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="font-caption text-caption">Oct 12, 2023</span>
+</div>
+</div>
+</div>
+<div class="card-menu opacity-0 absolute top-md right-md p-xs hover:bg-surface-container rounded-full cursor-pointer transition-opacity">
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</div>
+</div>
+<!-- Repeated Card 6 -->
+<div class="project-card relative bg-white rounded-[10px] border border-outline-variant/30 shadow-sm overflow-hidden flex flex-col group hover:shadow-md transition-all duration-300">
+<div class="h-1 bg-secondary-container w-full"></div>
+<div class="p-lg flex-grow">
+<div class="flex justify-between items-start mb-md">
+<div>
+<h3 class="font-headline-2 text-headline-2 text-on-surface mb-xs">E-commerce API</h3>
+<p class="font-body text-body text-on-surface-variant">SwiftCart</p>
+</div>
+<span class="bg-secondary-container text-on-secondary-container px-sm py-xs rounded-full font-label text-label flex items-center gap-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                            At Risk 55/100
+                        </span>
+</div>
+<div class="mb-lg">
+<div class="flex justify-between items-center mb-xs">
+<span class="font-label text-label text-on-surface-variant">Milestone Progress</span>
+<span class="font-label text-label text-on-surface">3/8 milestones</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 overflow-hidden">
+<div class="bg-secondary h-full w-[37%]" style="width: 37%;"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="avatar-stack flex items-center">
+<img class="w-7 h-7 rounded-full border-2 border-white object-cover" data-alt="Portrait of a young male developer in a modern, casual tech environment. Bright daylight lighting, sharp detail, clean and contemporary style. The background is a blurred high-tech workspace. Professional photography for a collaborative project management tool." src="https://lh3.googleusercontent.com/aida-public/AB6AXuApHCGDgnlWYBLQs6n8YK4g8z763QBOB6Hjj2_cDLzuO5pxBX_A90wgjOGi5Au3Dp62KR0AePzlrfja3krtC8E1trt0b8EZLT1R_0tBnrHev_5yNrBVr2BD-vwiaGuTR0ObUGJEgBeNOSS4NLPAg16DCjT_k_ffuhbUrxJirX5tBpUyUq0Vz-eXlpLPKXi-YhAHudaBDcaVVb740QSOc53KMOMZ1ZLVrVE8G11fDePS-knBskI74_NJspS_GhLLuPTjYLkkZA0cc_EA"/>
+<div class="w-7 h-7 rounded-full border-2 border-white bg-surface-container text-on-surface-variant flex items-center justify-center font-label text-[10px]">+1</div>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="font-caption text-caption">Jan 15, 2024</span>
+</div>
+</div>
+</div>
+<div class="card-menu opacity-0 absolute top-md right-md p-xs hover:bg-surface-container rounded-full cursor-pointer transition-opacity">
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interactions and subtle effects
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Search Bar focus effect
+        const searchInput = document.querySelector('input[placeholder="Search..."]');
+        searchInput?.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('shadow-md');
+        });
+        searchInput?.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('shadow-md');
+        });
+    </script>
+</body></html>
